@@ -1,0 +1,5 @@
+config/config.php
+docker-compose.yaml
+Dockerfile
+.idea
+php.ini
