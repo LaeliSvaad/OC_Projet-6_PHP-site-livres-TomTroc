@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : db
--- Généré le : mer. 21 mai 2025 à 15:07
+-- Généré le : mer. 21 mai 2025 à 15:18
 -- Version du serveur : 5.7.44
 -- Version de PHP : 8.2.27
 
@@ -63,19 +63,6 @@ CREATE TABLE `chat` (
 -- --------------------------------------------------------
 
 --
--- Structure de la table `connection`
---
-
-CREATE TABLE `connection` (
-  `mail` varchar(255) NOT NULL,
-  `password` varchar(255) NOT NULL,
-  `id_user` int(11) NOT NULL,
-  `id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
 -- Structure de la table `library`
 --
 
@@ -115,6 +102,19 @@ CREATE TABLE `user` (
   `id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `user_connection`
+--
+
+CREATE TABLE `user_connection` (
+  `mail` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `id_user` int(11) NOT NULL,
+  `id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
 --
 -- Index pour les tables déchargées
 --
@@ -138,12 +138,6 @@ ALTER TABLE `chat`
   ADD PRIMARY KEY (`id`);
 
 --
--- Index pour la table `connection`
---
-ALTER TABLE `connection`
-  ADD PRIMARY KEY (`id`);
-
---
 -- Index pour la table `library`
 --
 ALTER TABLE `library`
@@ -159,6 +153,12 @@ ALTER TABLE `message`
 -- Index pour la table `user`
 --
 ALTER TABLE `user`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `user_connection`
+--
+ALTER TABLE `user_connection`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -184,12 +184,6 @@ ALTER TABLE `chat`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT pour la table `connection`
---
-ALTER TABLE `connection`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
 -- AUTO_INCREMENT pour la table `library`
 --
 ALTER TABLE `library`
@@ -205,6 +199,12 @@ ALTER TABLE `message`
 -- AUTO_INCREMENT pour la table `user`
 --
 ALTER TABLE `user`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT pour la table `user_connection`
+--
+ALTER TABLE `user_connection`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 COMMIT;
 
