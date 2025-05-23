@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : db
--- Généré le : mer. 21 mai 2025 à 15:18
+-- Généré le : ven. 23 mai 2025 à 09:17
 -- Version du serveur : 5.7.44
 -- Version de PHP : 8.2.27
 
@@ -28,11 +28,19 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `author` (
-  `name` varchar(255) NOT NULL,
-  `lastname` varchar(255) NOT NULL,
-  `pseudo` varchar(255) NOT NULL,
-  `id` int(11) NOT NULL
+  `firstname` varchar(40) NOT NULL,
+  `lastname` varchar(40) NOT NULL,
+  `pseudo` varchar(40) DEFAULT NULL,
+  `id` smallint(5) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Déchargement des données de la table `author`
+--
+
+INSERT INTO `author` (`firstname`, `lastname`, `pseudo`, `id`) VALUES
+('Friedrich', 'Nietzsche', NULL, 1),
+('Donatien Alphonse François', 'de Sade', 'Marquis de Sade', 2);
 
 -- --------------------------------------------------------
 
@@ -41,12 +49,21 @@ CREATE TABLE `author` (
 --
 
 CREATE TABLE `book` (
-  `title` varchar(255) NOT NULL,
-  `description` text NOT NULL,
-  `picture` varchar(255) NOT NULL,
-  `id_author` int(11) NOT NULL,
-  `id` int(11) NOT NULL
+  `title` varchar(180) NOT NULL,
+  `description` text,
+  `picture` varchar(180) DEFAULT NULL,
+  `author_id` smallint(5) UNSIGNED NOT NULL,
+  `id` smallint(5) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Déchargement des données de la table `book`
+--
+
+INSERT INTO `book` (`title`, `description`, `picture`, `author_id`, `id`) VALUES
+('Le gai savoir', 'Le Gai Savoir est un ouvrage de Friedrich Nietzsche, publié en 1882, sous le titre original Die fröhliche Wissenschaft, la gaya scienza. Le titre fait référence aux troubadours, l\'expression Gai Saber de laquelle dérive la gaya scienza étant une façon de dénommer en occitan l\'art de composer des poésies lyriques. L\'expression (« gai sçavoir ») fut très tôt reprise dans la littérature, par Rabelais dans Gargantua et Pantagruel', NULL, 1, 1),
+('Ainsi parlait Zarathoustra', 'Ainsi parlait Zarathoustra ou Ainsi parla Zarathoustra, sous-titré « Un livre pour tous et pour personne » (en allemand : Also sprach Zarathustra. Ein Buch für Alle und Keinen), est un poème philosophique de Friedrich Nietzsche, publié en plusieurs volumes entre 1883 et 1885. ', NULL, 1, 2),
+('La philosophie dans le boudoir', 'L’ouvrage se présente comme une série de dialogues retraçant l’éducation érotique et sexuelle d’une jeune fille de 15 ans.\r\n\r\nUne libertine, Mme de Saint-Ange, veut initier Eugénie de Mistival « dans les plus secrets mystères de Vénus ».\r\n\r\nElle est aidée en cela par son frère (le chevalier de Mirvel), un ami de son frère (Dolmancé) et par son jardinier (Augustin). ', NULL, 2, 3);
 
 -- --------------------------------------------------------
 
@@ -55,9 +72,9 @@ CREATE TABLE `book` (
 --
 
 CREATE TABLE `chat` (
-  `id_user_1` int(11) NOT NULL,
-  `id_user_2` int(11) NOT NULL,
-  `id` int(11) NOT NULL
+  `id_user_1` smallint(5) UNSIGNED NOT NULL,
+  `id_user_2` smallint(5) UNSIGNED NOT NULL,
+  `id` smallint(5) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -67,11 +84,10 @@ CREATE TABLE `chat` (
 --
 
 CREATE TABLE `library` (
-  `id_author` int(11) NOT NULL,
-  `id_book` int(11) NOT NULL,
-  `id_user` int(11) NOT NULL,
-  `status` varchar(255) NOT NULL,
-  `id` int(11) NOT NULL
+  `id_book` smallint(5) UNSIGNED NOT NULL,
+  `id_user` smallint(5) UNSIGNED NOT NULL,
+  `status` enum('AVAILABLE','RESERVED','NOT AVAILABLE','') NOT NULL DEFAULT 'NOT AVAILABLE',
+  `id` smallint(5) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -84,9 +100,9 @@ CREATE TABLE `message` (
   `text` text NOT NULL,
   `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `seen_by_recipient` tinyint(1) NOT NULL DEFAULT '0',
-  `id_sender` int(11) NOT NULL,
-  `id_chat` int(11) NOT NULL,
-  `id` int(11) NOT NULL
+  `id_sender` smallint(5) UNSIGNED NOT NULL,
+  `id_chat` smallint(5) UNSIGNED NOT NULL,
+  `id` int(11) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -96,23 +112,12 @@ CREATE TABLE `message` (
 --
 
 CREATE TABLE `user` (
-  `nickname` varchar(255) NOT NULL,
-  `profile_picture` varchar(255) NOT NULL,
-  `registration_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Structure de la table `user_connection`
---
-
-CREATE TABLE `user_connection` (
-  `mail` varchar(255) NOT NULL,
+  `nickname` varchar(40) NOT NULL,
+  `email` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
-  `id_user` int(11) NOT NULL,
-  `id` int(11) NOT NULL
+  `picture` varchar(180) DEFAULT NULL,
+  `registration_date` date NOT NULL,
+  `id` smallint(5) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -156,12 +161,6 @@ ALTER TABLE `user`
   ADD PRIMARY KEY (`id`);
 
 --
--- Index pour la table `user_connection`
---
-ALTER TABLE `user_connection`
-  ADD PRIMARY KEY (`id`);
-
---
 -- AUTO_INCREMENT pour les tables déchargées
 --
 
@@ -169,43 +168,37 @@ ALTER TABLE `user_connection`
 -- AUTO_INCREMENT pour la table `author`
 --
 ALTER TABLE `author`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` smallint(5) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT pour la table `book`
 --
 ALTER TABLE `book`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` smallint(5) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT pour la table `chat`
 --
 ALTER TABLE `chat`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` smallint(5) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT pour la table `library`
 --
 ALTER TABLE `library`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` smallint(5) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT pour la table `message`
 --
 ALTER TABLE `message`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT pour la table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT pour la table `user_connection`
---
-ALTER TABLE `user_connection`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` smallint(5) UNSIGNED NOT NULL AUTO_INCREMENT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
