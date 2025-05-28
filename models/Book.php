@@ -8,7 +8,19 @@ class Book extends AbstractEntity
     private string $title;
     private string $description;
     private Author $author;
+    private User $user;
 
+    protected int $id;
+
+    public function setId(int $id) : void
+    {
+        $this->id = $id;
+    }
+
+    public function getId() : int
+    {
+        return $this->id;
+    }
 
     public function setTitle(string $title) : void
     {
@@ -43,6 +55,16 @@ class Book extends AbstractEntity
     public function getAuthor() : string
     {
         return $this->author;
+    }
+
+    public function setUser(User $user) : void
+    {
+        $this->user = $user;
+    }
+
+    public function getUser() : string
+    {
+        return $this->user;
     }
 
 }
