@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : db
--- Généré le : ven. 23 mai 2025 à 09:17
+-- Généré le : mer. 28 mai 2025 à 15:10
 -- Version du serveur : 5.7.44
 -- Version de PHP : 8.2.27
 
@@ -63,7 +63,8 @@ CREATE TABLE `book` (
 INSERT INTO `book` (`title`, `description`, `picture`, `author_id`, `id`) VALUES
 ('Le gai savoir', 'Le Gai Savoir est un ouvrage de Friedrich Nietzsche, publié en 1882, sous le titre original Die fröhliche Wissenschaft, la gaya scienza. Le titre fait référence aux troubadours, l\'expression Gai Saber de laquelle dérive la gaya scienza étant une façon de dénommer en occitan l\'art de composer des poésies lyriques. L\'expression (« gai sçavoir ») fut très tôt reprise dans la littérature, par Rabelais dans Gargantua et Pantagruel', NULL, 1, 1),
 ('Ainsi parlait Zarathoustra', 'Ainsi parlait Zarathoustra ou Ainsi parla Zarathoustra, sous-titré « Un livre pour tous et pour personne » (en allemand : Also sprach Zarathustra. Ein Buch für Alle und Keinen), est un poème philosophique de Friedrich Nietzsche, publié en plusieurs volumes entre 1883 et 1885. ', NULL, 1, 2),
-('La philosophie dans le boudoir', 'L’ouvrage se présente comme une série de dialogues retraçant l’éducation érotique et sexuelle d’une jeune fille de 15 ans.\r\n\r\nUne libertine, Mme de Saint-Ange, veut initier Eugénie de Mistival « dans les plus secrets mystères de Vénus ».\r\n\r\nElle est aidée en cela par son frère (le chevalier de Mirvel), un ami de son frère (Dolmancé) et par son jardinier (Augustin). ', NULL, 2, 3);
+('La philosophie dans le boudoir', 'L’ouvrage se présente comme une série de dialogues retraçant l’éducation érotique et sexuelle d’une jeune fille de 15 ans.\r\n\r\nUne libertine, Mme de Saint-Ange, veut initier Eugénie de Mistival « dans les plus secrets mystères de Vénus ».\r\n\r\nElle est aidée en cela par son frère (le chevalier de Mirvel), un ami de son frère (Dolmancé) et par son jardinier (Augustin). ', NULL, 2, 3),
+('Généalogie de la morale', ' Nietzsche se donne pour objectif de montrer d\'où proviennent les valeurs morales contemporaines et pourquoi nous devrions en changer pour des valeurs plus saines.', NULL, 1, 4);
 
 -- --------------------------------------------------------
 
@@ -84,11 +85,21 @@ CREATE TABLE `chat` (
 --
 
 CREATE TABLE `library` (
-  `id_book` smallint(5) UNSIGNED NOT NULL,
-  `id_user` smallint(5) UNSIGNED NOT NULL,
+  `book_id` smallint(5) UNSIGNED NOT NULL,
+  `user_id` smallint(5) UNSIGNED NOT NULL,
   `status` enum('AVAILABLE','RESERVED','NOT AVAILABLE','') NOT NULL DEFAULT 'NOT AVAILABLE',
   `id` smallint(5) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Déchargement des données de la table `library`
+--
+
+INSERT INTO `library` (`book_id`, `user_id`, `status`, `id`) VALUES
+(1, 1, 'AVAILABLE', 1),
+(2, 1, 'RESERVED', 2),
+(3, 1, 'NOT AVAILABLE', 3),
+(4, 2, 'AVAILABLE', 4);
 
 -- --------------------------------------------------------
 
@@ -119,6 +130,14 @@ CREATE TABLE `user` (
   `registration_date` date NOT NULL,
   `id` smallint(5) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Déchargement des données de la table `user`
+--
+
+INSERT INTO `user` (`nickname`, `email`, `password`, `picture`, `registration_date`, `id`) VALUES
+('Lisa87', 'lisa.valade@orange.fr', 'test', NULL, '2025-05-28', 1),
+('Une autre Lisa', 'lisa.valade@hotmail.fr', 'test2', NULL, '2025-05-28', 2);
 
 --
 -- Index pour les tables déchargées
@@ -174,7 +193,7 @@ ALTER TABLE `author`
 -- AUTO_INCREMENT pour la table `book`
 --
 ALTER TABLE `book`
-  MODIFY `id` smallint(5) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` smallint(5) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT pour la table `chat`
@@ -186,7 +205,7 @@ ALTER TABLE `chat`
 -- AUTO_INCREMENT pour la table `library`
 --
 ALTER TABLE `library`
-  MODIFY `id` smallint(5) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` smallint(5) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT pour la table `message`
@@ -198,7 +217,7 @@ ALTER TABLE `message`
 -- AUTO_INCREMENT pour la table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` smallint(5) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` smallint(5) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
