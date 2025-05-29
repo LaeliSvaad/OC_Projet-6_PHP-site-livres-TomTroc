@@ -9,8 +9,8 @@ class Book extends AbstractEntity
     private string $description;
     private Author $author;
     private User $user;
-
     protected int $id;
+
 
     public function setId(int $id) : void
     {

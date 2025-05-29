@@ -7,6 +7,12 @@
  * un fichier avec le bon nom. Si c'est le cas, il l'inclut avec require_once.
  */
 spl_autoload_register(function($className) {
+
+    // On va voir dans le dossier enum si la classe existe.
+    if (file_exists('enum/' . $className . '.php')) {
+        require_once 'enum/' . $className . '.php';
+    }
+
     // On va voir dans le dossier Service si la classe existe.
     if (file_exists('services/' . $className . '.php')) {
         require_once 'services/' . $className . '.php';

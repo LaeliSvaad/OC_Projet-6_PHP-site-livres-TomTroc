@@ -8,8 +8,12 @@ class User extends AbstractEntity
     private string $nickname;
     private string $email;
     private string $password;
-    /*private Date $registrationDate;*/
+    protected int $id;
 
+    public function setId(int $id) : void
+    {
+        $this->id = $id;
+    }
     public function setNickname(string $nickname) : void
     {
         $this->nickname = $nickname;
@@ -23,7 +27,10 @@ class User extends AbstractEntity
     {
         $this->password = $password;
     }
-
+    public function getId() : int
+    {
+        return $this->id;
+    }
     public function getNickname() : string
     {
         return $this->nickname;
