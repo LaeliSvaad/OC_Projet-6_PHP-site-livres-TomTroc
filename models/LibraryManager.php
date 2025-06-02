@@ -7,6 +7,7 @@ class LibraryManager extends AbstractEntityManager
 {
     public function getAvailableBooks(): ?Library
     {
+        $status = BookStatus::AVAILABLE->value;
         $sql = "SELECT
                     `user`.nickname, 
                     `user`.email,
@@ -21,9 +22,9 @@ class LibraryManager extends AbstractEntityManager
                 INNER JOIN `user` ON `user`.`id` = `library`.`user_id`
                 INNER JOIN `book` ON `library`.`book_id` = `book`.`id`
                 INNER JOIN `author` ON `author`.`id` = `book`.`author_id`
-                WHERE `library`.`status` = BookStatus::AVAILABLE";
+                WHERE `library`.`status` = :status";
 
-        $result = $this->db->query($sql);
+        $result = $this->db->query($sql, ['status' => $status]);
         $library = new Library();
 
         foreach ($result as $element) {
