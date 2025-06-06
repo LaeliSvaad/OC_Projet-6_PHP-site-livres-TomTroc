@@ -74,6 +74,25 @@ class Utils {
         return $finalString;
     }
 
+    public static function controlPassword(string $password) : string
+    {
+        return password_hash($password, PASSWORD_DEFAULT);
+    }
+    public static function controlNickname(string $nickname) : string
+    {
+        return htmlspecialchars($nickname);
+    }
+
+    public static function controlPicture(string $picture) : string
+    {
+        return "./pictures" . htmlspecialchars($picture);
+    }
+
+    public static function controlEmail(string $email) : string
+    {
+        return htmlspecialchars($email);
+    }
+
     /**
      * Cette méthode permet de récupérer une variable de la superglobale $_REQUEST.
      * Si cette variable n'est pas définie, on retourne la valeur null (par défaut)

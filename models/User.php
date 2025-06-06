@@ -8,16 +8,23 @@ class User extends AbstractEntity
     private string $nickname;
     private string $email;
     private string $password;
-    protected int $id;
+    /*private string $picture;*/
 
-    public function setId(int $id) : void
+    private int $userId;
+
+    public function setUserId(int $id) : void
     {
-        $this->id = $id;
+        $this->userId = $id;
     }
     public function setNickname(string $nickname) : void
     {
         $this->nickname = $nickname;
     }
+
+    /*public function setPicture(string $picture) : void
+    {
+        $this->picture = $picture;
+    }*/
 
     public function setEmail(string $email) : void
     {
@@ -27,14 +34,21 @@ class User extends AbstractEntity
     {
         $this->password = $password;
     }
-    public function getId() : int
+
+    public function getUserId() : int
     {
-        return $this->id;
+        return $this->userId;
     }
+
     public function getNickname() : string
     {
         return $this->nickname;
     }
+
+    /*public function getPicture() : string
+    {
+        return $this->picture;
+    }*/
 
     public function getEmail() : string
     {
@@ -46,8 +60,8 @@ class User extends AbstractEntity
         return $this->password;
     }
 
-    public function __toString() : string
+    /*public function __toString() : string
     {
         return $this->nickname . ' ' . $this->email;
-    }
+    }*/
 }

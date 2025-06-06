@@ -26,35 +26,47 @@ try {
             $bookController->showBook();
             break;
 
-        /*case 'connexion':
-            $articleController = new ArticleController();
-            $articleController->addArticle();
+        case 'connexion':
+            $signInController = new SignInController();
+            $signInController->showForm();
             break;
 
         case 'inscription':
-            $commentController = new CommentController();
-            $commentController->addComment();
+            $signUpController = new SignUpController();
+            $signUpController->showForm();
+            break;
+
+        case 'sign-up':
+            $signUpController = new SignUpController();
+            $signUpController->addUser();
+            break;
+
+        case 'sign-in':
+            $signInController = new SignInController();
+            $signInController->connectUser();
+            break;
+
+        case 'utilisateur':
+            $userPageController = new UserPageController();
+            $userPageController->showUserPage();
             break;
 
         case 'mon-compte':
-            $articleController = new ArticleController();
-            $articleController->showArticle();
-            break;
-
-        case 'modification-livre':
-            $articleController = new ArticleController();
-            $articleController->showArticle();
-            break;
-
-        case 'profil':
-            $articleController = new ArticleController();
-            $articleController->showArticle();
+            $userPageController = new UserPageController();
+            $userPageController->showMyAccount();
             break;
 
         case 'messagerie':
+            $messagingController = new MessagingController();
+            $messagingController->showMessages();
+            break;
+
+        /*case 'modification-livre':
             $articleController = new ArticleController();
             $articleController->showArticle();
-            break;*/
+            break;
+
+        */
 
 
         default:

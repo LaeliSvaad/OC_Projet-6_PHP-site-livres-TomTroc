@@ -11,6 +11,7 @@ class LibraryManager extends AbstractEntityManager
         $sql = "SELECT
                     `user`.nickname, 
                     `user`.email,
+                    `user`.id AS userId,
                     `book`.title, 
                     `book`.description, 
                     `book`.picture, 
