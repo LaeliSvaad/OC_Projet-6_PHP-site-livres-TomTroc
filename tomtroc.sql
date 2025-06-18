@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : db
--- Généré le : mer. 28 mai 2025 à 15:10
+-- Généré le : mer. 18 juin 2025 à 16:39
 -- Version du serveur : 5.7.44
 -- Version de PHP : 8.2.27
 
@@ -64,7 +64,8 @@ INSERT INTO `book` (`title`, `description`, `picture`, `author_id`, `id`) VALUES
 ('Le gai savoir', 'Le Gai Savoir est un ouvrage de Friedrich Nietzsche, publié en 1882, sous le titre original Die fröhliche Wissenschaft, la gaya scienza. Le titre fait référence aux troubadours, l\'expression Gai Saber de laquelle dérive la gaya scienza étant une façon de dénommer en occitan l\'art de composer des poésies lyriques. L\'expression (« gai sçavoir ») fut très tôt reprise dans la littérature, par Rabelais dans Gargantua et Pantagruel', NULL, 1, 1),
 ('Ainsi parlait Zarathoustra', 'Ainsi parlait Zarathoustra ou Ainsi parla Zarathoustra, sous-titré « Un livre pour tous et pour personne » (en allemand : Also sprach Zarathustra. Ein Buch für Alle und Keinen), est un poème philosophique de Friedrich Nietzsche, publié en plusieurs volumes entre 1883 et 1885. ', NULL, 1, 2),
 ('La philosophie dans le boudoir', 'L’ouvrage se présente comme une série de dialogues retraçant l’éducation érotique et sexuelle d’une jeune fille de 15 ans.\r\n\r\nUne libertine, Mme de Saint-Ange, veut initier Eugénie de Mistival « dans les plus secrets mystères de Vénus ».\r\n\r\nElle est aidée en cela par son frère (le chevalier de Mirvel), un ami de son frère (Dolmancé) et par son jardinier (Augustin). ', NULL, 2, 3),
-('Généalogie de la morale', ' Nietzsche se donne pour objectif de montrer d\'où proviennent les valeurs morales contemporaines et pourquoi nous devrions en changer pour des valeurs plus saines.', NULL, 1, 4);
+('Généalogie de la morale', ' Nietzsche se donne pour objectif de montrer d\'où proviennent les valeurs morales contemporaines et pourquoi nous devrions en changer pour des valeurs plus saines.', NULL, 1, 4),
+('Justine ou les Malheurs de la vertu', 'Justine, ou les Malheurs de la vertu est un roman français du marquis de Sade publié de façon anonyme en 1791 à Paris, un an après que son auteur a été rendu à la liberté par la Révolution et l’abolition des lettres de cachet. ', NULL, 2, 5);
 
 -- --------------------------------------------------------
 
@@ -87,7 +88,7 @@ CREATE TABLE `chat` (
 CREATE TABLE `library` (
   `book_id` smallint(5) UNSIGNED NOT NULL,
   `user_id` smallint(5) UNSIGNED NOT NULL,
-  `status` enum('AVAILABLE','RESERVED','NOT AVAILABLE','') NOT NULL DEFAULT 'NOT AVAILABLE',
+  `status` enum('available','not available','reserved','') NOT NULL DEFAULT 'not available',
   `id` smallint(5) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -96,10 +97,11 @@ CREATE TABLE `library` (
 --
 
 INSERT INTO `library` (`book_id`, `user_id`, `status`, `id`) VALUES
-(1, 1, 'AVAILABLE', 1),
-(2, 1, 'RESERVED', 2),
-(3, 1, 'NOT AVAILABLE', 3),
-(4, 2, 'AVAILABLE', 4);
+(1, 3, 'available', 1),
+(2, 3, 'available', 2),
+(3, 4, 'available', 3),
+(4, 4, 'available', 4),
+(5, 3, 'available', 5);
 
 -- --------------------------------------------------------
 
@@ -136,8 +138,8 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`nickname`, `email`, `password`, `picture`, `registration_date`, `id`) VALUES
-('Lisa87', 'lisa.valade@orange.fr', 'test', NULL, '2025-05-28', 1),
-('Une autre Lisa', 'lisa.valade@hotmail.fr', 'test2', NULL, '2025-05-28', 2);
+('Lisa', 'lisa.valade@hotmail.fr', '$2y$10$jx6YJ6nEwA0yKkUnNt3gVebV9Ip2y7bWwZj/e7E6A2aE8CVKaqlVC', NULL, '2025-06-04', 3),
+('Lissaaaaaa', 'lisa.valade@orange.fr', '$2y$10$HbZIqZ84tshUME8H2AHe1.x/waMwBoGyaVbahwW7vMNoOZEJ5NmNm', NULL, '2025-06-04', 4);
 
 --
 -- Index pour les tables déchargées
@@ -193,7 +195,7 @@ ALTER TABLE `author`
 -- AUTO_INCREMENT pour la table `book`
 --
 ALTER TABLE `book`
-  MODIFY `id` smallint(5) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` smallint(5) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT pour la table `chat`
@@ -205,7 +207,7 @@ ALTER TABLE `chat`
 -- AUTO_INCREMENT pour la table `library`
 --
 ALTER TABLE `library`
-  MODIFY `id` smallint(5) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` smallint(5) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT pour la table `message`
@@ -217,7 +219,7 @@ ALTER TABLE `message`
 -- AUTO_INCREMENT pour la table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` smallint(5) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` smallint(5) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
