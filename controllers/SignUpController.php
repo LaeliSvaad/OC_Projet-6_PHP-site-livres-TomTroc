@@ -8,7 +8,7 @@ class SignUpController
         $params["email"] = Utils::controlEmail(Utils::request("email"));
         $params["password"] = Utils::controlPassword(Utils::request("password"));
         $params["picture"] = Utils::request("picture");
-        //$params["picture"] = Utils::controlPicture(Utils::request("picture"));
+        //0.dcfd$params["picture"] = Utils::controlPicture(Utils::request("picture"));
         var_dump(Utils::request("picture"));
         var_dump($params);
 

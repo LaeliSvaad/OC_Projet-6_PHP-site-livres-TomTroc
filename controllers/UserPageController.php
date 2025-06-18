@@ -17,7 +17,7 @@ class UserPageController
         if(isset($_SESSION["user"]))
         {
             $view = new View('utilisateur');
-            $view->render("utilisateur");
+            $view->render("utilisateur", [$_SESSION["user"]]);
         }
         else
         {

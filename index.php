@@ -70,7 +70,7 @@ try {
 
 
         default:
-            throw new Exception("La page demandée n'existe pas.");
+            throw new Exception("Erreur 404: page non trouvée.");
     }
 } catch (Exception $e) {
     // En cas d'erreur, on affiche la page d'erreur.
