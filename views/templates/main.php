@@ -22,15 +22,15 @@
     <div class="navbar">
         <div class="logo">
             <img src="pictures/logo_tomtroc.png" alt="logo tomtroc">
-            <h1 class="main_title">Tom Troc</h1>
+            <h1 class="main-title">Tom Troc</h1>
         </div>
         <nav>
-            <div class="nav_links">
-                <a href="index.php">Accueil</a>
-                <a href="index.php?action=nos-livres">Nos livres à l'échange</a>
-                <a href="index.php?action=messagerie">Messagerie</a>
-                <a href="index.php?action=mon-compte">Mon compte</a>
-                <a href="index.php?action=connexion">Connexion</a>
+            <div class="nav-links">
+                <div class="nav-link"><a href="index.php">Accueil</a></div>
+                <div class="nav-link"><a href="index.php?action=nos-livres">Nos livres à l'échange</a></div>
+                <div class="nav-link"><a href="index.php?action=messagerie">Messagerie</a></div>
+                <div class="nav-link"><a href="index.php?action=mon-compte">Mon compte</a></div>
+                <div class="nav-link"><a href="index.php?action=connexion">Connexion</a></div>
             </div>
         </nav>
     </div>
@@ -41,7 +41,12 @@
 </main>
 
 <footer>
-
+    <div class="footer">
+        <div class="footer-content"><a href="#">Politique de confidentialité</a></div>
+        <div class="footer-content"><a href="#">Mentions légales</a></div>
+        <div class="footer-content"><a href="#">Tom Troc©</a></div>
+        <div class="footer-content"><img src="pictures/logo_tomtroc_green.png"></div>
+    </div>
 </footer>
 
 </body>
