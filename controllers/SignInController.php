@@ -10,27 +10,29 @@ class SignInController
 
         // On vérifie que les données sont valides.
         if (empty($nickname) || empty($email) || empty($password)) {
-            throw new Exception("Tous les champs sont obligatoires. 1");
+            throw new Exception("Tous les champs sont obligatoires.");
         }
 
         // On vérifie que l'utilisateur existe.
         $userManager = new UserManager();
         $user = $userManager->getUser($nickname, $email);
+
         if (!$user) {
-            throw new Exception("L'utilisateur demandé n'existe pas.");
+            throw new Exception("Une erreur est survenue lors de l'authentification.");
         }
 
         // On vérifie que le mot de passe est correct.
         if (!password_verify($password, $user->getPassword())) {
             $hash = password_hash($password, PASSWORD_DEFAULT);
-            throw new Exception("Le mot de passe est incorrect : $hash");
+            throw new Exception("Une erreur est survenue lors de l'authentification.");
         }
 
         // On connecte l'utilisateur.
-        $_SESSION['user'] = $user;
+        $_SESSION['user'] = $user->getId();
 
         // On redirige vers la page mon compte.
-        Utils::redirect("mon-compte");
+        $view = new View('utilisateur');
+        $view->render("utilisateur", ['user' => $user]);
     }
     public function showForm() : void
     {

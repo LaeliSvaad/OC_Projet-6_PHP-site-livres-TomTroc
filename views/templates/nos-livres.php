@@ -1,5 +1,5 @@
 <?php
-echo "<h2>Nos livres</h2>";
+echo "<h2>Nos livres à l'échange</h2>";
 echo "<section>";
 echo "<form method='post' action='index.php?action=search-book'><div class='book-searchbar'><img src='pictures/magnifying.png'><input type='search' placeholder='Rechercher un livre' name='booksearch'></div></form>";
 echo "<div class='books'>";

@@ -51,14 +51,9 @@ try {
             $signInController->connectUser();
             break;
 
-        case 'utilisateur':
+        case 'user-account':
             $userPageController = new UserPageController();
             $userPageController->showUserPage();
-            break;
-
-        case 'mon-compte':
-            $userPageController = new UserPageController();
-            $userPageController->showMyAccount();
             break;
 
         case 'messagerie':

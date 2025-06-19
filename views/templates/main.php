@@ -29,7 +29,7 @@
                 <div class="nav-link"><a href="index.php">Accueil</a></div>
                 <div class="nav-link"><a href="index.php?action=nos-livres">Nos livres à l'échange</a></div>
                 <div class="nav-link"><a href="index.php?action=messagerie">Messagerie</a></div>
-                <div class="nav-link"><a href="index.php?action=mon-compte">Mon compte</a></div>
+                <div class="nav-link"><a href="index.php?action=user-account">Mon compte</a></div>
                 <div class="nav-link"><a href="index.php?action=connexion">Connexion</a></div>
             </div>
         </nav>

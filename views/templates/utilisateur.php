@@ -1,4 +1,6 @@
 <?php
-echo $user->get
-var_dump($_SESSION["user"]);
+echo $user->getNickname();
+echo"<br>";
+echo $user->getEmail();
+
 

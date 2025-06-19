@@ -16,11 +16,11 @@ class SignUpController
         $userManager = new UserManager();
         $success = $userManager->addUser($user);
         if($success){
-           $view = new View('sign-up');
+            $view = new View('sign-up');
             $view->render("sign-up");
         }
         else{
-           $view = new View('sign-up');
+            $view = new View('sign-up');
             $view->render("sign-up");
         }
     }
