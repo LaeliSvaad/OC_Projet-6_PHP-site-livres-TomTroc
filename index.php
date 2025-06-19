@@ -26,6 +26,11 @@ try {
             $bookController->showBook();
             break;
 
+        case 'search-book':
+            $libraryController = new LibraryController();
+            $libraryController->showSearchResults();
+            break;
+
         case 'connexion':
             $signInController = new SignInController();
             $signInController->showForm();
@@ -60,14 +65,6 @@ try {
             $messagingController = new MessagingController();
             $messagingController->showMessages();
             break;
-
-        /*case 'modification-livre':
-            $articleController = new ArticleController();
-            $articleController->showArticle();
-            break;
-
-        */
-
 
         default:
             throw new Exception("Erreur 404: page non trouvée.");

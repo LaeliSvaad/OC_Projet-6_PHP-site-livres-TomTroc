@@ -48,8 +48,40 @@ class LibraryManager extends AbstractEntityManager
                 WHERE `library`.`status` = :status";
         }
 
-
         $result = $this->db->query($sql, ['status' => $status]);
+        $library = new Library();
+
+        foreach ($result as $element) {
+            $element["author"] = new Author($element);
+            $element["user"] = new User($element);
+
+            $book = new Book($element);
+            $library->addBook($book);
+        }
+        return $library;
+    }
+
+    public function getBooksByTitle(string $title): ?Library
+    {
+        $status = BookStatus::AVAILABLE->value;
+        $sql = "SELECT
+                    `user`.nickname, 
+                    `user`.email,
+                    `user`.id AS userId,
+                    `book`.title, 
+                    `book`.description, 
+                    `book`.picture, 
+                    `book`.id,
+                    `author`.firstname, 
+                    `author`.lastname, 
+                    `author`.pseudo
+                FROM `library`
+                INNER JOIN `user` ON `user`.`id` = `library`.`user_id`
+                INNER JOIN `book` ON `library`.`book_id` = `book`.`id`
+                INNER JOIN `author` ON `author`.`id` = `book`.`author_id`
+                WHERE `library`.`status` = :status && `book`.`title` LIKE :title";
+
+        $result = $this->db->query($sql, ['status' => $status, 'title' => $title]);
         $library = new Library();
 
         foreach ($result as $element) {

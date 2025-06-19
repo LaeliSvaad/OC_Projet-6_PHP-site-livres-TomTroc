@@ -93,6 +93,11 @@ class Utils {
         return htmlspecialchars($email);
     }
 
+    public static function controlUserInput(string $userInput) : string
+    {
+        return htmlspecialchars($userInput);
+    }
+
     /**
      * Cette méthode permet de récupérer une variable de la superglobale $_REQUEST.
      * Si cette variable n'est pas définie, on retourne la valeur null (par défaut)

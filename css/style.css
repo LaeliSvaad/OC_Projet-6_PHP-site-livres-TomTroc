@@ -111,6 +111,31 @@ body{
     height: 540px;
 }
 
+/*Nos livres*/
+
+.book-searchbar{
+    background-color: white;
+    border: 1px solid #F0F0F0;
+    border-radius: 10px;
+    height: 50px;
+    width: 325px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: stretch;
+    padding: 5px;
+}
+
+.book-searchbar img{
+    margin-right: 15px;
+}
+
+.book-searchbar input{
+    width: 80%;
+    border: 0px;
+}
+
+
 /*Footer*/
 
 .footer{
