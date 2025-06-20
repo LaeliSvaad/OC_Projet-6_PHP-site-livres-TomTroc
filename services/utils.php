@@ -78,19 +78,13 @@ class Utils {
     {
         return password_hash($password, PASSWORD_DEFAULT);
     }
-    public static function controlNickname(string $nickname) : string
-    {
-        return htmlspecialchars($nickname);
-    }
 
-    public static function controlPicture(string $picture) : string
+    public static function controlProfilePicture(string $filename) : ?string
     {
-        return "./pictures" . htmlspecialchars($picture);
-    }
-
-    public static function controlEmail(string $email) : string
-    {
-        return htmlspecialchars($email);
+        if($filename != "")
+            return "pictures/" . htmlspecialchars($filename);
+        else
+            return "pictures/default-profile-picture.png";
     }
 
     public static function controlUserInput(string $userInput) : string

@@ -11,7 +11,7 @@ class UserManager extends AbstractEntityManager
         $result = $this->db->query($sql, [
             'nickname' => $user->getNickname(),
             'password' => $user->getPassword(),
-            'picture' => $user->getPicture(),
+            'picture' => $user->getPictureFilename(),
             'email' => $user->getEmail()
         ]);
         return $result->rowCount() > 0;
@@ -29,7 +29,7 @@ class UserManager extends AbstractEntityManager
             'nickname' => $user->getNickname(),
             'password' => $user->getPassword(),
             'email' => $user->getEmail(),
-            'picture' => $user->getPicture(),
+            'picture' => $user->getPictureFilename(),
             'id' => $user->getId()
         ]);
         return $result->rowCount() > 0;
@@ -67,5 +67,13 @@ class UserManager extends AbstractEntityManager
             return new User($user);
         }
         return null;
+    }
+
+    public function checkExistingEmail(string $email) :int
+    {
+        $sql = "SELECT COUNT(*) FROM `user` WHERE `email` = :email";
+        $result = $this->db->query($sql, ['email' => $email]);
+        $user = $result->fetch();
+        return $user["COUNT(*)"];
     }
 }

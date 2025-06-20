@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : db
--- Généré le : mer. 18 juin 2025 à 16:39
+-- Généré le : ven. 20 juin 2025 à 08:36
 -- Version du serveur : 5.7.44
 -- Version de PHP : 8.2.27
 
@@ -128,7 +128,7 @@ CREATE TABLE `user` (
   `nickname` varchar(40) NOT NULL,
   `email` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
-  `picture` varchar(180) DEFAULT NULL,
+  `picture` varchar(180) NOT NULL,
   `registration_date` date NOT NULL,
   `id` smallint(5) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -138,8 +138,8 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`nickname`, `email`, `password`, `picture`, `registration_date`, `id`) VALUES
-('Lisa', 'lisa.valade@hotmail.fr', '$2y$10$jx6YJ6nEwA0yKkUnNt3gVebV9Ip2y7bWwZj/e7E6A2aE8CVKaqlVC', NULL, '2025-06-04', 3),
-('Lissaaaaaa', 'lisa.valade@orange.fr', '$2y$10$HbZIqZ84tshUME8H2AHe1.x/waMwBoGyaVbahwW7vMNoOZEJ5NmNm', NULL, '2025-06-04', 4);
+('Lisa', 'lisa.valade@hotmail.fr', '$2y$10$jx6YJ6nEwA0yKkUnNt3gVebV9Ip2y7bWwZj/e7E6A2aE8CVKaqlVC', 'pictures/default-profile-picture.png', '2025-06-04', 3),
+('Lissaaaaaa', 'lisa.valade@orange.fr', '$2y$10$HbZIqZ84tshUME8H2AHe1.x/waMwBoGyaVbahwW7vMNoOZEJ5NmNm', 'pictures/default-profile-picture.png', '2025-06-04', 4);
 
 --
 -- Index pour les tables déchargées
@@ -219,7 +219,7 @@ ALTER TABLE `message`
 -- AUTO_INCREMENT pour la table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` smallint(5) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` smallint(5) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

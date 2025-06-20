@@ -8,6 +8,10 @@ class SignInController
         $email = Utils::request("email");
         $password = Utils::request("password");
 
+        //On sécurise les entrées utilisateur
+        $nickname = Utils::controlUserInput($nickname);
+        $email = Utils::controlUserInput($email);
+
         // On vérifie que les données sont valides.
         if (empty($nickname) || empty($email) || empty($password)) {
             throw new Exception("Tous les champs sont obligatoires.");
@@ -23,7 +27,6 @@ class SignInController
 
         // On vérifie que le mot de passe est correct.
         if (!password_verify($password, $user->getPassword())) {
-            $hash = password_hash($password, PASSWORD_DEFAULT);
             throw new Exception("Une erreur est survenue lors de l'authentification.");
         }
 
@@ -39,6 +42,7 @@ class SignInController
     {
         $_SESSION = [];
 
+        //Suppression de la session côté client
         if (ini_get("session.use_cookies")) {
             $params = session_get_cookie_params();
             setcookie(session_name(), '', time() - 42000,
