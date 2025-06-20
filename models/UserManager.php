@@ -11,7 +11,7 @@ class UserManager extends AbstractEntityManager
         $result = $this->db->query($sql, [
             'nickname' => $user->getNickname(),
             'password' => $user->getPassword(),
-            'picture' => $user->getPicture(),
+            'picture' => $user->getPicture  (),
             'email' => $user->getEmail()
         ]);
         return $result->rowCount() > 0;
@@ -60,13 +60,46 @@ class UserManager extends AbstractEntityManager
      */
     public function getUserById(int $id) : ?User
     {
-        $sql = "SELECT * FROM `user` WHERE `id` = :id";
+        $sql = "SELECT 
+                    `user`.nickname, 
+                    `user`.email,
+                    `user`.picture,
+                    `user`.id AS userId,
+                    `author`.firstname, 
+                    `author`.lastname, 
+                    `author`.pseudo,
+                    `book`.title, 
+                    `book`.description, 
+                    `book`.picture AS bookPicture, 
+                    `book`.id
+                FROM `user` 
+                INNER JOIN `library` ON `library`.`user_id` = `user`.`id`
+                INNER JOIN `book` ON `book`.`id` = `library`.`book_id`
+                INNER JOIN `author` ON `author`.`id` = `book`.`author_id`
+                WHERE `user`.`id` = :id";
+
         $result = $this->db->query($sql, ['id' => $id]);
-        $user = $result->fetch();
-        if ($user) {
-            return new User($user);
+
+        $db_array = $result->fetchAll();
+
+        $library = new Library();
+
+
+        foreach ($db_array as $element) {
+
+            $element["author"] = new Author($element);
+            $book = new Book($element);
+            $library->addBook($book);
+            $element["book"] = $book;
+            $db_array["library"] = $library;
+            $db_array["user"] = new user($db_array);
         }
-        return null;
+
+        $user = new User($db_array);
+        echo"<br><br>";
+        var_dump($user);
+        echo"<br><br>";
+        return $user;
     }
 
     public function checkExistingEmail(string $email) :int
