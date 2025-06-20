@@ -36,6 +36,11 @@ try {
             $signInController->showForm();
             break;
 
+        case 'deconnexion':
+            $signInController = new SignInController();
+            $signInController->disconnectUser();
+            break;
+
         case 'inscription':
             $signUpController = new SignUpController();
             $signUpController->showForm();

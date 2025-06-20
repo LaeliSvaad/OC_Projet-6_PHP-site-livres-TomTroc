@@ -1,3 +1,5 @@
+
+
 <?php
 echo $user->getNickname();
 echo"<br>";
