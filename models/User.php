@@ -8,7 +8,7 @@ class User extends AbstractEntity
     private string $nickname;
     private string $email;
     private string $password;
-    private string $pictureFilename;
+    private string $picture;
     private int $userId;
 
     public function setUserId(int $id) : void
@@ -20,9 +20,9 @@ class User extends AbstractEntity
         $this->nickname = $nickname;
     }
 
-    public function setPictureFilename(string $picture) : void
+    public function setPicture(string $picture) : void
     {
-        $this->pictureFilename = $picture;
+        $this->picture = $picture;
     }
 
     public function setEmail(string $email) : void
@@ -44,9 +44,9 @@ class User extends AbstractEntity
         return $this->nickname;
     }
 
-    public function getPictureFilename() : string
+    public function getPicture() : string
     {
-        return $this->pictureFilename;
+        return $this->picture;
     }
 
     public function getEmail() : string

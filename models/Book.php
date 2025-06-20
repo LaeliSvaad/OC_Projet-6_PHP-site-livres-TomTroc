@@ -7,7 +7,7 @@ class Book extends AbstractEntity
 {
     private string $title;
     private string $description;
-    private string $picture;
+    private string $bookPicture;
     private Author $author;
     private User $user;
 
@@ -44,10 +44,10 @@ class Book extends AbstractEntity
         return $this->description;
     }
 
-    /*public function setPicture(?string $picture) : void
+    public function setBookPicture(string $picture) : void
     {
-        $this->picture = $picture;
-    }*/
+        $this->bookPicture = $picture;
+    }
 
     public function setAuthor(Author $author) : void
     {
@@ -69,9 +69,9 @@ class Book extends AbstractEntity
         return $this->user;
     }
 
-    /*public function getPicture() : ?string
+    public function getBookPicture() : ?string
     {
-        return $this->picture;
-    }*/
+        return $this->bookPicture;
+    }
 
 }

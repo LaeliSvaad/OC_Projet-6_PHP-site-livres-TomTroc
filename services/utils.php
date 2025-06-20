@@ -82,9 +82,17 @@ class Utils {
     public static function controlProfilePicture(string $filename) : ?string
     {
         if($filename != "")
-            return "pictures/" . htmlspecialchars($filename);
+            return "pictures/profile/" . htmlspecialchars($filename);
         else
-            return "pictures/default-profile-picture.png";
+            return "pictures/profile/default-profile-picture.png";
+    }
+
+    public static function controlBookPicture(string $filename) : ?string
+    {
+        if($filename != "")
+            return "pictures/books/" . htmlspecialchars($filename);
+        else
+            return "pictures/books/default-book-picture.png";
     }
 
     public static function controlUserInput(string $userInput) : string

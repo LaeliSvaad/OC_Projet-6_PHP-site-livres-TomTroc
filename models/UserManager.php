@@ -11,7 +11,7 @@ class UserManager extends AbstractEntityManager
         $result = $this->db->query($sql, [
             'nickname' => $user->getNickname(),
             'password' => $user->getPassword(),
-            'picture' => $user->getPictureFilename(),
+            'picture' => $user->getPicture(),
             'email' => $user->getEmail()
         ]);
         return $result->rowCount() > 0;
@@ -29,7 +29,7 @@ class UserManager extends AbstractEntityManager
             'nickname' => $user->getNickname(),
             'password' => $user->getPassword(),
             'email' => $user->getEmail(),
-            'picture' => $user->getPictureFilename(),
+            'picture' => $user->getPicture(),
             'id' => $user->getId()
         ]);
         return $result->rowCount() > 0;

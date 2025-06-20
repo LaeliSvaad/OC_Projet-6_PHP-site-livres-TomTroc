@@ -17,6 +17,7 @@
             foreach ($library as $book) {
                 echo"<div class='book'>";
                 echo "<h3><a href='?action=detail-livre&id=" . $book->getId() . "' >" . $book->getTitle() . "</a></h3>";
+                echo "<img class='book-img' src='" . $book->getBookPicture() . "' alt='" . $book->getTitle() . "'>";
                 echo "<span>Auteur : " . $book->getAuthor()->getFirstname() . " " . $book->getAuthor()->getLastname() . " " .  $book->getAuthor()->getPseudo() . "</span>";
                 echo "<span>Vendu par : <a href='index.php?action=utilisateur&id=" . $book->getUser()->getUserId() . "'>" . $book->getUser()->getNickname() . "</a></span>";
                 echo"</div>";

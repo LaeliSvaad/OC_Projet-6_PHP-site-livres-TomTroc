@@ -53,8 +53,8 @@ class SignInController
 
         session_destroy();
 
-        $view = new View('sign-in');
-        $view->render("sign-in");
+        $view = new View('home');
+        $view->render("home");
     }
 
     public function showForm() : void

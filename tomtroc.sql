@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : db
--- Généré le : ven. 20 juin 2025 à 08:36
+-- Généré le : ven. 20 juin 2025 à 09:16
 -- Version du serveur : 5.7.44
 -- Version de PHP : 8.2.27
 
@@ -51,7 +51,7 @@ INSERT INTO `author` (`firstname`, `lastname`, `pseudo`, `id`) VALUES
 CREATE TABLE `book` (
   `title` varchar(180) NOT NULL,
   `description` text,
-  `picture` varchar(180) DEFAULT NULL,
+  `picture` varchar(180) NOT NULL,
   `author_id` smallint(5) UNSIGNED NOT NULL,
   `id` smallint(5) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -61,11 +61,11 @@ CREATE TABLE `book` (
 --
 
 INSERT INTO `book` (`title`, `description`, `picture`, `author_id`, `id`) VALUES
-('Le gai savoir', 'Le Gai Savoir est un ouvrage de Friedrich Nietzsche, publié en 1882, sous le titre original Die fröhliche Wissenschaft, la gaya scienza. Le titre fait référence aux troubadours, l\'expression Gai Saber de laquelle dérive la gaya scienza étant une façon de dénommer en occitan l\'art de composer des poésies lyriques. L\'expression (« gai sçavoir ») fut très tôt reprise dans la littérature, par Rabelais dans Gargantua et Pantagruel', NULL, 1, 1),
-('Ainsi parlait Zarathoustra', 'Ainsi parlait Zarathoustra ou Ainsi parla Zarathoustra, sous-titré « Un livre pour tous et pour personne » (en allemand : Also sprach Zarathustra. Ein Buch für Alle und Keinen), est un poème philosophique de Friedrich Nietzsche, publié en plusieurs volumes entre 1883 et 1885. ', NULL, 1, 2),
-('La philosophie dans le boudoir', 'L’ouvrage se présente comme une série de dialogues retraçant l’éducation érotique et sexuelle d’une jeune fille de 15 ans.\r\n\r\nUne libertine, Mme de Saint-Ange, veut initier Eugénie de Mistival « dans les plus secrets mystères de Vénus ».\r\n\r\nElle est aidée en cela par son frère (le chevalier de Mirvel), un ami de son frère (Dolmancé) et par son jardinier (Augustin). ', NULL, 2, 3),
-('Généalogie de la morale', ' Nietzsche se donne pour objectif de montrer d\'où proviennent les valeurs morales contemporaines et pourquoi nous devrions en changer pour des valeurs plus saines.', NULL, 1, 4),
-('Justine ou les Malheurs de la vertu', 'Justine, ou les Malheurs de la vertu est un roman français du marquis de Sade publié de façon anonyme en 1791 à Paris, un an après que son auteur a été rendu à la liberté par la Révolution et l’abolition des lettres de cachet. ', NULL, 2, 5);
+('Le gai savoir', 'Le Gai Savoir est un ouvrage de Friedrich Nietzsche, publié en 1882, sous le titre original Die fröhliche Wissenschaft, la gaya scienza. Le titre fait référence aux troubadours, l\'expression Gai Saber de laquelle dérive la gaya scienza étant une façon de dénommer en occitan l\'art de composer des poésies lyriques. L\'expression (« gai sçavoir ») fut très tôt reprise dans la littérature, par Rabelais dans Gargantua et Pantagruel', 'pictures/books/default-book-picture.png', 1, 1),
+('Ainsi parlait Zarathoustra', 'Ainsi parlait Zarathoustra ou Ainsi parla Zarathoustra, sous-titré « Un livre pour tous et pour personne » (en allemand : Also sprach Zarathustra. Ein Buch für Alle und Keinen), est un poème philosophique de Friedrich Nietzsche, publié en plusieurs volumes entre 1883 et 1885. ', 'pictures/books/default-book-picture.png', 1, 2),
+('La philosophie dans le boudoir', 'L’ouvrage se présente comme une série de dialogues retraçant l’éducation érotique et sexuelle d’une jeune fille de 15 ans.\r\n\r\nUne libertine, Mme de Saint-Ange, veut initier Eugénie de Mistival « dans les plus secrets mystères de Vénus ».\r\n\r\nElle est aidée en cela par son frère (le chevalier de Mirvel), un ami de son frère (Dolmancé) et par son jardinier (Augustin). ', 'pictures/books/default-book-picture.png', 2, 3),
+('Généalogie de la morale', ' Nietzsche se donne pour objectif de montrer d\'où proviennent les valeurs morales contemporaines et pourquoi nous devrions en changer pour des valeurs plus saines.', 'pictures/books/default-book-picture.png', 1, 4),
+('Justine ou les Malheurs de la vertu', 'Justine, ou les Malheurs de la vertu est un roman français du marquis de Sade publié de façon anonyme en 1791 à Paris, un an après que son auteur a été rendu à la liberté par la Révolution et l’abolition des lettres de cachet. ', 'pictures/books/default-book-picture.png', 2, 5);
 
 -- --------------------------------------------------------
 
@@ -138,8 +138,9 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`nickname`, `email`, `password`, `picture`, `registration_date`, `id`) VALUES
-('Lisa', 'lisa.valade@hotmail.fr', '$2y$10$jx6YJ6nEwA0yKkUnNt3gVebV9Ip2y7bWwZj/e7E6A2aE8CVKaqlVC', 'pictures/default-profile-picture.png', '2025-06-04', 3),
-('Lissaaaaaa', 'lisa.valade@orange.fr', '$2y$10$HbZIqZ84tshUME8H2AHe1.x/waMwBoGyaVbahwW7vMNoOZEJ5NmNm', 'pictures/default-profile-picture.png', '2025-06-04', 4);
+('Lisa', 'lisa.valade@hotmail.fr', '$2y$10$jx6YJ6nEwA0yKkUnNt3gVebV9Ip2y7bWwZj/e7E6A2aE8CVKaqlVC', 'pictures/profile/default-profile-picture.png', '2025-06-04', 3),
+('Lissaaaaaa', 'lisa.valade@orange.fr', '$2y$10$HbZIqZ84tshUME8H2AHe1.x/waMwBoGyaVbahwW7vMNoOZEJ5NmNm', 'pictures/profile/default-profile-picture.png', '2025-06-04', 4),
+('LV', 'sdf@sdf.fr', '$2y$10$.6FgH6MsSPS..6.W8tqHGeJnWTE7OYLw2o8JyxkpFKY1lNsH4Mabq', 'pictures/profile/Mask group-3.png', '2025-06-20', 21);
 
 --
 -- Index pour les tables déchargées
@@ -219,7 +220,7 @@ ALTER TABLE `message`
 -- AUTO_INCREMENT pour la table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` smallint(5) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` smallint(5) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

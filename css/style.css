@@ -107,6 +107,12 @@ body{
     align-items: stretch;
 }
 
+.book{
+    display: flex;
+    flex-direction: column;
+
+}
+
 .intro-img{
     height: 540px;
 }
@@ -135,6 +141,9 @@ body{
     border: 0px;
 }
 
+.book-img{
+    width: 20%;
+}
 
 /*Footer*/
 
