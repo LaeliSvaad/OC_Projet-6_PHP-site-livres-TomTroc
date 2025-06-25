@@ -62,7 +62,6 @@ class UserManager extends AbstractEntityManager
     {
         $sql = "SELECT 
                     `user`.nickname, 
-                    `user`.email,
                     `user`.picture,
                     `user`.id AS userId,
                     `author`.firstname, 

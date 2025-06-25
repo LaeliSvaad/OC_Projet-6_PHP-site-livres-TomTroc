@@ -13,7 +13,6 @@ class LibraryManager extends AbstractEntityManager
         {
             $sql = "SELECT
                     `user`.nickname, 
-                    `user`.email,
                     `user`.id AS userId,
                     `book`.title, 
                     `book`.description, 
@@ -32,7 +31,6 @@ class LibraryManager extends AbstractEntityManager
         {
             $sql = "SELECT
                     `user`.nickname, 
-                    `user`.email,
                     `user`.id AS userId,
                     `book`.title, 
                     `book`.description, 
@@ -66,11 +64,10 @@ class LibraryManager extends AbstractEntityManager
         $status = BookStatus::AVAILABLE->value;
         $sql = "SELECT
                     `user`.nickname, 
-                    `user`.email,
                     `user`.id AS userId,
                     `book`.title, 
                     `book`.description, 
-                    `book`.picture, 
+                    `book`.picture AS bookPicture, 
                     `book`.id,
                     `author`.firstname, 
                     `author`.lastname, 
