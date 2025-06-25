@@ -88,17 +88,12 @@ class UserManager extends AbstractEntityManager
         foreach ($db_array as $element) {
 
             $element["author"] = new Author($element);
+            $user = new User($element);
             $book = new Book($element);
             $library->addBook($book);
-            $element["book"] = $book;
-            $db_array["library"] = $library;
-            $db_array["user"] = new user($db_array);
         }
 
-        $user = new User($db_array);
-        echo"<br><br>";
-        var_dump($user);
-        echo"<br><br>";
+        $user->setLibrary($library);
         return $user;
     }
 

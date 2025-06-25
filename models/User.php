@@ -10,22 +10,22 @@ class User extends AbstractEntity
     private string $password;
     private string $picture;
     private int $userId;
-    /*private ?Library $library;*/
+    private ?Library $library;
 
     public function setUserId(int $id) : void
     {
         $this->userId = $id;
     }
 
-   /* public function setLibrary(?Library $library) : void
+   public function setLibrary(?Library $library) : void
     {
         $this->library = $library;
-    }*/
+    }
 
-    /*public function getLibrary() : ?Library
+    public function getLibrary() : ?Library
     {
         return $this->library;
-    }*/
+    }
 
     public function setNickname(string $nickname) : void
     {
