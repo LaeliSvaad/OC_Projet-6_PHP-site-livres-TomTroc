@@ -7,11 +7,14 @@ class BookManager extends AbstractEntityManager
 {
     public function getBook(int $id) : ?Book
     {
-        $sql = "SELECT * FROM book 
-                INNER JOIN author ON book.author_id = author.id 
-                INNER JOIN library ON book.id = library.book_id
-                INNER JOIN user ON library.user_id = user.id
-                WHERE book.id = :id";
+        $sql = "SELECT book.`title`, book.`description`, book.`picture` AS bookPicture, 
+                author.`firstname`, author.lastname, author.pseudo, 
+                user.`nickname`, user.`email`, user.`id` AS userId
+                FROM book 
+                INNER JOIN author ON book.`author_id` = author.id 
+                INNER JOIN library ON book.`id` = library.book_id
+                INNER JOIN user ON library.`user_id` = user.id
+                WHERE book.`id` = :id";
 
         $result = $this->db->query($sql, ['id' => $id]);
         $db_array = $result->fetch();
