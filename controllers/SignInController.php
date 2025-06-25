@@ -33,6 +33,9 @@ class SignInController
         // On connecte l'utilisateur.
         $_SESSION['user'] = $user->getId();
 
+        //On récupère les informations à afficher sur la page utilisateur.
+        $user = $userManager->getUserById($user->getId());
+
         // On redirige vers la page mon compte.
         $view = new View('utilisateur');
         $view->render("utilisateur", ['user' => $user]);
