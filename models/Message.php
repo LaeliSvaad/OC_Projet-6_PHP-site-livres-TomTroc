@@ -4,15 +4,12 @@
  */
 class Message extends AbstractEntity
 {
-    private int $chatId;
 
     private Datetime $datetime;
-
-    private int $senderId;
-
-    private string $content;
-
-    private boolean $status;
+    private string $text;
+    private bool $seenByRecipient;
+    private User $sender;
+    private Conversation $conversation;
 
     protected int $id;
 
@@ -26,24 +23,24 @@ class Message extends AbstractEntity
         return $this->id;
     }
 
-    public function setChatId(int $chatId) : void
+   public function setSender(User $user) : void
     {
-        $this->chatId = $chatId;
+        $this->sender = $user;
     }
 
-    public function getChatId() : int
+    public function getSender() : User
     {
-        return $this->chatId;
+        return $this->sender;
     }
 
-    public function setSenderId(int $senderId) : void
+    public function setConversation(Conversation $conversation) : void
     {
-        $this->senderId = $senderId;
+        $this->conversation = $conversation;
     }
 
-    public function getSenderId() : int
+    public function getConversation() : Conversation
     {
-        return $this->senderId;
+        return $this->conversation;
     }
 
     public function setDatetime(Datetime $datetime) : void
@@ -56,24 +53,24 @@ class Message extends AbstractEntity
         return $this->datetime;
     }
 
-    public function setContent(string $content) : void
+    public function setText(string $text) : void
     {
-        $this->content = $content;
+        $this->text = $text;
     }
 
-    public function getContent() : string
+    public function getText() : string
     {
-        return $this->content;
+        return $this->text;
     }
 
-    public function setStatus($status) : void
+    public function setSeenByRecipient($seenByRecipient) : void
     {
-        $this->status = $status;
+        $this->seenByRecipient = $seenByRecipient;
     }
 
-    public function getStatus() : boolean
+    public function getSeenByRecipient() : bool
     {
-        return $this->status;
+        return $this->seenByRecipient;
     }
 
 }

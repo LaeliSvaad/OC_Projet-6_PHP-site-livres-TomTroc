@@ -5,10 +5,10 @@ class MessagingController
     public function showMessages() : void
     {
         $id = Utils::request("id", -1);
-        $chatManager = new ChatManager();
-        $chat = $chatManager->getChatById($id);
+        $conversationManager = new ConversationManager();
+        $conversation = $conversationManager->getConversation(3, 4);
         $view = new View('messagerie');
-        $view->render("messagerie", ['chat' => $chat]);
+        $view->render("messagerie", ['conversation' => $conversation]);
     }
 
     public function showMessagingPage() : void
