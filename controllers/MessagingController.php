@@ -6,7 +6,7 @@ class MessagingController
     {
         $id = Utils::request("id", -1);
         $conversationManager = new ConversationManager();
-        $conversation = $conversationManager->getConversation(3, 4);
+        $conversation = $conversationManager->getConversation(4, 3);
         $view = new View('messagerie');
         $view->render("messagerie", ['conversation' => $conversation]);
     }
