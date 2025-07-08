@@ -5,11 +5,11 @@ class ChatManager extends AbstractEntityManager
     public function getChat(int $userId) : ?Chat
     {
        $sql = "SELECT
-                    chat.id,
+                    chat.id AS conversationId,
                     message.id,
                     user.nickname,
                     message.text,
-                    message.date
+                    message.date AS datetime
                 FROM chat
                 JOIN (
                     SELECT message.conversation_id, MAX(date) AS latest_sent
@@ -26,6 +26,7 @@ class ChatManager extends AbstractEntityManager
         $chat = new Chat();
         foreach ($result as $element) {
             $element["sender"] = new User($element);
+            $element["datetime"] = new Datetime($element["datetime"]);
             $element["message"] = new Message($element);
             $element["conversation"] = new Conversation($element);
             $element["conversation"]->addMessage($element["message"]);

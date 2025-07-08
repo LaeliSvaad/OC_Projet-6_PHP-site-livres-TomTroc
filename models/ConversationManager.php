@@ -11,8 +11,9 @@ class ConversationManager extends AbstractEntityManager
                     `user`.`id` AS userId,
                     `message`.`text`, 
                     `message`.`sender_id`,
+                    `message`.`date` AS datetime,
                     `message`.`id`,
-                    `chat`.id
+                    `chat`.id AS conversationId
                 FROM `chat`
                 INNER JOIN `message` ON `message`.`conversation_id` = `chat`.`id`
                 INNER JOIN `user` ON `user`.`id` = `message`.`sender_id`
@@ -22,6 +23,7 @@ class ConversationManager extends AbstractEntityManager
 
         $conversation = new Conversation();
         foreach ($result as $element) {
+            $element["datetime"] = new DateTime($element["datetime"]);
             $element["sender"] = new User($element);
             $element["message"] = new Message($element);
             $conversation->addMessage($element["message"]);
