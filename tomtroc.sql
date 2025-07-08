@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : db
--- Généré le : lun. 07 juil. 2025 à 09:47
+-- Généré le : lun. 07 juil. 2025 à 16:35
 -- Version du serveur : 5.7.44
 -- Version de PHP : 8.2.27
 
@@ -75,16 +75,17 @@ INSERT INTO `book` (`title`, `description`, `picture`, `author_id`, `id`) VALUES
 
 CREATE TABLE `chat` (
                         `user_1_id` smallint(5) UNSIGNED NOT NULL,
-                        `user_2_id` smallint(5) UNSIGNED NOT NULL
+                        `user_2_id` smallint(5) UNSIGNED NOT NULL,
+                        `id` int(10) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Déchargement des données de la table `chat`
 --
 
-INSERT INTO `chat` (`user_1_id`, `user_2_id`) VALUES
-                                                  (3, 4),
-                                                  (21, 3);
+INSERT INTO `chat` (`user_1_id`, `user_2_id`, `id`) VALUES
+                                                        (3, 4, 1),
+                                                        (21, 3, 2);
 
 -- --------------------------------------------------------
 
@@ -121,6 +122,7 @@ CREATE TABLE `message` (
                            `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
                            `seen_by_recipient` tinyint(1) NOT NULL DEFAULT '0',
                            `sender_id` smallint(5) UNSIGNED NOT NULL,
+                           `conversation_id` int(10) UNSIGNED NOT NULL,
                            `id` int(11) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -128,12 +130,12 @@ CREATE TABLE `message` (
 -- Déchargement des données de la table `message`
 --
 
-INSERT INTO `message` (`text`, `date`, `seen_by_recipient`, `sender_id`, `id`) VALUES
-                                                                                   ('Coucou', '2025-07-04 10:33:53', 1, 3, 1),
-                                                                                   ('Coucou également!!', '2025-07-04 10:34:33', 1, 4, 3),
-                                                                                   ('Hello hello', '2025-07-07 09:19:40', 1, 21, 4),
-                                                                                   ('Hey hey', '2025-07-07 09:19:40', 1, 3, 5),
-                                                                                   ('re', '2025-07-07 09:19:59', 1, 21, 6);
+INSERT INTO `message` (`text`, `date`, `seen_by_recipient`, `sender_id`, `conversation_id`, `id`) VALUES
+                                                                                                      ('Coucou', '2025-07-07 16:34:26', 1, 3, 1, 1),
+                                                                                                      ('Coucou également!!', '2025-07-07 16:34:26', 1, 4, 1, 3),
+                                                                                                      ('Hello hello', '2025-07-07 16:34:07', 1, 21, 2, 4),
+                                                                                                      ('Hey hey', '2025-07-07 16:34:15', 1, 3, 2, 5),
+                                                                                                      ('re', '2025-07-07 16:34:15', 1, 21, 2, 6);
 
 -- --------------------------------------------------------
 
@@ -176,6 +178,12 @@ ALTER TABLE `book`
     ADD PRIMARY KEY (`id`);
 
 --
+-- Index pour la table `chat`
+--
+ALTER TABLE `chat`
+    ADD PRIMARY KEY (`id`);
+
+--
 -- Index pour la table `library`
 --
 ALTER TABLE `library`
@@ -208,6 +216,12 @@ ALTER TABLE `author`
 --
 ALTER TABLE `book`
     MODIFY `id` smallint(5) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT pour la table `chat`
+--
+ALTER TABLE `chat`
+    MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT pour la table `library`

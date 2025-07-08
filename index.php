@@ -61,9 +61,14 @@ try {
             $userPageController->showUserPage();
             break;
 
+        case 'conversation':
+            $messagingController = new MessagingController();
+            $messagingController->showConversation();
+            break;
+
         case 'messagerie':
             $messagingController = new MessagingController();
-            $messagingController->showMessages();
+            $messagingController->showChat();
             break;
 
         default:

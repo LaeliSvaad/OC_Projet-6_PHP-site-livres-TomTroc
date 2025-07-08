@@ -6,6 +6,8 @@ class Conversation extends AbstractEntity
 {
     private array $conversation;
 
+    protected int $id;
+
    public function addMessage(Message $message): void
     {
         $this->conversation[] = $message;
@@ -16,4 +18,13 @@ class Conversation extends AbstractEntity
         return $this->conversation;
     }
 
+    public function getId(): int
+    {
+        return $this->id;
+    }
+
+    public function setId(int $id): void
+    {
+        $this->id = $id;
+    }
 }

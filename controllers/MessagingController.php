@@ -2,17 +2,21 @@
 
 class MessagingController
 {
-    public function showMessages() : void
+    public function showConversation() : void
     {
-        $id = Utils::request("id", -1);
+        $conversationId = Utils::request("conversationId", -1);
         $conversationManager = new ConversationManager();
-        $conversation = $conversationManager->getConversation(4, 3);
+        $conversation = $conversationManager->getConversation($conversationId);
         $view = new View('messagerie');
         $view->render("messagerie", ['conversation' => $conversation]);
     }
 
-    public function showMessagingPage() : void
+    public function showChat() : void
     {
-
+        $userId = $_SESSION["user"];
+        $chatManager = new ChatManager();
+        $chat = $chatManager->getChat($userId);
+        $view = new View('chat');
+        $view->render("chat", ['chat' => $chat]);
     }
 }
