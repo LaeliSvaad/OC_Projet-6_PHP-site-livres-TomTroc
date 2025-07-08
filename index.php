@@ -71,6 +71,12 @@ try {
             $messagingController->showChat();
             break;
 
+        case 'contactUser':
+            $messagingController = new MessagingController();
+            $messagingController->contactUser();
+            break;
+
+
         default:
             throw new Exception("Erreur 404: page non trouvée.");
     }

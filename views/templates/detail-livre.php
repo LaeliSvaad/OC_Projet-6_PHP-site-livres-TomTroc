@@ -5,6 +5,6 @@ echo "<p>Auteur: " . $book->getAuthor()->getFirstname() . " " . $book->getAuthor
 echo "<p>Description: " . $book->getDescription() . "</p>";
 echo "<p>Vendu par : <a href='index.php?action=user-account&id=". $book->getUser()->getUserId() ."' >" . $book->getUser()->getNickname() . "</a> -  ";
 if(isset($_SESSION["user"]))
-    echo "<a href='index.php?action=messagerie&'>Lui envoyer un message</a></p>";
+    echo "<a href='index.php?action=contactUser&userId=" . $book->getUser()->getUserId()  . "'>Lui envoyer un message</a></p>";
 else
     echo "Créez un compte ou connectez-vous pour lui envoyer un message.</p>";
