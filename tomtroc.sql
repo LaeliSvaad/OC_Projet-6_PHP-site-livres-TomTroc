@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : db
--- Généré le : lun. 07 juil. 2025 à 16:35
+-- Généré le : mar. 08 juil. 2025 à 14:03
 -- Version du serveur : 5.7.44
 -- Version de PHP : 8.2.27
 
@@ -85,7 +85,8 @@ CREATE TABLE `chat` (
 
 INSERT INTO `chat` (`user_1_id`, `user_2_id`, `id`) VALUES
                                                         (3, 4, 1),
-                                                        (21, 3, 2);
+                                                        (21, 3, 2),
+                                                        (21, 22, 3);
 
 -- --------------------------------------------------------
 
@@ -119,7 +120,7 @@ INSERT INTO `library` (`book_id`, `user_id`, `status`, `id`) VALUES
 
 CREATE TABLE `message` (
                            `text` text NOT NULL,
-                           `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+                           `date` datetime NOT NULL,
                            `seen_by_recipient` tinyint(1) NOT NULL DEFAULT '0',
                            `sender_id` smallint(5) UNSIGNED NOT NULL,
                            `conversation_id` int(10) UNSIGNED NOT NULL,
@@ -131,11 +132,13 @@ CREATE TABLE `message` (
 --
 
 INSERT INTO `message` (`text`, `date`, `seen_by_recipient`, `sender_id`, `conversation_id`, `id`) VALUES
-                                                                                                      ('Coucou', '2025-07-07 16:34:26', 1, 3, 1, 1),
+                                                                                                      ('Coucou', '2025-07-07 16:34:25', 1, 3, 1, 1),
                                                                                                       ('Coucou également!!', '2025-07-07 16:34:26', 1, 4, 1, 3),
                                                                                                       ('Hello hello', '2025-07-07 16:34:07', 1, 21, 2, 4),
                                                                                                       ('Hey hey', '2025-07-07 16:34:15', 1, 3, 2, 5),
-                                                                                                      ('re', '2025-07-07 16:34:15', 1, 21, 2, 6);
+                                                                                                      ('re', '2025-07-07 16:34:18', 1, 21, 2, 6),
+                                                                                                      ('test hello', '2025-07-08 09:04:48', 1, 21, 3, 7),
+                                                                                                      ('hé', '2025-07-08 09:05:02', 1, 22, 3, 8);
 
 -- --------------------------------------------------------
 
@@ -159,7 +162,8 @@ CREATE TABLE `user` (
 INSERT INTO `user` (`nickname`, `email`, `password`, `picture`, `registration_date`, `id`) VALUES
                                                                                                ('Lisa', 'lisa.valade@hotmail.fr', '$2y$10$jx6YJ6nEwA0yKkUnNt3gVebV9Ip2y7bWwZj/e7E6A2aE8CVKaqlVC', 'pictures/profile/default-profile-picture.png', '2025-06-04', 3),
                                                                                                ('Lissaaaaaa', 'lisa.valade@orange.fr', '$2y$10$HbZIqZ84tshUME8H2AHe1.x/waMwBoGyaVbahwW7vMNoOZEJ5NmNm', 'pictures/profile/default-profile-picture.png', '2025-06-04', 4),
-                                                                                               ('LV', 'sdf@sdf.fr', '$2y$10$.6FgH6MsSPS..6.W8tqHGeJnWTE7OYLw2o8JyxkpFKY1lNsH4Mabq', 'pictures/profile/Mask group-3.png', '2025-06-20', 21);
+                                                                                               ('LV', 'sdf@sdf.fr', '$2y$10$.6FgH6MsSPS..6.W8tqHGeJnWTE7OYLw2o8JyxkpFKY1lNsH4Mabq', 'pictures/profile/Mask group-3.png', '2025-06-20', 21),
+                                                                                               ('testtest', 'test@sdf.fr', '$2y$10$jx6YJ6nEwA0yKkUnNt3gVebV9Ip2y7bWwZj/e7E6A2aE8CVKaqlVC', 'pictures/profile/default-profile-picture.png', '2025-07-08', 22);
 
 --
 -- Index pour les tables déchargées
@@ -221,7 +225,7 @@ ALTER TABLE `book`
 -- AUTO_INCREMENT pour la table `chat`
 --
 ALTER TABLE `chat`
-    MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+    MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT pour la table `library`
@@ -233,13 +237,13 @@ ALTER TABLE `library`
 -- AUTO_INCREMENT pour la table `message`
 --
 ALTER TABLE `message`
-    MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+    MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT pour la table `user`
 --
 ALTER TABLE `user`
-    MODIFY `id` smallint(5) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+    MODIFY `id` smallint(5) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
