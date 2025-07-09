@@ -13,7 +13,9 @@ class ConversationManager extends AbstractEntityManager
                     `message`.`sender_id`,
                     `message`.`date` AS datetime,
                     `message`.`id`,
-                    `chat`.id AS conversationId
+                    `chat`.id AS conversationId,
+                    `chat`.`user_1_id` AS user1Id,
+                    `chat`.`user_2_id` AS user2Id
                 FROM `chat`
                 INNER JOIN `message` ON `message`.`conversation_id` = `chat`.`id`
                 INNER JOIN `user` ON `user`.`id` = `message`.`sender_id`
@@ -21,11 +23,15 @@ class ConversationManager extends AbstractEntityManager
 
         $result = $this->db->query($sql, ['conversationId' => $conversationId]);
 
-        $result_array = $result->fetchAll();
+        $db_array = $result->fetchAll();
 
-        if ($result_array) {
+        if ($db_array) {
             $conversation = new Conversation();
-            foreach ($result_array as $element) {
+            var_dump($db_array);
+            $conversation->setId($db_array[0]["conversationId"]);
+            $conversation->setUser1Id($db_array[0]["user1Id"]);
+            $conversation->setUser2Id($db_array[0]["user2Id"]);
+            foreach ($db_array as $element) {
                 $element["datetime"] = new DateTime($element["datetime"]);
                 $element["sender"] = new User($element);
                 $element["message"] = new Message($element);
@@ -35,38 +41,4 @@ class ConversationManager extends AbstractEntityManager
         }
         return null;
     }
-
-    public function getConversationFromBookPage(int $connectedUserId, int $userId) : ?Conversation
-    {
-        $sql = "SELECT
-                    `user`.`nickname`, 
-                    `user`.`id` AS userId,
-                    `message`.`text`, 
-                    `message`.`sender_id`,
-                    `message`.`date` AS datetime,
-                    `message`.`id`,
-                    `chat`.id AS conversationId
-                FROM `chat`
-                INNER JOIN `message` ON `message`.`conversation_id` = `chat`.`id`
-                INNER JOIN `user` ON `user`.`id` = `message`.`sender_id`
-                WHERE `chat`.`user_1_id` = :userId AND `chat`.`user_2_id` = :connectedUserId 
-                OR `chat`.`user_1_id` = :connectedUserId AND `chat`.`user_2_id` = :userId";
-
-        $result = $this->db->query($sql, ['connectedUserId' => $connectedUserId, 'userId' => $userId]);
-
-        $result_array = $result->fetchAll();
-
-        if ($result_array) {
-            $conversation = new Conversation();
-            foreach ($result_array as $element) {
-                $element["datetime"] = new DateTime($element["datetime"]);
-                $element["sender"] = new User($element);
-                $element["message"] = new Message($element);
-                $conversation->addMessage($element["message"]);
-            }
-            return $conversation;
-        }
-        return null;
-    }
-
 }

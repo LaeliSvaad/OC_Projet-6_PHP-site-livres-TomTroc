@@ -11,6 +11,7 @@ class User extends AbstractEntity
     private string $picture;
     private int $userId;
     private ?Library $library;
+    private ?Conversation  $conversation;
 
     public function setUserId(int $id) : void
     {
@@ -25,6 +26,16 @@ class User extends AbstractEntity
     public function getLibrary() : ?Library
     {
         return $this->library;
+    }
+
+    public function setConversation(?Conversation $conversation) : void
+    {
+        $this->conversation = $conversation;
+    }
+
+    public function getConversation() : ?Conversation
+    {
+        return $this->conversation;
     }
 
     public function setNickname(string $nickname) : void

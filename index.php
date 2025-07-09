@@ -71,11 +71,10 @@ try {
             $messagingController->showChat();
             break;
 
-        case 'contactUser':
+        case 'send-message':
             $messagingController = new MessagingController();
-            $messagingController->contactUser();
+            $messagingController->sendMessage();
             break;
-
 
         default:
             throw new Exception("Erreur 404: page non trouvée.");

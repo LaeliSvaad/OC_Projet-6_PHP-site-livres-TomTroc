@@ -5,9 +5,9 @@
 class Conversation extends AbstractEntity
 {
    private int $user1Id;
-    private int $user2Id;
-    private ?array $conversation = null;
-    private int $conversationId;
+   private int $user2Id;
+   private ?array $conversation = null;
+   private int $conversationId;
 
     public function getUser1Id(): int
     {
