@@ -2,14 +2,14 @@
 
 class Chat extends AbstractEntity
 {
-    private array $chat;
+    private ?array $chat;
 
-    public function addConversation(Conversation $conversation): void
+    public function addConversation(?Conversation $conversation): void
     {
         $this->chat[] = $conversation;
     }
 
-    public function getChat(): array
+    public function getChat(): ?array
     {
         return $this->chat;
     }

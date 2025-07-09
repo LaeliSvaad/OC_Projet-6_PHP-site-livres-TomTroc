@@ -27,7 +27,6 @@ class ConversationManager extends AbstractEntityManager
 
         if ($db_array) {
             $conversation = new Conversation();
-            var_dump($db_array);
             $conversation->setId($db_array[0]["conversationId"]);
             $conversation->setUser1Id($db_array[0]["user1Id"]);
             $conversation->setUser2Id($db_array[0]["user2Id"]);

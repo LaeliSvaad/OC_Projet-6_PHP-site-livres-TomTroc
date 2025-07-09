@@ -30,7 +30,9 @@ class BookManager extends AbstractEntityManager
             $sql = "SELECT book.`title`, book.`description`, book.`picture` AS bookPicture, 
                 author.`firstname`, author.lastname, author.pseudo, 
                 user.`nickname`, user.`email`, user.`id` AS userId,
-                `chat`.`id` AS conversationId
+                `chat`.`id` AS conversationId,  
+                `chat`.`user_1_id` AS user1Id,
+                `chat`.`user_2_id` AS user2Id
                 FROM book 
                 INNER JOIN author ON book.`author_id` = author.id 
                 INNER JOIN library ON book.`id` = library.book_id
@@ -44,8 +46,12 @@ class BookManager extends AbstractEntityManager
             $db_array = $result->fetch();
             if ($db_array) {
                 $db_array["author"] = new Author($db_array);
-                $db_array["conversation"] = new Conversation($db_array);
+                $chat = new Chat();
+                $conversation = new Conversation($db_array);
+                $chat->addConversation($conversation);
+                $db_array["chat"] = $chat;
                 $db_array["user"] = new User($db_array);
+                var_dump($db_array);
                 return new Book($db_array);
             }
         }
