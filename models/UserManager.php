@@ -64,13 +64,14 @@ class UserManager extends AbstractEntityManager
                     `user`.nickname, 
                     `user`.picture,
                     `user`.id AS userId,
-                    `author`.firstname, 
-                    `author`.lastname, 
-                    `author`.pseudo,
+                    `library`.user_id,
                     `book`.title, 
                     `book`.description, 
                     `book`.picture AS bookPicture, 
-                    `book`.id
+                    `book`.id,
+                    `author`.firstname, 
+                    `author`.lastname, 
+                    `author`.pseudo            
                 FROM `user` 
                 INNER JOIN `library` ON `library`.`user_id` = `user`.`id`
                 INNER JOIN `book` ON `book`.`id` = `library`.`book_id`
@@ -80,18 +81,18 @@ class UserManager extends AbstractEntityManager
         $result = $this->db->query($sql, ['id' => $id]);
 
         $db_array = $result->fetchAll();
-
+        $user = new User($db_array[0]);
         $library = new Library();
-
 
         foreach ($db_array as $element) {
 
             $element["author"] = new Author($element);
-            $user = new User($element);
-            $book = new Book($element);
-            $library->addBook($book);
-        }
+            $element["user"] = $user;
+            $element["book"] = new Book($element);
 
+            $library->addBook($element["book"]);
+
+        }
         $user->setLibrary($library);
         return $user;
     }

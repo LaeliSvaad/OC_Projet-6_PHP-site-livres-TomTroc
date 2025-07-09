@@ -5,19 +5,19 @@
  */
 class BookManager extends AbstractEntityManager
 {
-    public function getBook(int $id, ?int $idConnectedUser) : ?Book
+    public function getBook(int $id, int $userId, ?int $idConnectedUser) : ?Book
     {
-        if(is_null($idConnectedUser)) {
-            $sql = "SELECT book.`title`, book.`description`, book.`picture` AS bookPicture, 
+        if(is_null($idConnectedUser) || $userId == $idConnectedUser) {
+            $sql = "SELECT book.`title`, book.`description`, book.`picture` AS bookPicture, book.id,
                 author.`firstname`, author.lastname, author.pseudo, 
                 user.`nickname`, user.`email`, user.`id` AS userId
                 FROM book 
                 INNER JOIN author ON book.`author_id` = author.id 
                 INNER JOIN library ON book.`id` = library.book_id
                 INNER JOIN user ON library.`user_id` = user.id
-                WHERE book.`id` = :id";
+                WHERE book.`id` = :id AND library.user_id = :userId";
 
-            $result = $this->db->query($sql, ['id' => $id]);
+            $result = $this->db->query($sql, ['id' => $id, 'userId' => $userId]);
 
             $db_array = $result->fetch();
             if ($db_array) {
@@ -27,7 +27,7 @@ class BookManager extends AbstractEntityManager
             }
         }
         else{
-            $sql = "SELECT book.`title`, book.`description`, book.`picture` AS bookPicture, 
+            $sql = "SELECT book.`title`, book.`description`, book.`picture` AS bookPicture, book.id,
                 author.`firstname`, author.lastname, author.pseudo, 
                 user.`nickname`, user.`email`, user.`id` AS userId,
                 `chat`.`id` AS conversationId,  
@@ -39,9 +39,9 @@ class BookManager extends AbstractEntityManager
                 INNER JOIN user ON library.`user_id` = user.id
                 INNER JOIN chat ON chat.user_1_id = library.user_id AND chat.user_2_id = :idConnectedUser 
                                        OR chat.user_1_id = :idConnectedUser AND chat.user_2_id = library.user_id
-                WHERE book.`id` = :id";
+                WHERE book.`id` = :id AND library.user_id = :userId";
 
-            $result = $this->db->query($sql, ['id' => $id,  'idConnectedUser' => $idConnectedUser]);
+            $result = $this->db->query($sql, ['id' => $id, 'userId' => $userId, 'idConnectedUser' => $idConnectedUser]);
 
             $db_array = $result->fetch();
             if ($db_array) {
