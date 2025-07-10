@@ -7,8 +7,8 @@ class LibraryController
         $libraryManager = new LibraryManager();
         $library = $libraryManager->getAvailableBooks();
 
-        $view = new View('nos-livres');
-        $view->render("nos-livres", ['library' => $library->getLibrary()] );
+        $view = new View('our-books');
+        $view->render("our-books", ['library' => $library->getLibrary()] );
     }
 
     public function showSearchResults() : void
@@ -19,7 +19,7 @@ class LibraryController
         $libraryManager = new LibraryManager();
         $library = $libraryManager->getBooksByTitle($booksearch);
 
-        $view = new View('nos-livres');
-        $view->render("nos-livres", ['library' => $library->getLibrary()] );
+        $view = new View('our-books');
+        $view->render("our-books", ['library' => $library->getLibrary()] );
     }
 }

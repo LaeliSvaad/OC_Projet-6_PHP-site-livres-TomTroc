@@ -6,7 +6,7 @@
     <div class="intro-content">
         <strong>Rejoignez nos lecteurs passionnés</strong>
         <span>Donnez une nouvelle vie à vos livres en les échangeant avec d'autres amoureux de la lecture. Nous croyons en la magie du partage de connaissances et d'histoires à travers les livres.</span>
-        <button class="button green-button"><a href="index.php?action=nos-livres" >Voir tous les livres</a></button>
+        <button class="button green-button"><a href="index.php?action=our-books" >Voir tous les livres</a></button>
     </div>
 </div>
 <section>
@@ -16,15 +16,15 @@
             <?php
             foreach ($library as $book) {
                 echo"<div class='book'>";
-                echo "<h3><a href='?action=detail-livre&id=" . $book->getId() . "' >" . $book->getTitle() . "</a></h3>";
+                echo "<h3><a href='?action=book-details&id=" . $book->getId() . "' >" . $book->getTitle() . "</a></h3>";
                 echo "<img class='book-img' src='" . $book->getBookPicture() . "' alt='" . $book->getTitle() . "'>";
                 echo "<span>Auteur : " . $book->getAuthor()->getFirstname() . " " . $book->getAuthor()->getLastname() . " " .  $book->getAuthor()->getPseudo() . "</span>";
-                echo "<span>Vendu par : <a href='index.php?action=user-account&id=" . $book->getUser()->getUserId() . "'>" . $book->getUser()->getNickname() . "</a></span>";
+                echo "<span>Vendu par : <a href='index.php?action=user-public-account&id=" . $book->getUser()->getUserId() . "'>" . $book->getUser()->getNickname() . "</a></span>";
                 echo"</div>";
             }
             ?>
         </div>
-        <button class="button green-button"><a href="index.php?action=nos-livres" >Voir tous les livres</a></button>
+        <button class="button green-button"><a href="index.php?action=our-books" >Voir tous les livres</a></button>
     </div>
 </section>
 <section>
@@ -37,7 +37,7 @@
             <div class="instruction">Parcourez les livres disponibles chez d'autres membres.</div>
             <div class="instruction">Proposez un échange et discutez avec d'autres passionnés de lecture.</div>
         </div>
-        <button class="button transparent-button"><a href="index.php?action=nos-livres" >Voir tous les livres</a></button>
+        <button class="button transparent-button"><a href="index.php?action=our-books" >Voir tous les livres</a></button>
     </div>
 </section>
 <div class="home-section banner"><img src="pictures/banner.png" alt="banner"></div>

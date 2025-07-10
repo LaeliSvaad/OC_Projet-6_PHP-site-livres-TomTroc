@@ -37,8 +37,8 @@ class SignInController
         $user = $userManager->getUserById($user->getId());
 
         // On redirige vers la page mon compte.
-        $view = new View('utilisateur');
-        $view->render("utilisateur", ['user' => $user]);
+        $view = new View('private-user-account');
+        $view->render("private-user-account", ['user' => $user]);
     }
 
     public function disconnectUser() : void

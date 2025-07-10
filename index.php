@@ -16,12 +16,12 @@ try {
             $homeController->showHome();
             break;
 
-        case 'nos-livres':
+        case 'our-books':
             $libraryController = new LibraryController();
             $libraryController->showLibrary();
             break;
 
-        case 'detail-livre':
+        case 'book-details':
             $bookController = new BookController();
             $bookController->showBook();
             break;
@@ -56,7 +56,7 @@ try {
             $signInController->disconnectUser();
             break;
 
-        case 'inscription':
+        case 'registration-form':
             $signUpController = new SignUpController();
             $signUpController->showForm();
             break;
@@ -71,7 +71,12 @@ try {
             $signInController->connectUser();
             break;
 
-        case 'user-account':
+        case 'user-private-account':
+            $userPageController = new UserPageController();
+            $userPageController->showUserPage();
+            break;
+
+        case 'user-public-account':
             $userPageController = new UserPageController();
             $userPageController->showUserPage();
             break;
@@ -86,7 +91,7 @@ try {
             $messagingController->showConversation();
             break;
 
-        case 'messagerie':
+        case 'chat':
             $messagingController = new MessagingController();
             $messagingController->showChat();
             break;
@@ -102,5 +107,5 @@ try {
 } catch (Exception $e) {
     // En cas d'erreur, on affiche la page d'erreur.
     $errorView = new View('Erreur');
-    $errorView->render('errorPage', ['errorMessage' => $e->getMessage()]);
+    $errorView->render('error-page', ['errorMessage' => $e->getMessage()]);
 }

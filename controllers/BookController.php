@@ -13,13 +13,13 @@ class BookController
         $userId = Utils::request("userId", -1);
         $bookManager = new BookManager();
         $book = $bookManager->getBook($id, $userId, $idConnectedUser);
-        $view = new View('detail-livre');
-        $view->render("detail-livre", ['book' => $book]);
+        $view = new View('book-details');
+        $view->render("book-details", ['book' => $book]);
     }
 
     public function editBook() : void
     {
-        $view = new View('detail-livre');
-        $view->render("detail-livre", ['book' => $book]);
+        $view = new View('book-details');
+        $view->render("book-details", ['book' => $book]);
     }
 }

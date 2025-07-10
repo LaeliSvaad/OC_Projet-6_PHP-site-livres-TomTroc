@@ -27,11 +27,11 @@
         <nav>
             <div class="nav-links">
                 <div class="nav-link"><a href="index.php">Accueil</a></div>
-                <div class="nav-link"><a href="index.php?action=nos-livres">Nos livres à l'échange</a></div>
+                <div class="nav-link"><a href="index.php?action=our-books">Nos livres à l'échange</a></div>
                 <?php
                 if (isset($_SESSION['user'])) {
-                    echo "<div class='nav-link'><a href='index.php?action=messagerie'>Messagerie</a></div>";
-                    echo "<div class='nav-link'><a href='index.php?action=user-account'>Mon compte</a></div>";
+                    echo "<div class='nav-link'><a href='index.php?action=chat'>Messagerie</a></div>";
+                    echo "<div class='nav-link'><a href='index.php?action=user-private-account'>Mon compte</a></div>";
                     echo "<div class='nav-link'><a href='index.php?action=deconnexion'>Déconnexion</a></div>";
                 }
                 else

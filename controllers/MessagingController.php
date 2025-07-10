@@ -7,8 +7,8 @@ class MessagingController
         $conversationId = Utils::request("conversationId", -1);
         $conversationManager = new ConversationManager();
         $conversation = $conversationManager->getConversation($conversationId);
-        $view = new View('messagerie');
-        $view->render("messagerie", ['conversation' => $conversation]);
+        $view = new View('conversation');
+        $view->render("conversation", ['conversation' => $conversation]);
     }
 
     public function showChat() : void

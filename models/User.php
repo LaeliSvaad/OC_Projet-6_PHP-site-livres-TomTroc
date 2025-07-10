@@ -9,9 +9,10 @@ class User extends AbstractEntity
     private string $email;
     private string $password;
     private string $picture;
-    private int $userId;
+    private Datetime $registrationDate;
     private ?Library $library;
     private ?Chat $chat;
+    private int $userId;
 
     public function setUserId(int $id) : void
     {
@@ -82,8 +83,14 @@ class User extends AbstractEntity
         return $this->password;
     }
 
-    /*public function __toString() : string
+    public function getRegistrationDate() : Datetime
     {
-        return $this->nickname . ' ' . $this->email;
-    }*/
+        return $this->registrationDate;
+    }
+
+    public function setRegistrationDate(Datetime $registrationDate) : void
+    {
+        $this->registrationDate = $registrationDate;
+    }
+
 }

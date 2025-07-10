@@ -1,6 +1,4 @@
-
-
-<h1>Inscription</h1>
+<h2>Inscription</h2>
 <form method="post" action="index.php?action=sign-up" enctype="multipart/form-data">
     <label for="pseudo">Pseudo: </label><input type="text" name="nickname" id="pseudo"><br><br>
     <label for="email">Adresse email: </label><input type="email" name="email" id="mail"><br><br>

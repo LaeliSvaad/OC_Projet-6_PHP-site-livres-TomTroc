@@ -11,6 +11,21 @@ class Utils {
      * @param DateTime $date : la date à convertir.
      * @return string : la date convertie.
      */
+
+    public static function dateInterval(DateTime $registrationDate) :string
+    {
+        $now = new DateTime();
+        $interval = $now->diff($registrationDate);
+        if($interval->y != 0)
+            return $interval->format("%y ans");
+        else if($interval->y === 0 && $interval->m != 0)
+            return $interval->format("%m mois");
+        else if($interval->y === 0 && $interval->m === 0 && $interval->d != 0)
+            return $interval->format("%d jours");
+        else
+            return $interval->format("%H heures");
+    }
+
     public static function convertDateToFrenchFormat(DateTime $date) : string
     {
         // Attention, s'il y a un soucis lié à IntlDateFormatter c'est qu'il faut

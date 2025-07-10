@@ -43,7 +43,7 @@ class UserManager extends AbstractEntityManager
      */
     public function getUser(string $nickname, string $email) : ?User
     {
-        $sql = "SELECT * FROM `user` WHERE `nickname` = :nickname && `email` = :email";
+        $sql = "SELECT `user`.`id`, `user`.`password` FROM `user` WHERE `nickname` = :nickname && `email` = :email";
         $result = $this->db->query($sql, ['nickname' => $nickname, 'email' => $email]);
         $user = $result->fetch();
         if ($user) {
@@ -63,6 +63,8 @@ class UserManager extends AbstractEntityManager
         $sql = "SELECT 
                     `user`.nickname, 
                     `user`.picture,
+                    `user`.registration_date,
+                    `user`.email,
                     `user`.id AS userId,
                     `library`.user_id,
                     `book`.title, 
@@ -82,6 +84,7 @@ class UserManager extends AbstractEntityManager
         $result = $this->db->query($sql, ['id' => $id]);
 
         $db_array = $result->fetchAll();
+        $db_array[0]["registration_date"] = New Datetime($db_array[0]["registration_date"]);
         $user = new User($db_array[0]);
         $library = new Library();
 

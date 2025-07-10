@@ -7,7 +7,7 @@ if(isset($_SESSION["user"]) && $_SESSION["user"] == $book->getUser()->getUserId(
     echo "<p>Vendu par vous</p>";
 }
 else{
-    echo "<p>Vendu par : <a href='index.php?action=user-account&id=". $book->getUser()->getUserId() ."' >" . $book->getUser()->getNickname() . "</a> - ";
+    echo "<p>Vendu par : <a href='index.php?action=user-public-account&id=". $book->getUser()->getUserId() ."' >" . $book->getUser()->getNickname() . "</a> - ";
 }
 if(!isset($_SESSION["user"])){
     echo "Créez un compte ou connectez-vous pour lui envoyer un message.</p>";
