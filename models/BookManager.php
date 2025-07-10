@@ -8,10 +8,12 @@ class BookManager extends AbstractEntityManager
     public function getBook(int $id, int $userId, ?int $idConnectedUser) : ?Book
     {
         if(is_null($idConnectedUser) || $userId == $idConnectedUser) {
-            $sql = "SELECT book.`title`, book.`description`, book.`picture` AS bookPicture, book.id,
+            $sql = "SELECT book.`title`, book.id,
+                book_data.`description`, book_data.`picture` AS bookPicture,
                 author.`firstname`, author.lastname, author.pseudo, 
                 user.`nickname`, user.`email`, user.`id` AS userId
                 FROM book 
+                INNER JOIN book_data ON book.`id` = book_data.book_id
                 INNER JOIN author ON book.`author_id` = author.id 
                 INNER JOIN library ON book.`id` = library.book_id
                 INNER JOIN user ON library.`user_id` = user.id
@@ -27,13 +29,15 @@ class BookManager extends AbstractEntityManager
             }
         }
         else{
-            $sql = "SELECT book.`title`, book.`description`, book.`picture` AS bookPicture, book.id,
+            $sql = "SELECT book.`title`, book.id,
+                book_data.`description`, book_data.`picture` AS bookPicture,
                 author.`firstname`, author.lastname, author.pseudo, 
                 user.`nickname`, user.`email`, user.`id` AS userId,
                 `chat`.`id` AS conversationId,  
                 `chat`.`user_1_id` AS user1Id,
                 `chat`.`user_2_id` AS user2Id
                 FROM book 
+                INNER JOIN book_data ON book.`id` = book_data.book_id
                 INNER JOIN author ON book.`author_id` = author.id 
                 INNER JOIN library ON book.`id` = library.book_id
                 INNER JOIN user ON library.`user_id` = user.id

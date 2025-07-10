@@ -31,6 +31,21 @@ try {
             $libraryController->showSearchResults();
             break;
 
+        case 'edit-book':
+            $messagingController = new BookController();
+            $messagingController->editBook();
+            break;
+
+        case 'add-book':
+            $messagingController = new LibraryController();
+            $messagingController->addBook();
+            break;
+
+        case 'delete-book':
+            $messagingController = new LibraryController();
+            $messagingController->deleteBook();
+            break;
+
         case 'connexion':
             $signInController = new SignInController();
             $signInController->showForm();
@@ -57,6 +72,11 @@ try {
             break;
 
         case 'user-account':
+            $userPageController = new UserPageController();
+            $userPageController->showUserPage();
+            break;
+
+        case 'edit-user':
             $userPageController = new UserPageController();
             $userPageController->showUserPage();
             break;

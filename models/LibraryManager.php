@@ -14,18 +14,19 @@ class LibraryManager extends AbstractEntityManager
             $sql = "SELECT
                     `user`.nickname, 
                     `user`.id AS userId,
-                    `book`.title, 
-                    `book`.description, 
-                    `book`.picture AS bookPicture, 
+                    `book`.title,
                     `book`.id,
+                    `book_data`.description, 
+                    `book_data`.picture AS bookPicture, 
                     `author`.firstname, 
                     `author`.lastname, 
                     `author`.pseudo
                 FROM `library`
                 INNER JOIN `user` ON `user`.`id` = `library`.`user_id`
                 INNER JOIN `book` ON `library`.`book_id` = `book`.`id`
+                INNER JOIN `book_data` ON `book_data`.`book_id` = `book`.`id`
                 INNER JOIN `author` ON `author`.`id` = `book`.`author_id`
-                WHERE `library`.`status` = :status LIMIT 4";
+                WHERE `book_data`.`status` = :status LIMIT 4";
         }
         else
         {
@@ -33,17 +34,18 @@ class LibraryManager extends AbstractEntityManager
                     `user`.nickname, 
                     `user`.id AS userId,
                     `book`.title, 
-                    `book`.description, 
-                    `book`.picture AS bookPicture, 
                     `book`.id,
+                    `book_data`.description, 
+                    `book_data`.picture AS bookPicture, 
                     `author`.firstname, 
                     `author`.lastname, 
                     `author`.pseudo
                 FROM `library`
                 INNER JOIN `user` ON `user`.`id` = `library`.`user_id`
                 INNER JOIN `book` ON `library`.`book_id` = `book`.`id`
+                INNER JOIN `book_data` ON `book_data`.`book_id` = `book`.`id`
                 INNER JOIN `author` ON `author`.`id` = `book`.`author_id`
-                WHERE `library`.`status` = :status";
+                WHERE `book_data`.`status` = :status";
         }
 
         $result = $this->db->query($sql, ['status' => $status]);
@@ -66,17 +68,18 @@ class LibraryManager extends AbstractEntityManager
                     `user`.nickname, 
                     `user`.id AS userId,
                     `book`.title, 
-                    `book`.description, 
-                    `book`.picture AS bookPicture, 
                     `book`.id,
+                    `book_data`.description, 
+                    `book_data`.picture AS bookPicture, 
                     `author`.firstname, 
                     `author`.lastname, 
                     `author`.pseudo
                 FROM `library`
                 INNER JOIN `user` ON `user`.`id` = `library`.`user_id`
                 INNER JOIN `book` ON `library`.`book_id` = `book`.`id`
+                INNER JOIN `book_data` ON `book_data`.`book_id` = `book`.`id`
                 INNER JOIN `author` ON `author`.`id` = `book`.`author_id`
-                WHERE `library`.`status` = :status && `book`.`title` LIKE :title";
+                WHERE `book_data`.`status` = :status && `book`.`title` LIKE :title";
 
         $result = $this->db->query($sql, ['status' => $status, 'title' => $title]);
         $library = new Library();

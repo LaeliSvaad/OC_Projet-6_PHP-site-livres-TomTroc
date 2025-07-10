@@ -66,15 +66,16 @@ class UserManager extends AbstractEntityManager
                     `user`.id AS userId,
                     `library`.user_id,
                     `book`.title, 
-                    `book`.description, 
-                    `book`.picture AS bookPicture, 
                     `book`.id,
+                    `book_data`.description, 
+                    `book_data`.picture AS bookPicture, 
                     `author`.firstname, 
                     `author`.lastname, 
                     `author`.pseudo            
                 FROM `user` 
                 INNER JOIN `library` ON `library`.`user_id` = `user`.`id`
                 INNER JOIN `book` ON `book`.`id` = `library`.`book_id`
+                INNER JOIN `book_data` ON `book`.`id` = `book_data`.`book_id`
                 INNER JOIN `author` ON `author`.`id` = `book`.`author_id`
                 WHERE `user`.`id` = :id";
 

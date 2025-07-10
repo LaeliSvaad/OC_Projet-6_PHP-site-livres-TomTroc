@@ -16,4 +16,10 @@ class BookController
         $view = new View('detail-livre');
         $view->render("detail-livre", ['book' => $book]);
     }
+
+    public function editBook() : void
+    {
+        $view = new View('detail-livre');
+        $view->render("detail-livre", ['book' => $book]);
+    }
 }
