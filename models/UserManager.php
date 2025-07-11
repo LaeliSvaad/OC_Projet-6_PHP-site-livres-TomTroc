@@ -115,9 +115,8 @@ class UserManager extends AbstractEntityManager
         }
 
         $db_array = $result->fetchAll();
-        var_dump($db_array);
         $db_array[0]["registration_date"] = New Datetime($db_array[0]["registration_date"]);
-        if ($db_array[0]["conversationId"]) {
+        if (isset($db_array[0]["conversationId"])) {
             $chat = new Chat();
             $chat->addConversation(new Conversation($db_array[0]));
             $db_array[0]["chat"] = $chat;

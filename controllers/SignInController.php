@@ -34,11 +34,11 @@ class SignInController
         $_SESSION['user'] = $user->getId();
 
         //On récupère les informations à afficher sur la page utilisateur.
-        $user = $userManager->getUserById($user->getId());
+        $user = $userManager->getUserById($user->getId(), null);
 
         // On redirige vers la page mon compte.
-        $view = new View('private-user-account');
-        $view->render("private-user-account", ['user' => $user]);
+        $view = new View('user-private-account');
+        $view->render("user-private-account", ['user' => $user]);
     }
 
     public function disconnectUser() : void
@@ -56,8 +56,7 @@ class SignInController
 
         session_destroy();
 
-        $view = new View('home');
-        $view->render("home");
+         Utils::redirect("home");
     }
 
     public function showForm() : void
