@@ -58,9 +58,11 @@ class UserManager extends AbstractEntityManager
      * @param int $id
      * @return ?User
      */
-    public function getUserById(int $id) : ?User
+    public function getUserById(int $id, ?int $idConnectedUser) : ?User
     {
-        $sql = "SELECT 
+        if(is_null($idConnectedUser))
+        {
+            $sql = "SELECT 
                     `user`.nickname, 
                     `user`.picture,
                     `user`.registration_date,
@@ -81,10 +83,45 @@ class UserManager extends AbstractEntityManager
                 INNER JOIN `author` ON `author`.`id` = `book`.`author_id`
                 WHERE `user`.`id` = :id";
 
-        $result = $this->db->query($sql, ['id' => $id]);
+            $result = $this->db->query($sql, ['id' => $id]);
+        }
+        else
+        {
+            $sql = "SELECT 
+                    `user`.nickname, 
+                    `user`.picture,
+                    `user`.registration_date,
+                    `user`.email,
+                    `user`.id AS userId,
+                    `library`.user_id,
+                    `book`.title, 
+                    `book`.id,
+                    `book_data`.description, 
+                    `book_data`.picture AS bookPicture, 
+                    `author`.firstname, 
+                    `author`.lastname, 
+                    `author`.pseudo,
+                    `conversation`.id AS conversationId
+                FROM `user`
+                INNER JOIN `library` ON `library`.`user_id` = `user`.`id`
+                INNER JOIN `book` ON `book`.`id` = `library`.`book_id`
+                INNER JOIN `book_data` ON `book`.`id` = `book_data`.`book_id`
+                INNER JOIN `author` ON `author`.`id` = `book`.`author_id`
+                INNER JOIN conversation ON conversation.user_1_id = library.user_id AND conversation.user_2_id = :idConnectedUser 
+                                       OR conversation.user_1_id = :idConnectedUser AND conversation.user_2_id = library.user_id
+                WHERE `user`.`id` = :id";
+
+            $result = $this->db->query($sql, ['id' => $id, 'idConnectedUser' => $idConnectedUser]);
+        }
 
         $db_array = $result->fetchAll();
+        var_dump($db_array);
         $db_array[0]["registration_date"] = New Datetime($db_array[0]["registration_date"]);
+        if ($db_array[0]["conversationId"]) {
+            $chat = new Chat();
+            $chat->addConversation(new Conversation($db_array[0]));
+            $db_array[0]["chat"] = $chat;
+        }
         $user = new User($db_array[0]);
         $library = new Library();
 
@@ -93,7 +130,6 @@ class UserManager extends AbstractEntityManager
             $element["author"] = new Author($element);
             $element["user"] = $user;
             $element["book"] = new Book($element);
-
             $library->addBook($element["book"]);
 
         }

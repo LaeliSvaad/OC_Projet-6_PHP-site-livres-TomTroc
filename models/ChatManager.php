@@ -5,7 +5,7 @@ class ChatManager extends AbstractEntityManager
     public function getChat(int $userId) : ?Chat
     {
        $sql = "SELECT
-                    chat.id AS conversationId,
+                    conversation.id AS conversationId,
                     message.id,
                     user.nickname,
                     message.text,
@@ -18,7 +18,7 @@ class ChatManager extends AbstractEntityManager
                 ) lm ON chat.id = lm.conversation_id
                 JOIN message ON message.conversation_id = lm.conversation_id AND message.date = lm.latest_sent
                 JOIN user  ON message.sender_id = user.id
-                WHERE chat.user_1_id = :userId OR chat.user_2_id = :userId
+                WHERE conversation.user_1_id = :userId OR conversation.user_2_id = :userId
                 ORDER BY message.date DESC";
 
         $result = $this->db->query($sql, ['userId' => $userId]);

@@ -41,8 +41,8 @@ class BookManager extends AbstractEntityManager
                 INNER JOIN author ON book.`author_id` = author.id 
                 INNER JOIN library ON book.`id` = library.book_id
                 INNER JOIN user ON library.`user_id` = user.id
-                INNER JOIN chat ON chat.user_1_id = library.user_id AND chat.user_2_id = :idConnectedUser 
-                                       OR chat.user_1_id = :idConnectedUser AND chat.user_2_id = library.user_id
+                INNER JOIN conversation ON conversation.user_1_id = library.user_id AND conversation.user_2_id = :idConnectedUser 
+                                       OR conversation.user_1_id = :idConnectedUser AND conversation.user_2_id = library.user_id
                 WHERE book.`id` = :id AND library.user_id = :userId";
 
             $result = $this->db->query($sql, ['id' => $id, 'userId' => $userId, 'idConnectedUser' => $idConnectedUser]);
@@ -55,7 +55,6 @@ class BookManager extends AbstractEntityManager
                 $chat->addConversation($conversation);
                 $db_array["chat"] = $chat;
                 $db_array["user"] = new User($db_array);
-                var_dump($db_array);
                 return new Book($db_array);
             }
         }

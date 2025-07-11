@@ -13,13 +13,13 @@ class ConversationManager extends AbstractEntityManager
                     `message`.`sender_id`,
                     `message`.`date` AS datetime,
                     `message`.`id`,
-                    `chat`.id AS conversationId,
-                    `chat`.`user_1_id` AS user1Id,
-                    `chat`.`user_2_id` AS user2Id
-                FROM `chat`
-                INNER JOIN `message` ON `message`.`conversation_id` = `chat`.`id`
+                    `conversation`.id AS conversationId,
+                    `conversation`.`user_1_id` AS user1Id,
+                    `conversation`.`user_2_id` AS user2Id
+                FROM `conversation`
+                INNER JOIN `message` ON `message`.`conversation_id` = `conversation`.`id`
                 INNER JOIN `user` ON `user`.`id` = `message`.`sender_id`
-                WHERE `chat`.`id` = :conversationId";
+                WHERE `conversation`.`id` = :conversationId";
 
         $result = $this->db->query($sql, ['conversationId' => $conversationId]);
 
