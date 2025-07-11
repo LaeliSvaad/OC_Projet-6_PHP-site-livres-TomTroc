@@ -9,7 +9,7 @@ class UserPageController
         else
             $idConnectedUser = null;
 
-        if(isset($_SESSION["user"]) && !Utils::request("id"))
+        if(!is_null($idConnectedUser) && !Utils::request("id"))
         {
             $userManager = new UserManager();
             $user = $userManager->getUserById($_SESSION["user"], $idConnectedUser);

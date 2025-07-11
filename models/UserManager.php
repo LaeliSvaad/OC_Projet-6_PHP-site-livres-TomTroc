@@ -62,6 +62,7 @@ class UserManager extends AbstractEntityManager
     {
         if(is_null($idConnectedUser))
         {
+            echo"1";
             $sql = "SELECT 
                     `user`.nickname, 
                     `user`.picture,
@@ -85,7 +86,9 @@ class UserManager extends AbstractEntityManager
 
             $result = $this->db->query($sql, ['id' => $id]);
         }
-        else if(is_null($id)){
+        else if(is_null($id))
+        {
+            echo"2";
             $sql = "SELECT 
                     `user`.nickname, 
                     `user`.picture,
@@ -99,21 +102,19 @@ class UserManager extends AbstractEntityManager
                     `book_data`.picture AS bookPicture, 
                     `author`.firstname, 
                     `author`.lastname, 
-                    `author`.pseudo,
-                    `conversation`.id AS conversationId
+                    `author`.pseudo
                 FROM `user`
-                LEFT JOIN `library` ON `library`.`user_id` = `user`.`id`
-                LEFT JOIN `book` ON `book`.`id` = `library`.`book_id`
+                LEFT JOIN `library` ON `user`.`id` = `library`.`user_id` 
+                LEFT JOIN `book` ON `library`.`book_id` = `book`.`id`
                 LEFT JOIN `book_data` ON `book`.`id` = `book_data`.`book_id`
-                LEFT JOIN `author` ON `author`.`id` = `book`.`author_id`
-                LEFT JOIN conversation ON conversation.user_1_id = library.user_id AND conversation.user_2_id = :idConnectedUser 
-                                       OR conversation.user_1_id = :idConnectedUser AND conversation.user_2_id = library.user_id
+                LEFT JOIN `author` ON `book`.`author_id` = `author`.`id`
                 WHERE `user`.`id` = :idConnectedUser";
 
             $result = $this->db->query($sql, ['idConnectedUser' => $idConnectedUser]);
         }
         else
         {
+            echo"3";
             $sql = "SELECT 
                     `user`.nickname, 
                     `user`.picture,
@@ -143,6 +144,7 @@ class UserManager extends AbstractEntityManager
         }
 
         $db_array = $result->fetchAll();
+        var_dump($db_array);
         $db_array[0]["registration_date"] = New Datetime($db_array[0]["registration_date"]);
         if (isset($db_array[0]["conversationId"])) {
             $chat = new Chat();
@@ -150,6 +152,7 @@ class UserManager extends AbstractEntityManager
             $db_array[0]["chat"] = $chat;
         }
         $user = new User($db_array[0]);
+
         $library = new Library();
 
         foreach ($db_array as $element) {

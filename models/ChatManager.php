@@ -10,7 +10,7 @@ class ChatManager extends AbstractEntityManager
                     user.nickname,
                     message.text,
                     message.date AS datetime
-                FROM chat
+                FROM conversation
                 JOIN (
                     SELECT message.conversation_id, MAX(date) AS latest_sent
                     FROM message
