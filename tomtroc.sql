@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : db
--- Généré le : jeu. 10 juil. 2025 à 08:00
+-- Généré le : ven. 11 juil. 2025 à 09:24
 -- Version du serveur : 5.7.44
 -- Version de PHP : 8.2.27
 
@@ -93,23 +93,23 @@ INSERT INTO `book_data` (`book_id`, `picture`, `description`, `status`, `id`) VA
 -- --------------------------------------------------------
 
 --
--- Structure de la table `chat`
+-- Structure de la table `conversation`
 --
 
-CREATE TABLE `chat` (
-                        `user_1_id` smallint(5) UNSIGNED NOT NULL,
-                        `user_2_id` smallint(5) UNSIGNED NOT NULL,
-                        `id` int(10) UNSIGNED NOT NULL
+CREATE TABLE `conversation` (
+                                `user_1_id` smallint(5) UNSIGNED NOT NULL,
+                                `user_2_id` smallint(5) UNSIGNED NOT NULL,
+                                `id` int(10) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Déchargement des données de la table `chat`
+-- Déchargement des données de la table `conversation`
 --
 
-INSERT INTO `chat` (`user_1_id`, `user_2_id`, `id`) VALUES
-                                                        (3, 4, 1),
-                                                        (21, 3, 2),
-                                                        (21, 22, 3);
+INSERT INTO `conversation` (`user_1_id`, `user_2_id`, `id`) VALUES
+                                                                (3, 4, 1),
+                                                                (21, 3, 2),
+                                                                (21, 22, 3);
 
 -- --------------------------------------------------------
 
@@ -173,8 +173,8 @@ CREATE TABLE `user` (
                         `nickname` varchar(40) NOT NULL,
                         `email` varchar(255) NOT NULL,
                         `password` varchar(255) NOT NULL,
-                        `picture` varchar(180) NOT NULL,
-                        `registration_date` date NOT NULL,
+                        `picture` varchar(180) NOT NULL DEFAULT 'pictures/profile/default-profile-picture.png',
+                        `registration_date` datetime NOT NULL,
                         `id` smallint(5) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -183,10 +183,11 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`nickname`, `email`, `password`, `picture`, `registration_date`, `id`) VALUES
-                                                                                               ('Lisa', 'lisa.valade@hotmail.fr', '$2y$10$jx6YJ6nEwA0yKkUnNt3gVebV9Ip2y7bWwZj/e7E6A2aE8CVKaqlVC', 'pictures/profile/default-profile-picture.png', '2025-06-04', 3),
-                                                                                               ('Lissaaaaaa', 'lisa.valade@orange.fr', '$2y$10$HbZIqZ84tshUME8H2AHe1.x/waMwBoGyaVbahwW7vMNoOZEJ5NmNm', 'pictures/profile/default-profile-picture.png', '2025-06-04', 4),
-                                                                                               ('LV', 'sdf@sdf.fr', '$2y$10$.6FgH6MsSPS..6.W8tqHGeJnWTE7OYLw2o8JyxkpFKY1lNsH4Mabq', 'pictures/profile/Mask group-3.png', '2025-06-20', 21),
-                                                                                               ('testtest', 'test@sdf.fr', '$2y$10$jx6YJ6nEwA0yKkUnNt3gVebV9Ip2y7bWwZj/e7E6A2aE8CVKaqlVC', 'pictures/profile/default-profile-picture.png', '2025-07-08', 22);
+                                                                                               ('Lisa', 'lisa.valade@hotmail.fr', '$2y$10$jx6YJ6nEwA0yKkUnNt3gVebV9Ip2y7bWwZj/e7E6A2aE8CVKaqlVC', 'pictures/profile/default-profile-picture.png', '2025-07-10 07:15:06', 3),
+                                                                                               ('Lissaaaaaa', 'lisa.valade@orange.fr', '$2y$10$HbZIqZ84tshUME8H2AHe1.x/waMwBoGyaVbahwW7vMNoOZEJ5NmNm', 'pictures/profile/default-profile-picture.png', '2025-06-04 00:00:00', 4),
+                                                                                               ('LV', 'sdf@sdf.fr', '$2y$10$.6FgH6MsSPS..6.W8tqHGeJnWTE7OYLw2o8JyxkpFKY1lNsH4Mabq', 'pictures/profile/Mask group-3.png', '2025-06-20 00:00:00', 21),
+                                                                                               ('testtest', 'test@sdf.fr', '$2y$10$jx6YJ6nEwA0yKkUnNt3gVebV9Ip2y7bWwZj/e7E6A2aE8CVKaqlVC', 'pictures/profile/default-profile-picture.png', '2025-07-08 00:00:00', 22),
+                                                                                               ('autre utilisateur', 'miaou@miaou.fr', '$2y$10$J.T3Zg4JDtaibIP9/D1JWu9Kw055lDVt0fqMyW3dR.hIuBF7YzjoO', 'pictures/profile/default-profile-picture.png', '2025-07-11 08:23:41', 23);
 
 --
 -- Index pour les tables déchargées
@@ -211,9 +212,9 @@ ALTER TABLE `book_data`
     ADD PRIMARY KEY (`id`);
 
 --
--- Index pour la table `chat`
+-- Index pour la table `conversation`
 --
-ALTER TABLE `chat`
+ALTER TABLE `conversation`
     ADD PRIMARY KEY (`id`);
 
 --
@@ -257,9 +258,9 @@ ALTER TABLE `book_data`
     MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT pour la table `chat`
+-- AUTO_INCREMENT pour la table `conversation`
 --
-ALTER TABLE `chat`
+ALTER TABLE `conversation`
     MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
@@ -278,7 +279,7 @@ ALTER TABLE `message`
 -- AUTO_INCREMENT pour la table `user`
 --
 ALTER TABLE `user`
-    MODIFY `id` smallint(5) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+    MODIFY `id` smallint(5) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

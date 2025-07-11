@@ -16,7 +16,7 @@ class UserPageController
             $view = new View('user-private-account');
             $view->render("user-private-account", ['user' => $user]);
         }
-        else if(Utils::request("id"))
+        else if(!is_null(Utils::request("id")))
         {
             $userManager = new UserManager();
             $user = $userManager->getUserById(Utils::request("id"), $idConnectedUser);

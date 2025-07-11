@@ -7,11 +7,10 @@ class UserManager extends AbstractEntityManager
 {
     public function addUser(User $user): ?int
     {
-        $sql = "INSERT INTO `user` (`nickname`, `email`, `password`, `picture`, `registration_date`) VALUES (:nickname, :email, :password, :picture, NOW())";
+        $sql = "INSERT INTO `user` (`nickname`, `email`, `password`, `registration_date`) VALUES (:nickname, :email, :password, NOW())";
         $result = $this->db->query($sql, [
             'nickname' => $user->getNickname(),
             'password' => $user->getPassword(),
-            'picture' => $user->getPicture  (),
             'email' => $user->getEmail()
         ]);
         return $result->rowCount() > 0;
@@ -56,9 +55,10 @@ class UserManager extends AbstractEntityManager
     /**
      * Récupère un utilisateur par son id.
      * @param int $id
+     * @param int $idConnectedUser
      * @return ?User
      */
-    public function getUserById(int $id, ?int $idConnectedUser) : ?User
+    public function getUserById(?int $id, ?int $idConnectedUser) : ?User
     {
         if(is_null($idConnectedUser))
         {
@@ -77,13 +77,40 @@ class UserManager extends AbstractEntityManager
                     `author`.lastname, 
                     `author`.pseudo            
                 FROM `user` 
-                INNER JOIN `library` ON `library`.`user_id` = `user`.`id`
-                INNER JOIN `book` ON `book`.`id` = `library`.`book_id`
-                INNER JOIN `book_data` ON `book`.`id` = `book_data`.`book_id`
-                INNER JOIN `author` ON `author`.`id` = `book`.`author_id`
+                LEFT JOIN `library` ON `library`.`user_id` = `user`.`id`
+                LEFT JOIN `book` ON `book`.`id` = `library`.`book_id`
+                LEFT JOIN `book_data` ON `book`.`id` = `book_data`.`book_id`
+                LEFT JOIN `author` ON `author`.`id` = `book`.`author_id`
                 WHERE `user`.`id` = :id";
 
             $result = $this->db->query($sql, ['id' => $id]);
+        }
+        else if(is_null($id)){
+            $sql = "SELECT 
+                    `user`.nickname, 
+                    `user`.picture,
+                    `user`.registration_date,
+                    `user`.email,
+                    `user`.id AS userId,
+                    `library`.user_id,
+                    `book`.title, 
+                    `book`.id,
+                    `book_data`.description, 
+                    `book_data`.picture AS bookPicture, 
+                    `author`.firstname, 
+                    `author`.lastname, 
+                    `author`.pseudo,
+                    `conversation`.id AS conversationId
+                FROM `user`
+                LEFT JOIN `library` ON `library`.`user_id` = `user`.`id`
+                LEFT JOIN `book` ON `book`.`id` = `library`.`book_id`
+                LEFT JOIN `book_data` ON `book`.`id` = `book_data`.`book_id`
+                LEFT JOIN `author` ON `author`.`id` = `book`.`author_id`
+                LEFT JOIN conversation ON conversation.user_1_id = library.user_id AND conversation.user_2_id = :idConnectedUser 
+                                       OR conversation.user_1_id = :idConnectedUser AND conversation.user_2_id = library.user_id
+                WHERE `user`.`id` = :idConnectedUser";
+
+            $result = $this->db->query($sql, ['idConnectedUser' => $idConnectedUser]);
         }
         else
         {
@@ -103,15 +130,16 @@ class UserManager extends AbstractEntityManager
                     `author`.pseudo,
                     `conversation`.id AS conversationId
                 FROM `user`
-                INNER JOIN `library` ON `library`.`user_id` = `user`.`id`
-                INNER JOIN `book` ON `book`.`id` = `library`.`book_id`
-                INNER JOIN `book_data` ON `book`.`id` = `book_data`.`book_id`
-                INNER JOIN `author` ON `author`.`id` = `book`.`author_id`
-                INNER JOIN conversation ON conversation.user_1_id = library.user_id AND conversation.user_2_id = :idConnectedUser 
+                LEFT JOIN `library` ON `library`.`user_id` = `user`.`id`
+                LEFT JOIN `book` ON `book`.`id` = `library`.`book_id`
+                LEFT JOIN `book_data` ON `book`.`id` = `book_data`.`book_id`
+                LEFT JOIN `author` ON `author`.`id` = `book`.`author_id`
+                LEFT JOIN conversation ON conversation.user_1_id = library.user_id AND conversation.user_2_id = :idConnectedUser 
                                        OR conversation.user_1_id = :idConnectedUser AND conversation.user_2_id = library.user_id
                 WHERE `user`.`id` = :id";
 
             $result = $this->db->query($sql, ['id' => $id, 'idConnectedUser' => $idConnectedUser]);
+
         }
 
         $db_array = $result->fetchAll();

@@ -15,7 +15,7 @@ class ChatManager extends AbstractEntityManager
                     SELECT message.conversation_id, MAX(date) AS latest_sent
                     FROM message
                     GROUP BY message.conversation_id
-                ) lm ON chat.id = lm.conversation_id
+                ) lm ON conversation.id = lm.conversation_id
                 JOIN message ON message.conversation_id = lm.conversation_id AND message.date = lm.latest_sent
                 JOIN user  ON message.sender_id = user.id
                 WHERE conversation.user_1_id = :userId OR conversation.user_2_id = :userId

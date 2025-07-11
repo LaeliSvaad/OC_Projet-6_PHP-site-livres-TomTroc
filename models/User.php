@@ -8,7 +8,7 @@ class User extends AbstractEntity
     private string $nickname;
     private string $email;
     private string $password;
-    private string $picture;
+    private ?string $picture;
     private Datetime $registrationDate;
     private ?Library $library;
     private ?Chat $chat;
@@ -44,7 +44,7 @@ class User extends AbstractEntity
         $this->nickname = $nickname;
     }
 
-    public function setPicture(string $picture) : void
+    public function setPicture(?string $picture) : void
     {
         $this->picture = $picture;
     }
@@ -68,7 +68,7 @@ class User extends AbstractEntity
         return $this->nickname;
     }
 
-    public function getPicture() : string
+    public function getPicture() : ?string
     {
         return $this->picture;
     }

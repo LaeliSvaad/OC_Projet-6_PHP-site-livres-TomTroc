@@ -33,9 +33,9 @@ class BookManager extends AbstractEntityManager
                 book_data.`description`, book_data.`picture` AS bookPicture,
                 author.`firstname`, author.lastname, author.pseudo, 
                 user.`nickname`, user.`email`, user.`id` AS userId,
-                `chat`.`id` AS conversationId,  
-                `chat`.`user_1_id` AS user1Id,
-                `chat`.`user_2_id` AS user2Id
+                `conversation`.`id` AS conversationId,  
+                `conversation`.`user_1_id` AS user1Id,
+                `conversation`.`user_2_id` AS user2Id
                 FROM book 
                 INNER JOIN book_data ON book.`id` = book_data.book_id
                 INNER JOIN author ON book.`author_id` = author.id 
