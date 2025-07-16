@@ -23,17 +23,20 @@ class ChatManager extends AbstractEntityManager
 
         $result = $this->db->query($sql, ['userId' => $userId]);
 
-        $chat = new Chat();
-        foreach ($result as $element) {
-            $element["sender"] = new User($element);
-            $element["datetime"] = new Datetime($element["datetime"]);
-            $element["message"] = new Message($element);
-            $element["conversation"] = new Conversation($element);
-            $element["conversation"]->addMessage($element["message"]);
-            $chat->addConversation($element["conversation"]);
+        if(is_null($result))
+            return null;
+        else
+        {
+            $chat = new Chat();
+            foreach ($result as $element) {
+                $element["sender"] = new User($element);
+                $element["datetime"] = new Datetime($element["datetime"]);
+                $element["message"] = new Message($element);
+                $element["conversation"] = new Conversation($element);
+                $element["conversation"]->addMessage($element["message"]);
+                $chat->addConversation($element["conversation"]);
+            }
+            return $chat;
         }
-
-        return $chat;
-
     }
 }

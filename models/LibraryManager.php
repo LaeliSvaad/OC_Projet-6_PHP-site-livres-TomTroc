@@ -93,4 +93,44 @@ class LibraryManager extends AbstractEntityManager
         }
         return $library;
     }
+
+    public function getLibraryByUserId(int $userId): ?Library
+    {
+        $sql = "SELECT
+                    (SELECT COUNT(*) FROM `library` WHERE `user_id` = :userId) AS bookNumber,
+                    `book`.title, 
+                    `book`.id,
+                    `book_data`.description, 
+                    `book_data`.picture AS bookPicture, 
+                    `author`.firstname, 
+                    `author`.lastname, 
+                    `author`.pseudo
+                FROM `library`
+                INNER JOIN `book` ON `library`.`book_id` = `book`.`id`
+                INNER JOIN `book_data` ON `book_data`.`book_id` = `book`.`id`
+                INNER JOIN `author` ON `author`.`id` = `book`.`author_id`
+                WHERE `library`.`user_id` = :userId";
+
+        $result = $this->db->query($sql, ['userId' => $userId]);
+
+        if(is_null($result))
+        {
+            return null;
+        }
+        else
+        {
+            $library = new Library();
+            foreach ($result as $element)
+            {
+                $element["author"] = new Author($element);
+                $element["user"] = new User($element);
+
+                $book = new Book($element);
+                $library->addBook($book);
+            }
+            var_dump($library);
+            return $library;
+        }
+    }
+
 }

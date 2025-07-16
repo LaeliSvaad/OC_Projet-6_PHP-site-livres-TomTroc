@@ -7,6 +7,7 @@
             <h2><?= $user->getNickname() ?></h2>
             <span>Membre depuis <?= Utils::dateInterval($user->getRegistrationDate()) ?></span>
             <span>Bibliothèque</span>
+            <span><?= $user->getLibrary()->getBookNumber() ?></span>
             <span>livres</span>
         </div>
         <div class="content-block">

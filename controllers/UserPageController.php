@@ -2,31 +2,61 @@
 
 class UserPageController
 {
-    public function showUserPage()
+    public function showPublicUserPage() : void
     {
-        if(isset($_SESSION['user']))
-            $idConnectedUser = $_SESSION['user'];
-        else
-            $idConnectedUser = null;
-
-        if(!is_null($idConnectedUser) && !Utils::request("id"))
+        if(is_null(Utils::request("id")))
         {
-            $userManager = new UserManager();
-            $user = $userManager->getUserById($_SESSION["user"], $idConnectedUser);
-            $view = new View('user-private-account');
-            $view->render("user-private-account", ['user' => $user]);
+            $view = new View('Erreur');
+            $view->render("error-page");
         }
-        else if(!is_null(Utils::request("id")))
+        else
         {
+            $userId= Utils::request("id");
             $userManager = new UserManager();
-            $user = $userManager->getUserById(Utils::request("id"), $idConnectedUser);
+            $user = $userManager->getPublicUserById($userId);
+            if(!is_null($user))
+            {
+                $libraryManager = new LibraryManager();
+                $userLibrary = $libraryManager->getLibraryByUserId($userId);
+                if(!is_null($userLibrary)){
+                    $user->setLibrary($userLibrary);
+                }
+            }
             $view = new View('user-public-account');
             $view->render("user-public-account", ['user' => $user]);
         }
-        else{
+
+    }
+
+    public function showPrivateUserPage() : void
+    {
+        if(!isset($_SESSION['user']))
+        {
             $view = new View('sign-in');
             $view->render("sign-in");
         }
-    }
+        else
+        {
+            $userId = $_SESSION['user'];
+            $userManager = new UserManager();
+            $user = $userManager->getPrivateUserById($userId);
 
+            if(!is_null($user))
+            {
+                $libraryManager = new LibraryManager();
+                $userLibrary = $libraryManager->getLibraryByUserId($userId);
+                if(!is_null($userLibrary)){
+                    $user->setLibrary($userLibrary);
+                }
+
+                $chatManager = new chatManager();
+                $userChat = $chatManager->getChat($userId);
+                if(!is_null($userChat))
+                    $user->setChat($userChat);
+            }
+
+            $view = new View('user-private-account');
+            $view->render("user-private-account", ['user' => $user]);
+        }
+    }
 }

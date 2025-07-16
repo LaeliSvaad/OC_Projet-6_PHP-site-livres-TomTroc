@@ -73,12 +73,12 @@ try {
 
         case 'user-private-account':
             $userPageController = new UserPageController();
-            $userPageController->showUserPage();
+            $userPageController->showPrivateUserPage();
             break;
 
         case 'user-public-account':
             $userPageController = new UserPageController();
-            $userPageController->showUserPage();
+            $userPageController->showPublicUserPage();
             break;
 
         case 'edit-user':

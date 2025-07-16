@@ -5,6 +5,25 @@
  */
 class UserManager extends AbstractEntityManager
 {
+    /**
+     * Vérifie l'existence ou non d'un compte avec l'adresse email fournie.
+     * @param string $email
+     * @return int
+     */
+    public function checkExistingEmail(string $email) :int
+    {
+        $sql = "SELECT COUNT(*) FROM `user` WHERE `email` = :email";
+        $result = $this->db->query($sql, ['email' => $email]);
+        $user = $result->fetch();
+        return $user["COUNT(*)"];
+    }
+
+    /**
+     * Ajoute un utilisateur en base de données.
+     * @param User $user
+     * @return ?int
+     */
+
     public function addUser(User $user): ?int
     {
         $sql = "INSERT INTO `user` (`nickname`, `email`, `password`, `registration_date`) VALUES (:nickname, :email, :password, NOW())";
@@ -40,7 +59,7 @@ class UserManager extends AbstractEntityManager
      * @param string $email
      * @return ?User
      */
-    public function getUser(string $nickname, string $email) : ?User
+    public function getUserByLoginInfo(string $nickname, string $email) : ?User
     {
         $sql = "SELECT `user`.`id`, `user`.`password` FROM `user` WHERE `nickname` = :nickname && `email` = :email";
         $result = $this->db->query($sql, ['nickname' => $nickname, 'email' => $email]);
@@ -51,127 +70,38 @@ class UserManager extends AbstractEntityManager
         return null;
     }
 
-
     /**
-     * Récupère un utilisateur par son id.
+     * Récupère un profil public d'utilisateur par son id.
      * @param int $id
-     * @param int $idConnectedUser
      * @return ?User
      */
-    public function getUserById(?int $id, ?int $idConnectedUser) : ?User
+    public function getPublicUserById(int $userId) : ?User
     {
-        if(is_null($idConnectedUser))
-        {
-            echo"1";
-            $sql = "SELECT 
-                    `user`.nickname, 
-                    `user`.picture,
-                    `user`.registration_date,
-                    `user`.email,
-                    `user`.id AS userId,
-                    `library`.user_id,
-                    `book`.title, 
-                    `book`.id,
-                    `book_data`.description, 
-                    `book_data`.picture AS bookPicture, 
-                    `author`.firstname, 
-                    `author`.lastname, 
-                    `author`.pseudo            
-                FROM `user` 
-                LEFT JOIN `library` ON `library`.`user_id` = `user`.`id`
-                LEFT JOIN `book` ON `book`.`id` = `library`.`book_id`
-                LEFT JOIN `book_data` ON `book`.`id` = `book_data`.`book_id`
-                LEFT JOIN `author` ON `author`.`id` = `book`.`author_id`
-                WHERE `user`.`id` = :id";
-
-            $result = $this->db->query($sql, ['id' => $id]);
-        }
-        else if(is_null($id))
-        {
-            echo"2";
-            $sql = "SELECT 
-                    `user`.nickname, 
-                    `user`.picture,
-                    `user`.registration_date,
-                    `user`.email,
-                    `user`.id AS userId,
-                    `library`.user_id,
-                    `book`.title, 
-                    `book`.id,
-                    `book_data`.description, 
-                    `book_data`.picture AS bookPicture, 
-                    `author`.firstname, 
-                    `author`.lastname, 
-                    `author`.pseudo
-                FROM `user`
-                LEFT JOIN `library` ON `user`.`id` = `library`.`user_id` 
-                LEFT JOIN `book` ON `library`.`book_id` = `book`.`id`
-                LEFT JOIN `book_data` ON `book`.`id` = `book_data`.`book_id`
-                LEFT JOIN `author` ON `book`.`author_id` = `author`.`id`
-                WHERE `user`.`id` = :idConnectedUser";
-
-            $result = $this->db->query($sql, ['idConnectedUser' => $idConnectedUser]);
-        }
-        else
-        {
-            echo"3";
-            $sql = "SELECT 
-                    `user`.nickname, 
-                    `user`.picture,
-                    `user`.registration_date,
-                    `user`.email,
-                    `user`.id AS userId,
-                    `library`.user_id,
-                    `book`.title, 
-                    `book`.id,
-                    `book_data`.description, 
-                    `book_data`.picture AS bookPicture, 
-                    `author`.firstname, 
-                    `author`.lastname, 
-                    `author`.pseudo,
-                    `conversation`.id AS conversationId
-                FROM `user`
-                LEFT JOIN `library` ON `library`.`user_id` = `user`.`id`
-                LEFT JOIN `book` ON `book`.`id` = `library`.`book_id`
-                LEFT JOIN `book_data` ON `book`.`id` = `book_data`.`book_id`
-                LEFT JOIN `author` ON `author`.`id` = `book`.`author_id`
-                LEFT JOIN conversation ON conversation.user_1_id = library.user_id AND conversation.user_2_id = :idConnectedUser 
-                                       OR conversation.user_1_id = :idConnectedUser AND conversation.user_2_id = library.user_id
-                WHERE `user`.`id` = :id";
-
-            $result = $this->db->query($sql, ['id' => $id, 'idConnectedUser' => $idConnectedUser]);
-
-        }
-
-        $db_array = $result->fetchAll();
-        var_dump($db_array);
-        $db_array[0]["registration_date"] = New Datetime($db_array[0]["registration_date"]);
-        if (isset($db_array[0]["conversationId"])) {
-            $chat = new Chat();
-            $chat->addConversation(new Conversation($db_array[0]));
-            $db_array[0]["chat"] = $chat;
-        }
-        $user = new User($db_array[0]);
-
-        $library = new Library();
-
-        foreach ($db_array as $element) {
-
-            $element["author"] = new Author($element);
-            $element["user"] = $user;
-            $element["book"] = new Book($element);
-            $library->addBook($element["book"]);
-
-        }
-        $user->setLibrary($library);
-        return $user;
-    }
-
-    public function checkExistingEmail(string $email) :int
-    {
-        $sql = "SELECT COUNT(*) FROM `user` WHERE `email` = :email";
-        $result = $this->db->query($sql, ['email' => $email]);
+        $sql = "SELECT `user`.`nickname`, `user`.`picture`, `user`.`registration_date`, `user`.`id` AS user_id FROM `user` WHERE `id` = :userId";
+        $result = $this->db->query($sql, ['userId' => $userId]);
         $user = $result->fetch();
-        return $user["COUNT(*)"];
+        $user["registration_date"] = new DateTime($user["registration_date"]);
+        if ($user) {
+            return new User($user);
+        }
+        return null;
     }
+
+    /**
+     * Récupère les infos de l'utilisateur connecté grâce à son id.
+     * @param int $id
+     * @return ?User
+     */
+    public function getPrivateUserById(int $userId) : ?User
+    {
+        $sql = "SELECT `user`.`nickname`, `user`.`picture`, `user`.`registration_date`, `user`.`email`, `user`.`id` AS user_id FROM `user` WHERE `id` = :userId";
+        $result = $this->db->query($sql, ['userId' => $userId]);
+        $user = $result->fetch();
+        $user["registration_date"] = new DateTime($user["registration_date"]);
+        if ($user) {
+            return new User($user);
+        }
+        return null;
+    }
+
 }

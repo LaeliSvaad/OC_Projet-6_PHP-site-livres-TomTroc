@@ -19,7 +19,7 @@ class SignInController
 
         // On vérifie que l'utilisateur existe.
         $userManager = new UserManager();
-        $user = $userManager->getUser($nickname, $email);
+        $user = $userManager->getUserByLoginInfo($nickname, $email);
 
         if (!$user) {
             throw new Exception("Une erreur est survenue lors de l'authentification.");
@@ -34,7 +34,7 @@ class SignInController
         $_SESSION['user'] = $user->getId();
 
         //On récupère les informations à afficher sur la page utilisateur.
-        $user = $userManager->getUserById(null, $user->getId());
+        $user = $userManager->getPrivateUserById($user->getId());
 
         // On redirige vers la page mon compte.
         $view = new View('user-private-account');
