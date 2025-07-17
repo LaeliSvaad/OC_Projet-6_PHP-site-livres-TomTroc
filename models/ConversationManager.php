@@ -40,4 +40,9 @@ class ConversationManager extends AbstractEntityManager
         }
         return null;
     }
+
+    public function getConversationByUsersId(int $connectedUserId, int $userId) : ?Conversation
+    {
+
+    }
 }

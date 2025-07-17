@@ -18,9 +18,14 @@ class UserPageController
             {
                 $libraryManager = new LibraryManager();
                 $userLibrary = $libraryManager->getLibraryByUserId($userId);
-                if(!is_null($userLibrary)){
-                    $user->setLibrary($userLibrary);
+                $user->setLibrary($userLibrary);
+
+                if(isset($_SESSION["user"]))
+                {
+                    $conversationManager = new ConversationManager();
+                    $conversationManager->getConversationByUsersId($_SESSION["user"], $user->getId());
                 }
+
             }
             $view = new View('user-public-account');
             $view->render("user-public-account", ['user' => $user]);
@@ -40,19 +45,14 @@ class UserPageController
             $userId = $_SESSION['user'];
             $userManager = new UserManager();
             $user = $userManager->getPrivateUserById($userId);
-
             if(!is_null($user))
             {
                 $libraryManager = new LibraryManager();
                 $userLibrary = $libraryManager->getLibraryByUserId($userId);
-                if(!is_null($userLibrary)){
-                    $user->setLibrary($userLibrary);
-                }
-
+                $user->setLibrary($userLibrary);
                 $chatManager = new chatManager();
                 $userChat = $chatManager->getChat($userId);
-                if(!is_null($userChat))
-                    $user->setChat($userChat);
+                $user->setChat($userChat);
             }
 
             $view = new View('user-private-account');

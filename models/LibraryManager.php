@@ -56,8 +56,11 @@ class LibraryManager extends AbstractEntityManager
             $element["user"] = new User($element);
 
             $book = new Book($element);
+
             $library->addBook($book);
+
         }
+
         return $library;
     }
 
@@ -111,23 +114,23 @@ class LibraryManager extends AbstractEntityManager
                 WHERE `library`.`user_id` = :userId";
 
         $result = $this->db->query($sql, ['userId' => $userId]);
+        $library = new Library();
 
-        if(is_null($result))
+        $db_array = $result->fetchAll();
+
+        if(is_null($db_array))
         {
             return null;
         }
         else
         {
-            $library = new Library();
-            foreach ($result as $element)
+            foreach ($db_array as $element)
             {
                 $element["author"] = new Author($element);
                 $element["user"] = new User($element);
-
                 $book = new Book($element);
                 $library->addBook($book);
             }
-
             return $library;
         }
     }

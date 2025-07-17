@@ -9,7 +9,6 @@ class User extends AbstractEntity
     private string $email;
     private string $password;
     private ?string $picture;
-    private ?int $bookNumber;
     private Datetime $registrationDate;
     private ?Library $library;
     private ?Chat $chat;
@@ -40,16 +39,6 @@ class User extends AbstractEntity
     public function getChat() : ?Chat
     {
         return $this->chat;
-    }
-
-     public function setBookNumber(?int $bookNumber) : void
-     {
-         $this->bookNumber = $bookNumber;
-     }
-
-    public function getBookNumber() : ?int
-    {
-        return $this->bookNumber;
     }
 
     public function setNickname(string $nickname) : void

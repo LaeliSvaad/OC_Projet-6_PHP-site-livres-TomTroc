@@ -8,11 +8,13 @@ class Library extends AbstractEntity
     private array $library = [];
 
 
-    public function addBook(Book $book): void {
+    public function addBook(Book $book): void
+    {
         $this->library[] = $book;
     }
 
-    public function getLibrary(): array {
+    public function getLibrary(): array
+    {
         return $this->library;
     }
 
