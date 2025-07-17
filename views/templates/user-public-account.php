@@ -9,7 +9,7 @@
             <h2><?= $user->getNickname() ?></h2>
             <span>Membre depuis <?= Utils::dateInterval($user->getRegistrationDate()) ?></span>
             <span>Bibliothèque</span>
-            <span><?= $user->getLibrary()->getBookNumber() ?></span>
+            <span><?= $user->getLibrary()->countBooks() ?></span>
             <span>livres</span>
             <?php if (isset($_SESSION["user"]))
                 echo"<button><a href='index.php?action=conversation&conversationId= " . $user->getChat()->getChat()[0]->getConversationId() . "'>Ecrire un message</a></button>";

@@ -97,7 +97,6 @@ class LibraryManager extends AbstractEntityManager
     public function getLibraryByUserId(int $userId): ?Library
     {
         $sql = "SELECT
-                    (SELECT COUNT(*) FROM `library` WHERE `user_id` = :userId) AS bookNumber,
                     `book`.title, 
                     `book`.id,
                     `book_data`.description, 
@@ -128,7 +127,7 @@ class LibraryManager extends AbstractEntityManager
                 $book = new Book($element);
                 $library->addBook($book);
             }
-            var_dump($library);
+
             return $library;
         }
     }
