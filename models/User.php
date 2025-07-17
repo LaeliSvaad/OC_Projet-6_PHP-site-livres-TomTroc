@@ -14,7 +14,6 @@ class User extends AbstractEntity
     private ?Chat $chat;
     private int $userId;
 
-    protected int $id;
 
     public function setUserId(int $id) : void
     {

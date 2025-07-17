@@ -2,7 +2,7 @@
 
 class Chat extends AbstractEntity
 {
-    private ?array $chat;
+    private ?array $chat = [];
 
     public function addConversation(?Conversation $conversation): void
     {

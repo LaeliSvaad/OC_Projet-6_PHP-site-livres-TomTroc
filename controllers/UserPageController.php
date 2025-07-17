@@ -14,18 +14,20 @@ class UserPageController
             $userId= Utils::request("id");
             $userManager = new UserManager();
             $user = $userManager->getPublicUserById($userId);
+
             if(!is_null($user))
             {
                 $libraryManager = new LibraryManager();
                 $userLibrary = $libraryManager->getLibraryByUserId($userId);
                 $user->setLibrary($userLibrary);
-
+                $chat = new Chat();
                 if(isset($_SESSION["user"]))
                 {
                     $conversationManager = new ConversationManager();
-                    $conversationManager->getConversationByUsersId($_SESSION["user"], $user->getId());
+                    $conversation =  $conversationManager->getConversationByUsersId($_SESSION["user"], $user->getUserId());
+                    $chat->addConversation($conversation);
                 }
-
+                $user->setChat($chat);
             }
             $view = new View('user-public-account');
             $view->render("user-public-account", ['user' => $user]);

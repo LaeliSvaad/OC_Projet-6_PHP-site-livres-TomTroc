@@ -22,6 +22,7 @@ class BookManager extends AbstractEntityManager
             $result = $this->db->query($sql, ['id' => $id, 'userId' => $userId]);
 
             $db_array = $result->fetch();
+
             if ($db_array) {
                 $db_array["author"] = new Author($db_array);
                 $db_array["user"] = new User($db_array);
@@ -41,18 +42,28 @@ class BookManager extends AbstractEntityManager
                 INNER JOIN author ON book.`author_id` = author.id 
                 INNER JOIN library ON book.`id` = library.book_id
                 INNER JOIN user ON library.`user_id` = user.id
-                INNER JOIN conversation ON conversation.user_1_id = library.user_id AND conversation.user_2_id = :idConnectedUser 
+                LEFT JOIN conversation ON conversation.user_1_id = library.user_id AND conversation.user_2_id = :idConnectedUser 
                                        OR conversation.user_1_id = :idConnectedUser AND conversation.user_2_id = library.user_id
                 WHERE book.`id` = :id AND library.user_id = :userId";
 
             $result = $this->db->query($sql, ['id' => $id, 'userId' => $userId, 'idConnectedUser' => $idConnectedUser]);
 
             $db_array = $result->fetch();
+
             if ($db_array) {
                 $db_array["author"] = new Author($db_array);
                 $chat = new Chat();
-                $conversation = new Conversation($db_array);
-                $chat->addConversation($conversation);
+                if(!is_null($db_array["conversationId"]))
+                {
+                    $conversation = new Conversation($db_array);
+                    $chat->addConversation($conversation);
+                }
+                else
+                {
+                    $conversation = new Conversation(['conversationId' => -1, 'userId1' => $userId, 'userId2' => $idConnectedUser]);
+                    $chat->addConversation($conversation);
+                }
+
                 $db_array["chat"] = $chat;
                 $db_array["user"] = new User($db_array);
                 return new Book($db_array);
