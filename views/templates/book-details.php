@@ -16,7 +16,7 @@ else if(isset($_SESSION["user"]) && $_SESSION["user"] === $book->getUser()->getU
     echo"<a href='index.php?action=edit-book&bookId=" . $book->getId() . "'>Editer les détails de ce livre</a></p>";
 }
 else{
-        echo "<a href='index.php?action=conversation&conversationId=" . $book->getUser()->getChat()->getChat()[0]->getConversationId() . "'>Lui envoyer un message</a></p>";
+        echo "<a href='index.php?action=conversation&user1Id=" . $book->getUser()->getUserId() . "&user2Id=" . $_SESSION["user"] . "'>Lui envoyer un message</a></p>";
 }
 
 

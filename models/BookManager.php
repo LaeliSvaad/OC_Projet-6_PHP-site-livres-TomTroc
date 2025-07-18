@@ -5,10 +5,10 @@
  */
 class BookManager extends AbstractEntityManager
 {
-    public function getBook(int $id, int $userId, ?int $idConnectedUser) : ?Book
+
+    public function getBook(int $id, int $userId) : ?Book
     {
-        if(is_null($idConnectedUser) || $userId == $idConnectedUser) {
-            $sql = "SELECT book.`title`, book.id,
+        $sql = "SELECT book.`title`, book.id,
                 book_data.`description`, book_data.`picture` AS bookPicture,
                 author.`firstname`, author.lastname, author.pseudo, 
                 user.`nickname`, user.`email`, user.`id` AS userId
@@ -19,15 +19,22 @@ class BookManager extends AbstractEntityManager
                 INNER JOIN user ON library.`user_id` = user.id
                 WHERE book.`id` = :id AND library.user_id = :userId";
 
-            $result = $this->db->query($sql, ['id' => $id, 'userId' => $userId]);
+        $result = $this->db->query($sql, ['id' => $id, 'userId' => $userId]);
 
-            $db_array = $result->fetch();
+        $db_array = $result->fetch();
 
-            if ($db_array) {
-                $db_array["author"] = new Author($db_array);
-                $db_array["user"] = new User($db_array);
-                return new Book($db_array);
-            }
+        if ($db_array) {
+            $db_array["author"] = new Author($db_array);
+            $db_array["user"] = new User($db_array);
+            return new Book($db_array);
+        }
+
+        return null;
+    }
+    /*public function getBookWithConvData(int $id, int $userId, ?int $idConnectedUser) : ?Book
+    {
+        if(is_null($idConnectedUser) || $userId == $idConnectedUser) {
+
         }
         else{
             $sql = "SELECT book.`title`, book.id,
@@ -70,7 +77,7 @@ class BookManager extends AbstractEntityManager
             }
         }
         return null;
-    }
+    }*/
 
     public function addBook(Book $book) : ?int
     {

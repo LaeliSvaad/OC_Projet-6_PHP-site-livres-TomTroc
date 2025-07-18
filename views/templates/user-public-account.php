@@ -12,7 +12,7 @@
             <span><?= $user->getLibrary()->countBooks() ?></span>
             <span>livres</span>
             <?php if (isset($_SESSION["user"]))
-                echo"<button><a href='index.php?action=conversation&conversationId= " . $user->getChat()->getChat()[0]->getConversationId() . "'>Ecrire un message</a></button>";
+                echo"<button><a href='index.php?action=conversation&user1Id= " . $user->getUserId() . "&user2Id=" . $_SESSION["user"] . "'>Ecrire un message</a></button>";
             else
                 echo"Connectez-vous pour lui écrire"; ?>
         </div>
