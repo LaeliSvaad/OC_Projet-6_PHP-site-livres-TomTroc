@@ -6,8 +6,12 @@ class MessagingController
     {
         $user1Id = Utils::request("user1Id", -1);
         $user2Id = Utils::request("user2Id", -1);
+        $conversationId = Utils::request("conversationId", -1);
         $conversationManager = new ConversationManager();
-        $conversation = $conversationManager->getConversationByUsersId($user1Id, $user2Id);
+        if($user1Id != -1 && $user2Id != -1)
+            $conversation = $conversationManager->getConversationByUsersId($user1Id, $user2Id);
+        else
+            $conversation = $conversationManager->getConversationById($conversationId);
         $view = new View('conversation');
         $view->render("conversation", ['conversation' => $conversation]);
 

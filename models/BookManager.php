@@ -31,53 +31,6 @@ class BookManager extends AbstractEntityManager
 
         return null;
     }
-    /*public function getBookWithConvData(int $id, int $userId, ?int $idConnectedUser) : ?Book
-    {
-        if(is_null($idConnectedUser) || $userId == $idConnectedUser) {
-
-        }
-        else{
-            $sql = "SELECT book.`title`, book.id,
-                book_data.`description`, book_data.`picture` AS bookPicture,
-                author.`firstname`, author.lastname, author.pseudo, 
-                user.`nickname`, user.`email`, user.`id` AS userId,
-                `conversation`.`id` AS conversationId,  
-                `conversation`.`user_1_id` AS user1Id,
-                `conversation`.`user_2_id` AS user2Id
-                FROM book 
-                INNER JOIN book_data ON book.`id` = book_data.book_id
-                INNER JOIN author ON book.`author_id` = author.id 
-                INNER JOIN library ON book.`id` = library.book_id
-                INNER JOIN user ON library.`user_id` = user.id
-                LEFT JOIN conversation ON conversation.user_1_id = library.user_id AND conversation.user_2_id = :idConnectedUser 
-                                       OR conversation.user_1_id = :idConnectedUser AND conversation.user_2_id = library.user_id
-                WHERE book.`id` = :id AND library.user_id = :userId";
-
-            $result = $this->db->query($sql, ['id' => $id, 'userId' => $userId, 'idConnectedUser' => $idConnectedUser]);
-
-            $db_array = $result->fetch();
-
-            if ($db_array) {
-                $db_array["author"] = new Author($db_array);
-                $chat = new Chat();
-                if(!is_null($db_array["conversationId"]))
-                {
-                    $conversation = new Conversation($db_array);
-                    $chat->addConversation($conversation);
-                }
-                else
-                {
-                    $conversation = new Conversation(['conversationId' => -1, 'userId1' => $userId, 'userId2' => $idConnectedUser]);
-                    $chat->addConversation($conversation);
-                }
-
-                $db_array["chat"] = $chat;
-                $db_array["user"] = new User($db_array);
-                return new Book($db_array);
-            }
-        }
-        return null;
-    }*/
 
     public function addBook(Book $book) : ?int
     {

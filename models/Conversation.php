@@ -7,6 +7,7 @@ class Conversation extends AbstractEntity
    private int $user1Id;
    private int $user2Id;
    private ?array $conversation = null;
+   private ?int $conversationId;
 
     public function getUser1Id(): int
     {
@@ -31,6 +32,16 @@ class Conversation extends AbstractEntity
     public function getConversation(): ?array
     {
         return $this->conversation;
+    }
+
+    public function getConversationId(): ?int
+    {
+        return $this->conversationId;
+    }
+
+    public function setConversationId(?int $conversationId): void
+    {
+        $this->conversationId = $conversationId;
     }
 
 
