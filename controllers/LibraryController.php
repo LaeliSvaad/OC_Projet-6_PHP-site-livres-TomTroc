@@ -5,7 +5,11 @@ class LibraryController
     public function showLibrary() : void
     {
         $libraryManager = new LibraryManager();
-        $library = $libraryManager->getAvailableBooks();
+        $action = Utils::request('action', 'home');
+        if($action == "home")
+            $library = $libraryManager->getHomepageBooks();
+        else
+            $library = $libraryManager->getAvailableBooks();
 
         $view = new View('our-books');
         $view->render("our-books", ['library' => $library->getLibrary()] );

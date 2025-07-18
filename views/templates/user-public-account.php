@@ -19,8 +19,8 @@
     </div>
 </section>
 
-
-<?php
+<section>
+    <?php
 $library = $user->getLibrary()->getLibrary();
 
 foreach ($library as $book) {
@@ -29,6 +29,7 @@ foreach ($library as $book) {
     echo "<img class='book-img' src='" . $book->getBookPicture() . "' alt='" . $book->getTitle() . "'>";
     echo "<div>Auteur : " . $book->getAuthor()->getFirstname() . " " . $book->getAuthor()->getLastname() . " " .  $book->getAuthor()->getPseudo() . "</div>";
     echo "</div>";
-}
-echo "</div>";
+} ?>
+</section>
+
 

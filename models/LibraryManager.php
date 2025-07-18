@@ -5,48 +5,24 @@
  */
 class LibraryManager extends AbstractEntityManager
 {
-    public function getAvailableBooks(): ?Library
+    public function getHomepageBooks(): ?Library
     {
         $status = BookStatus::AVAILABLE->value;
-        $action = Utils::request('action', 'home');
-        if($action == "home")
-        {
-            $sql = "SELECT
+
+        $sql = "SELECT
                     `user`.nickname, 
                     `user`.id AS userId,
                     `book`.title,
                     `book`.id,
-                    `book_data`.description, 
                     `book_data`.picture AS bookPicture, 
                     `author`.firstname, 
-                    `author`.lastname, 
-                    `author`.pseudo
+                    `author`.lastname
                 FROM `library`
                 INNER JOIN `user` ON `user`.`id` = `library`.`user_id`
                 INNER JOIN `book` ON `library`.`book_id` = `book`.`id`
                 INNER JOIN `book_data` ON `book_data`.`book_id` = `book`.`id`
                 INNER JOIN `author` ON `author`.`id` = `book`.`author_id`
                 WHERE `book_data`.`status` = :status LIMIT 4";
-        }
-        else
-        {
-            $sql = "SELECT
-                    `user`.nickname, 
-                    `user`.id AS userId,
-                    `book`.title, 
-                    `book`.id,
-                    `book_data`.description, 
-                    `book_data`.picture AS bookPicture, 
-                    `author`.firstname, 
-                    `author`.lastname, 
-                    `author`.pseudo
-                FROM `library`
-                INNER JOIN `user` ON `user`.`id` = `library`.`user_id`
-                INNER JOIN `book` ON `library`.`book_id` = `book`.`id`
-                INNER JOIN `book_data` ON `book_data`.`book_id` = `book`.`id`
-                INNER JOIN `author` ON `author`.`id` = `book`.`author_id`
-                WHERE `book_data`.`status` = :status";
-        }
 
         $result = $this->db->query($sql, ['status' => $status]);
         $library = new Library();
@@ -54,11 +30,41 @@ class LibraryManager extends AbstractEntityManager
         foreach ($result as $element) {
             $element["author"] = new Author($element);
             $element["user"] = new User($element);
-
             $book = new Book($element);
-
             $library->addBook($book);
+        }
+        return $library;
+    }
 
+    public function getAvailableBooks(): ?Library
+    {
+        $status = BookStatus::AVAILABLE->value;
+
+        $sql = "SELECT
+                `user`.nickname, 
+                `user`.id AS userId,
+                `book`.title, 
+                `book`.id,
+                `book_data`.description, 
+                `book_data`.picture AS bookPicture, 
+                `author`.firstname, 
+                `author`.lastname, 
+                `author`.pseudo
+            FROM `library`
+            INNER JOIN `user` ON `user`.`id` = `library`.`user_id`
+            INNER JOIN `book` ON `library`.`book_id` = `book`.`id`
+            INNER JOIN `book_data` ON `book_data`.`book_id` = `book`.`id`
+            INNER JOIN `author` ON `author`.`id` = `book`.`author_id`
+            WHERE `book_data`.`status` = :status";
+
+        $result = $this->db->query($sql, ['status' => $status]);
+        $library = new Library();
+
+        foreach ($result as $element) {
+            $element["author"] = new Author($element);
+            $element["user"] = new User($element);
+            $book = new Book($element);
+            $library->addBook($book);
         }
 
         return $library;
@@ -67,6 +73,7 @@ class LibraryManager extends AbstractEntityManager
     public function getBooksByTitle(string $title): ?Library
     {
         $status = BookStatus::AVAILABLE->value;
+
         $sql = "SELECT
                     `user`.nickname, 
                     `user`.id AS userId,
