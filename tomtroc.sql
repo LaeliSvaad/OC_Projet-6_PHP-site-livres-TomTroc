@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : db
--- Généré le : ven. 11 juil. 2025 à 09:24
+-- Généré le : ven. 18 juil. 2025 à 13:31
 -- Version du serveur : 5.7.44
 -- Version de PHP : 8.2.27
 
@@ -98,18 +98,17 @@ INSERT INTO `book_data` (`book_id`, `picture`, `description`, `status`, `id`) VA
 
 CREATE TABLE `conversation` (
                                 `user_1_id` smallint(5) UNSIGNED NOT NULL,
-                                `user_2_id` smallint(5) UNSIGNED NOT NULL,
-                                `id` int(10) UNSIGNED NOT NULL
+                                `user_2_id` smallint(5) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Déchargement des données de la table `conversation`
 --
 
-INSERT INTO `conversation` (`user_1_id`, `user_2_id`, `id`) VALUES
-                                                                (3, 4, 1),
-                                                                (21, 3, 2),
-                                                                (21, 22, 3);
+INSERT INTO `conversation` (`user_1_id`, `user_2_id`) VALUES
+                                                          (3, 4),
+                                                          (21, 3),
+                                                          (21, 22);
 
 -- --------------------------------------------------------
 
@@ -212,12 +211,6 @@ ALTER TABLE `book_data`
     ADD PRIMARY KEY (`id`);
 
 --
--- Index pour la table `conversation`
---
-ALTER TABLE `conversation`
-    ADD PRIMARY KEY (`id`);
-
---
 -- Index pour la table `library`
 --
 ALTER TABLE `library`
@@ -256,12 +249,6 @@ ALTER TABLE `book`
 --
 ALTER TABLE `book_data`
     MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-
---
--- AUTO_INCREMENT pour la table `conversation`
---
-ALTER TABLE `conversation`
-    MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT pour la table `library`
