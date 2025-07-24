@@ -12,9 +12,18 @@ class MessageManager extends AbstractEntityManager
             'text' => $message->getText(),
             'senderId' => $message->getSender()->getUserId(),
             'seenByRecipient' => (int)$message->getSeenByRecipient(),
-            'conversationId' => $message->getConversationId(),
+            'conversationId' => $message->getConversationId()
         ]);
 
+        return $result->rowCount() > 0;
+    }
+
+    public function updateMessageStatus(int $messageId) : bool
+    {
+        $sql = "UPDATE `message` SET `message`.`seen_by_recipient` = true WHERE `message`.`id` = :messageId";
+        $result = $this->db->query($sql, [
+            'messageId' => $messageId
+        ]);
         return $result->rowCount() > 0;
     }
 }
