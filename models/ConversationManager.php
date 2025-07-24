@@ -12,6 +12,7 @@ class ConversationManager extends AbstractEntityManager
                     `message`.`text`, 
                     `message`.`sender_id`,
                     `message`.`date` AS datetime,
+                    `message`.`seen_by_recipient` AS seenByRecipient,
                     `message`.`id`,
                     `conversation`.`id` AS conversationId,
                     `conversation`.`user_1_id` AS user1Id,
@@ -50,6 +51,7 @@ class ConversationManager extends AbstractEntityManager
                     `message`.`text`, 
                     `message`.`sender_id`,
                     `message`.`date` AS datetime,
+                    `message`.`seen_by_recipient` AS seenByRecipient,
                     `message`.`id`,
                     `conversation`.`user_1_id` AS user1Id,
                     `conversation`.`user_2_id` AS user2Id
@@ -92,8 +94,9 @@ class ConversationManager extends AbstractEntityManager
 
     public function getLastConversationId() : int
     {
-        $sql = "SELECT `id` FROM `conversation` WHERE id = LAST_INSERT_ID()";
+        $sql = "SELECT `id` FROM `conversation` WHERE `id` = LAST_INSERT_ID()";
         $result = $this->db->query($sql)->fetch();
         return $result['id'];
     }
+
 }

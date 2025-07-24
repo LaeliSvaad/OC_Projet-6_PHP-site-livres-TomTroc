@@ -145,8 +145,26 @@ body{
     width: 20%;
 }
 
+.messaging-page{
+    display: flex;
+    flex-direction: row;
+}
+
+.chat{
+    width: 20%;
+}
+
+.conversation{
+    width: 80%;
+    background-color: pink;
+}
+
 .message{
     border: 1px solid #00AC66;
+}
+
+.unread-message{
+    font-weight: bold;
 }
 
 /*Footer*/

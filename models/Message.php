@@ -63,7 +63,7 @@ class Message extends AbstractEntity
         return $this->text;
     }
 
-    public function setSeenByRecipient($seenByRecipient) : void
+    public function setSeenByRecipient(bool $seenByRecipient) : void
     {
         $this->seenByRecipient = $seenByRecipient;
     }

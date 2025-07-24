@@ -4,6 +4,9 @@ class MessagingController
 {
     public function showConversation() : void
     {
+        $userId = $_SESSION["user"];
+        $chatManager = new ChatManager();
+        $chat = $chatManager->getChat($userId);
         $user1Id = Utils::request("user1Id", -1);
         $user2Id = Utils::request("user2Id", -1);
         $conversationId = Utils::request("conversationId", -1);
@@ -16,8 +19,8 @@ class MessagingController
         {
             $conversation = new Conversation(["conversationId" => $conversationId, "user1Id" => $user1Id, "user2Id" => $user2Id]);
         }
-        $view = new View('conversation');
-        $view->render("conversation", ['conversation' => $conversation]);
+        $view = new View('chat');
+        $view->render("chat", ['chat' => $chat, 'conversation' => $conversation]);
 
     }
 
@@ -26,8 +29,11 @@ class MessagingController
         $userId = $_SESSION["user"];
         $chatManager = new ChatManager();
         $chat = $chatManager->getChat($userId);
+        $conversationManager = new ConversationManager();
+        $conversationId = $chat->getChat()[0]->getConversationId();
+        $conversation = $conversationManager->getConversationById($conversationId);
         $view = new View('chat');
-        $view->render("chat", ['chat' => $chat]);
+        $view->render("chat", ['chat' => $chat, 'conversation' => $conversation]);
     }
 
     public function sendMessage() : void
@@ -67,8 +73,12 @@ class MessagingController
         {
             $conversationManager = new ConversationManager();
             $conversation = $conversationManager->getConversationById($conversationId);
-            $view = new View('conversation');
-            $view->render("conversation", ['conversation' => $conversation]);
+
+            $chatManager = new ChatManager();
+            $chat = $chatManager->getChat($userId);
+
+            $view = new View('chat');
+            $view->render("chat", ['chat' => $chat, 'conversation' => $conversation]);
         }
         else
         {

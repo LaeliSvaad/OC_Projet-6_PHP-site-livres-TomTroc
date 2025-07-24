@@ -16,7 +16,11 @@ else
 
     foreach ($messages as $message)
     {
-        echo "<p class='message'>";
+
+        if($message->getSeenByRecipient() == false)
+            echo "<p class='message unread-message'>";
+        else
+            echo "<p class='message'>";
         echo "Le " . Utils::convertDateToFrenchFormat($message->getDatetime()) . " " .
             $message->getSender()->getNickname() ." a écrit: ".
             $message->getText();
