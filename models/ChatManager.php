@@ -5,9 +5,10 @@ class ChatManager extends AbstractEntityManager
     public function getChat(int $userId) : ?Chat
     {
        $sql = "SELECT
-                     `conversation`.`id` AS conversationId,
+                    `conversation`.`id` AS conversationId,
                     `message`.`id`,  
                     `user`.`nickname`,
+                    `user`.`id` AS userId,
                     `message`.`text`,
                     `message`.`date` AS `datetime`
                 FROM `conversation`

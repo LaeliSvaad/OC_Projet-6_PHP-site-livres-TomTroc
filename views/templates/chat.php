@@ -8,9 +8,16 @@
                 $conversations = $chat->getChat();
                 foreach ($conversations as $conv) {
                     echo "<p class='message'><a href='index.php?action=conversation&conversationId=" . $conv->getConversationId() . "'>";
-                    echo "Le ". Utils::convertDateToFrenchFormat($conv->getConversation()[0]->getDatetime()) . " " .
-                        $conv->getConversation()[0]->getSender()->getNickname() ." a écrit: ".
-                        $conv->getConversation()[0]->getText();
+                    echo "Le ". Utils::convertDateToFrenchFormat($conv->getConversation()[0]->getDatetime()) . " ";
+                    if($conv->getConversation()[0]->getSender()->getUserId() !== $_SESSION["user"])
+                    {
+                        echo $conv->getConversation()[0]->getSender()->getNickname() . " : ";
+                    }
+                    else
+                    {
+                        echo "Vous: ";
+                    }
+                    echo $conv->getConversation()[0]->getText();
                     echo "</a></p>";
                 }
             } ?>
@@ -34,16 +41,21 @@
                     {
                         foreach ($messages as $message)
                         {
-                            if($message->getSeenByRecipient() == false){
+                            if($message->getSeenByRecipient() == false && $message->getSender()->getUserId() !== $_SESSION['user']){
                                 $message->setSeenByRecipient(true);
                                 echo "<p class='message unread-message'>";
                                 echo "<input type='hidden' name='seenByRecipient' value=" . $message->getId() . ">";
                             }
                             else
                                 echo "<p class='message'>";
-                            echo "Le " . Utils::convertDateToFrenchFormat($message->getDatetime()) . " " .
-                                $message->getSender()->getNickname() ." a écrit: ".
-                                $message->getText();
+                            if($message->getSender()->getUserId() !== $_SESSION['user']){
+                                echo "Le " . Utils::convertDateToFrenchFormat($message->getDatetime()) . " " .
+                                    $message->getSender()->getNickname() ." a écrit: ";
+                            }
+                            else{
+                                echo "Le " . Utils::convertDateToFrenchFormat($message->getDatetime()) . " vous avez écrit: ";
+                            }
+                            echo $message->getText();
                             echo "</p>";
 
                         }
