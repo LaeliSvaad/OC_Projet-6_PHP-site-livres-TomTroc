@@ -5,11 +5,11 @@
 class Message extends AbstractEntity
 {
 
-    private Datetime $datetime;
+    private ?Datetime $datetime;
     private string $text;
     private bool $seenByRecipient;
     private User $sender;
-    private Conversation $conversation;
+    private int $conversationId;
 
     protected int $id;
 
@@ -33,22 +33,22 @@ class Message extends AbstractEntity
         return $this->sender;
     }
 
-    public function setConversation(Conversation $conversation) : void
+    public function setConversationId(int $conversationId) : void
     {
-        $this->conversation = $conversation;
+        $this->conversationId = $conversationId;
     }
 
-    public function getConversation() : Conversation
+    public function getConversationId() : int
     {
-        return $this->conversation;
+        return $this->conversationId;
     }
 
-    public function setDatetime(Datetime $datetime) : void
+    public function setDatetime(?Datetime $datetime) : void
     {
         $this->datetime = $datetime;
     }
 
-    public function getDatetime() : Datetime
+    public function getDatetime() : ?Datetime
     {
         return $this->datetime;
     }

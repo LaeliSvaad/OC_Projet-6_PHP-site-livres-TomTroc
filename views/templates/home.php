@@ -18,7 +18,7 @@
                 echo"<div class='book'>";
                 echo "<h3><a a href='?action=book-details&id=" . $book->getId() . "&userId=".$book->getUser()->getUserId()."'  >" . $book->getTitle() . "</a></h3>";
                 echo "<img class='book-img' src='" . $book->getBookPicture() . "' alt='" . $book->getTitle() . "'>";
-                echo "<span>Auteur : " . $book->getAuthor()->getFirstname() . " " . $book->getAuthor()->getLastname() . " " .  $book->getAuthor()->getPseudo() . "</span>";
+                echo "<span>Auteur : " . $book->getAuthor()->getFirstname() . " " . $book->getAuthor()->getLastname() . "</span>";
                 echo "<span>Vendu par : <a href='index.php?action=user-public-account&id=" . $book->getUser()->getUserId() . "'>" . $book->getUser()->getNickname() . "</a></span>";
                 echo"</div>";
             }

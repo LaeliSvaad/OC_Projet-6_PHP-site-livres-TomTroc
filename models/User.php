@@ -5,11 +5,11 @@
  */
 class User extends AbstractEntity
 {
-    private string $nickname;
-    private string $email;
-    private string $password;
+    private ?string $nickname;
+    private ?string $email;
+    private ?string $password;
     private ?string $picture;
-    private Datetime $registrationDate;
+    private ?Datetime $registrationDate;
     private ?Library $library;
     private ?Chat $chat;
     private int $userId;
@@ -40,7 +40,7 @@ class User extends AbstractEntity
         return $this->chat;
     }
 
-    public function setNickname(string $nickname) : void
+    public function setNickname(?string $nickname) : void
     {
         $this->nickname = $nickname;
     }
@@ -50,11 +50,11 @@ class User extends AbstractEntity
         $this->picture = $picture;
     }
 
-    public function setEmail(string $email) : void
+    public function setEmail(?string $email) : void
     {
         $this->email = $email;
     }
-    public function setPassword(string $password) : void
+    public function setPassword(?string $password) : void
     {
         $this->password = $password;
     }
@@ -64,7 +64,7 @@ class User extends AbstractEntity
         return $this->userId;
     }
 
-    public function getNickname() : string
+    public function getNickname() : ?string
     {
         return $this->nickname;
     }
@@ -74,7 +74,7 @@ class User extends AbstractEntity
         return $this->picture;
     }
 
-    public function getEmail() : string
+    public function getEmail() : ?string
     {
         return $this->email;
     }
@@ -84,12 +84,12 @@ class User extends AbstractEntity
         return $this->password;
     }
 
-    public function getRegistrationDate() : Datetime
+    public function getRegistrationDate() : ?Datetime
     {
         return $this->registrationDate;
     }
 
-    public function setRegistrationDate(Datetime $registrationDate) : void
+    public function setRegistrationDate(?Datetime $registrationDate) : void
     {
         $this->registrationDate = $registrationDate;
     }

@@ -59,7 +59,6 @@ class LibraryManager extends AbstractEntityManager
 
         $result = $this->db->query($sql, ['status' => $status]);
         $library = new Library();
-
         foreach ($result as $element) {
             $element["author"] = new Author($element);
             $element["user"] = new User($element);

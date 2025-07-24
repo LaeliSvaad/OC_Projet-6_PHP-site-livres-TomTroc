@@ -77,4 +77,23 @@ class ConversationManager extends AbstractEntityManager
         }
         return null;
     }
+
+    public function addConversation(Conversation $conversation) : bool
+    {
+        $sql = "INSERT INTO `conversation` (`user_1_id`, `user_2_id`) VALUES (:user1Id, :user2Id)";
+
+        $result = $this->db->query($sql, [
+            'user1Id' => $conversation->getUser1Id(),
+            'user2Id' => $conversation->getUser2Id(),
+        ]);
+
+        return $result->rowCount() > 0;
+    }
+
+    public function getLastConversationId() : int
+    {
+        $sql = "SELECT `id` FROM `conversation` WHERE id = LAST_INSERT_ID()";
+        $result = $this->db->query($sql)->fetch();
+        return $result['id'];
+    }
 }
