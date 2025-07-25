@@ -3,6 +3,12 @@
         <div class="content-block">
             <div class="profile-picture">
                 <img src="<?= $user->getPicture() ?>" alt="<?= $user->getNickname() ?> profile picture" />
+                <a href="#" onclick="document.getElementById('imageUpload').click();">
+                    Modifier l'image
+                </a>
+                <form action="index.php?action=modify-user" method="post" enctype="multipart/form-data" id="uploadForm">
+                    <input type="file" name="picture" id="imageUpload" style="display: none;" onchange="document.getElementById('uploadForm').submit();">
+                </form>
             </div>
             <h2><?= $user->getNickname() ?></h2>
             <span>Membre depuis <?= Utils::dateInterval($user->getRegistrationDate()) ?></span>
