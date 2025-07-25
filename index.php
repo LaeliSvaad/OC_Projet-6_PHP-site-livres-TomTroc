@@ -81,9 +81,9 @@ try {
             $userPageController->showPublicUserPage();
             break;
 
-        case 'edit-user':
+        case 'modify-user':
             $userPageController = new UserPageController();
-            $userPageController->showUserPage();
+            $userPageController->modifyUser();
             break;
 
         case 'conversation':

@@ -24,7 +24,7 @@ class UserManager extends AbstractEntityManager
      * @return ?int
      */
 
-    public function addUser(User $user): ?int
+    public function addUser(User $user): int
     {
         $sql = "INSERT INTO `user` (`nickname`, `email`, `password`, `registration_date`) VALUES (:nickname, :email, :password, NOW())";
         $result = $this->db->query($sql, [
@@ -36,19 +36,65 @@ class UserManager extends AbstractEntityManager
     }
 
     /**
-     * Modifie les données d'un utilisateur.
-     * @param User $user
+     * Modifie le pseudo d'un utilisateur.
+     * @param string $nickname
+     * @param int $id
      * @return ?int
      */
-    public function modifyUser(User $user): ?int
+    public function modifyUserNickname(string $nickname, int $id): int
     {
-        $sql = "UPDATE `user` SET `nickname`, `email`, `password`, `picture`) WHERE `id` = :id";
+        $sql = "UPDATE `user` SET `nickname` = :nickname WHERE `id` = :id";
         $result = $this->db->query($sql, [
-            'nickname' => $user->getNickname(),
-            'password' => $user->getPassword(),
-            'email' => $user->getEmail(),
-            'picture' => $user->getPicture(),
-            'id' => $user->getId()
+            'nickname' => $nickname,
+            'id' => $id
+        ]);
+        return $result->rowCount() > 0;
+    }
+
+    /**
+     * Modifie le mot de passe d'un utilisateur.
+     * @param string $password
+     * @param int $id
+     * @return ?int
+     */
+    public function modifyUserPassword(string $password, int $id): int
+    {
+        $sql = "UPDATE `user` SET `password` = :password WHERE `id` = :id";
+        $result = $this->db->query($sql, [
+            'password' => $password,
+            'id' => $id
+        ]);
+        return $result->rowCount() > 0;
+    }
+
+    /**
+     * Modifie la photo de profil d'un utilisateur.
+     * @param string $picture
+     * @param int $id
+     * @return ?int
+     */
+    public function modifyUserPicture(string $picture, int $id): int
+    {
+        $sql = "UPDATE `user` SET `picture` = :picture WHERE `id` = :id";
+        $result = $this->db->query($sql, [
+            'picture' => $picture,
+            'id' => $id
+        ]);
+        return $result->rowCount() > 0;
+    }
+
+    /**
+     * Modifie l'adresse email d'un utilisateur.
+     * @param string $email
+     * @param int $id
+     * @return ?int
+     */
+    public function modifyUserEmail(string $email, int $id): int
+    {
+        $sql = "UPDATE `user` SET `email` = :email WHERE `id` = :id";
+        $result = $this->db->query($sql, [
+            'email' => $email,
+            'id' => $id
         ]);
         return $result->rowCount() > 0;
     }

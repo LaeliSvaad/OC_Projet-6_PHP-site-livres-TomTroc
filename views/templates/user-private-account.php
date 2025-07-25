@@ -12,17 +12,17 @@
         </div>
         <div class="content-block">
             <h3>Vos informations personnelles</h3>
-            <label for="input-email" >Adresse email</label>
-            <input type="email" id="input-email" value="<?= $user->getEmail() ?>" />
-            <label for="input-pwd" >Mot de passe</label>
-            <input type="password" id="input-pwd" />
-            <label for="pseudo" >Pseudo</label>
-            <input type="text" id="input-text" value="<?= $user->getNickname() ?>" />
-            <input type="submit" value="Enregistrer" />
+            <form method='post' action='index.php?action=modify-user'>
+                <label for="input-email" >Adresse email</label>
+                <input type="email" id="input-email" name='email' placeholder="<?= $user->getEmail() ?>" value="" />
+                <label for="input-pwd" >Mot de passe</label>
+                <input type="password" id="input-pwd" name="password" placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;"/>
+                <label for="input-nickname" >Pseudo</label>
+                <input type="text" id="input-nickname" name='nickname' placeholder="<?= $user->getNickname() ?>" value="" />
+                <input type="hidden" name="userId" value="<?= $user->getUserId() ?>"/>
+                <input type="submit" value="Enregistrer" />
+            </form>
         </div>
-    </div>
-    <div class="content-block">
-
     </div>
 </section>
 
