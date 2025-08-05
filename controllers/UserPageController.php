@@ -52,7 +52,7 @@ class UserPageController
                 $libraryManager = new LibraryManager();
                 $userLibrary = $libraryManager->getLibraryByUserId($userId);
                 $user->setLibrary($userLibrary);
-                $chatManager = new chatManager();
+                $chatManager = new ChatManager();
                 $userChat = $chatManager->getChat($userId);
                 $user->setChat($userChat);
             }
