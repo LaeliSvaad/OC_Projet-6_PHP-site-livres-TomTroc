@@ -8,6 +8,7 @@ class Book extends AbstractEntity
     private string $title;
     private string $description;
     private string $bookPicture;
+    private string $status;
     private Author $author;
     private User $user;
 
@@ -32,6 +33,16 @@ class Book extends AbstractEntity
     public function getTitle() : string
     {
         return $this->title;
+    }
+
+    public function setStatus(string $status) : void
+    {
+        $this->status = $status;
+    }
+
+    public function getStatus() : string
+    {
+        return $this->status;
     }
 
     public function setDescription(string $description) : void

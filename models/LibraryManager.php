@@ -105,17 +105,34 @@ class LibraryManager extends AbstractEntityManager
 
     public function getLibraryByUserId(int $userId): ?Library
     {
-        $sql = "SELECT
-                    `book`.title, 
+        /*$sql = "SELECT
+                    `book`.title,
                     `book`.id,
                     `book_data`.description, 
                     `book_data`.picture AS bookPicture, 
+                    `book_data`.status,
                     `author`.firstname, 
                     `author`.lastname, 
                     `author`.pseudo
                 FROM `library`
                 INNER JOIN `book` ON `library`.`book_id` = `book`.`id`
                 INNER JOIN `book_data` ON `book_data`.`book_id` = `book`.`id`
+                INNER JOIN `author` ON `author`.`id` = `book`.`author_id`
+                WHERE `library`.`user_id` = :userId";*/
+
+        $sql = "SELECT
+                    `book`.title,
+                    `book`.id,
+                    `book_data`.description, 
+                    `book_data`.picture AS bookPicture, 
+                    `book_data`.status,
+                    `book_data`.id,
+                    `author`.firstname, 
+                    `author`.lastname, 
+                    `author`.pseudo
+                FROM `library`
+                INNER JOIN `book_data` ON `library`.`book_data_id` = `book_data`.`id`
+                INNER JOIN `book` ON `book_data`.`book_id` = `book`.`id`
                 INNER JOIN `author` ON `author`.`id` = `book`.`author_id`
                 WHERE `library`.`user_id` = :userId";
 
@@ -139,6 +156,16 @@ class LibraryManager extends AbstractEntityManager
             }
             return $library;
         }
+    }
+
+    public function deleteBook(int $bookId) : int
+    {
+        $sql = "DELETE FROM `library`
+                JOIN `book_data` ON `book_data`.`id` = `library`.`book_data_id`
+                WHERE `book_data`.`id` = :id";
+        $result = $this->db->query($sql, [
+            'id' => $bookId]);
+        return $result->rowCount() > 0;
     }
 
 }

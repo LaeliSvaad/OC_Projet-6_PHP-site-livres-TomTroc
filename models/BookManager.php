@@ -28,7 +28,6 @@ class BookManager extends AbstractEntityManager
             $db_array["user"] = new User($db_array);
             return new Book($db_array);
         }
-
         return null;
     }
 

@@ -35,13 +35,19 @@
 <section>
     <?php
     $library = $user->getLibrary()->getLibrary();
-
+    echo "<table>";
+    echo "<tr><th>Photo</th><th>Titre</th><th>Auteur</th><th>Description</th><th>Disponibilité</th><th>Action</th></tr>";
     foreach ($library as $book) {
-        echo "<div class='book'>";
-        echo "<h2><a href='?action=book-details&id=" . $book->getId() . "&userId=". $user->getUserId()."' >" . $book->getTitle() . "</a></h2>";
-        echo "<img class='book-img' src='" . $book->getBookPicture() . "' alt='" . $book->getTitle() . "'>";
-        echo "<div>Auteur : " . $book->getAuthor()->getFirstname() . " " . $book->getAuthor()->getLastname() . " " .  $book->getAuthor()->getPseudo() . "</div>";
-        echo "</div>";
-    } ?>
+        echo "<tr>";
+        echo "<td><img class='book-img' src='" . $book->getBookPicture() . "' alt='" . $book->getTitle() . "'></td>";
+        echo "<td>" . $book->getTitle() . "</td>";
+        echo "<td>" . $book->getAuthor()->getFirstname() . " " . $book->getAuthor()->getLastname() . "</td>";
+        echo "<td>" . $book->getDescription() . "</td>";
+        echo "<td>" . $book->getStatus() . "</td>";
+        echo "<td><a href='index.php?action=edit-book&id=". $book->getId() ."' >Modifier</a> <a href='index.php?action=delete-book&id=" . $book->getId() . "' >Supprimer</a></td>";
+        echo "</tr>";
+    }
+    echo "</table>";
+    ?>
 </section>
 

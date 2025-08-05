@@ -26,4 +26,16 @@ class LibraryController
         $view = new View('our-books');
         $view->render("our-books", ['library' => $library->getLibrary()] );
     }
+
+    public function deleteBook() : void
+    {
+        $libraryManager = new LibraryManager();
+        $id = Utils::request('id', '-1');
+
+        if($libraryManager->deleteBook($id) > 0)
+            Utils::redirect("user-private-account");
+        else{
+            throw new Exception("Une erreur est survenue lors de la suppression du livre.");
+        }
+    }
 }
