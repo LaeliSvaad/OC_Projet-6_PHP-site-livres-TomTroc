@@ -19,7 +19,7 @@ class LibraryManager extends AbstractEntityManager
                     `author`.lastname
                 FROM `library`
                 INNER JOIN `user` ON `user`.`id` = `library`.`user_id`
-                INNER JOIN `book` ON `library`.`book_id` = `book`.`id`
+                INNER JOIN `book` ON `library`.`book_data_id` = `book`.`id`
                 INNER JOIN `book_data` ON `book_data`.`book_id` = `book`.`id`
                 INNER JOIN `author` ON `author`.`id` = `book`.`author_id`
                 WHERE `book_data`.`status` = :status LIMIT 4";
