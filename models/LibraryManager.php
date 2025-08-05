@@ -160,9 +160,9 @@ class LibraryManager extends AbstractEntityManager
 
     public function deleteBook(int $bookId) : int
     {
-        $sql = "DELETE FROM `library`
-                JOIN `book_data` ON `book_data`.`id` = `library`.`book_data_id`
-                WHERE `book_data`.`id` = :id";
+        $sql = "DELETE `library`.*, `book_data`.*  FROM `library`
+                INNER JOIN `book_data` ON `library`.`book_data_id` = `book_data`.`id`
+                WHERE `library`.`book_data_id` = :id";
         $result = $this->db->query($sql, [
             'id' => $bookId]);
         return $result->rowCount() > 0;
