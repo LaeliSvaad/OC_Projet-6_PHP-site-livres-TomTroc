@@ -13,7 +13,7 @@ class LibraryManager extends AbstractEntityManager
                     `user`.nickname, 
                     `user`.id AS userId,
                     `book`.title,
-                    `book`.id,
+                    `book_data`.id,
                     `book_data`.picture AS bookPicture, 
                     `author`.firstname, 
                     `author`.lastname
@@ -105,21 +105,6 @@ class LibraryManager extends AbstractEntityManager
 
     public function getLibraryByUserId(int $userId): ?Library
     {
-        /*$sql = "SELECT
-                    `book`.title,
-                    `book`.id,
-                    `book_data`.description, 
-                    `book_data`.picture AS bookPicture, 
-                    `book_data`.status,
-                    `author`.firstname, 
-                    `author`.lastname, 
-                    `author`.pseudo
-                FROM `library`
-                INNER JOIN `book` ON `library`.`book_id` = `book`.`id`
-                INNER JOIN `book_data` ON `book_data`.`book_id` = `book`.`id`
-                INNER JOIN `author` ON `author`.`id` = `book`.`author_id`
-                WHERE `library`.`user_id` = :userId";*/
-
         $sql = "SELECT
                     `book`.title,
                     `book`.id,
