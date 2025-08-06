@@ -5,12 +5,7 @@ class LibraryController
     public function showLibrary() : void
     {
         $libraryManager = new LibraryManager();
-        $action = Utils::request('action', 'home');
-        if($action == "home")
-            $library = $libraryManager->getHomepageBooks();
-        else
-            $library = $libraryManager->getAvailableBooks();
-
+        $library = $libraryManager->getAvailableBooks();
         $view = new View('our-books');
         $view->render("our-books", ['library' => $library->getLibrary()] );
     }
@@ -34,8 +29,8 @@ class LibraryController
 
         if($libraryManager->deleteBook($id) > 0)
             Utils::redirect("user-private-account");
-        else{
+        else
             throw new Exception("Une erreur est survenue lors de la suppression du livre.");
-        }
+
     }
 }

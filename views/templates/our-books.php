@@ -6,7 +6,7 @@ echo "<div class='books'>";
 
 foreach ($library as $book) {
     echo "<div class='book'>";
-    echo "<h2><a href='?action=book-details&id=" . $book->getId() . "&userId=".$book->getUser()->getUserId()."' >" . $book->getTitle() . "</a></h2>";
+    echo "<h2><a href='?action=book-details&id=" . $book->getId() . "' >" . $book->getTitle() . "</a></h2>";
     echo "<img class='book-img' src='" . $book->getBookPicture() . "' alt='" . $book->getTitle() . "'>";
     echo "<div>Auteur : " . $book->getAuthor()->getFirstname() . " " . $book->getAuthor()->getLastname() . " " .  $book->getAuthor()->getPseudo() . "</div>";
     if(isset($_SESSION["user"]) && $_SESSION["user"] == $book->getUser()->getUserId()){

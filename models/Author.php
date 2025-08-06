@@ -8,6 +8,7 @@ class Author extends AbstractEntity
     private string $firstname;
     private string $lastname;
     private ?string $pseudo;
+    private int $authorId;
 
     public function setFirstname(string $firstname) : void
     {
@@ -38,11 +39,13 @@ class Author extends AbstractEntity
         return $this->pseudo;
     }
 
-    public function __toString() : string
+    public function getAuthorId() : int
     {
-        if($this->pseudo != null)
-            return $this->firstname . ' ' . $this->lastname . ' (' . $this->pseudo . ')';
-        else
-            return $this->firstname . ' ' . $this->lastname;
+        return $this->authorId;
+    }
+
+    public function setAuthorId(int $id) : void
+    {
+        $this->authorId = $id;
     }
 }

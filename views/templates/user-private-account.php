@@ -44,7 +44,7 @@
         echo "<td>" . $book->getAuthor()->getFirstname() . " " . $book->getAuthor()->getLastname() . "</td>";
         echo "<td>" . $book->getDescription() . "</td>";
         echo "<td>" . $book->getStatus() . "</td>";
-        echo "<td><a href='index.php?action=edit-book&id=". $book->getId() ."' >Modifier</a> <a href='index.php?action=delete-book&id=" . $book->getId() . "' >Supprimer</a></td>";
+        echo "<td><a href='index.php?action=book-form&id=". $book->getId() ."' >Modifier</a> <a href='index.php?action=delete-book&id=" . $book->getId() . "' >Supprimer</a></td>";
         echo "</tr>";
     }
     echo "</table>";

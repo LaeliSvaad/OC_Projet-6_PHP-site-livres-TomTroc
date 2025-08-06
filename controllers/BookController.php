@@ -6,18 +6,22 @@ class BookController
     public function showBook() : void
     {
         $id = Utils::request("id", -1);
-        $userId = Utils::request("userId", -1);
 
         $bookManager = new BookManager();
-        $book = $bookManager->getBook($id, $userId);
+        $book = $bookManager->getBook($id);
 
         $view = new View('book-details');
         $view->render("book-details", ['book' => $book]);
     }
 
-    public function editBook() : void
+    public function bookForm() : void
     {
-        $view = new View('book-details');
-        $view->render("book-details", ['book' => $book]);
+        $id = Utils::request("id", -1);
+
+        $bookManager = new BookManager();
+        $book = $bookManager->getBook($id);
+
+        $view = new View('book-form');
+        $view->render("book-form", ['book' => $book]);
     }
 }

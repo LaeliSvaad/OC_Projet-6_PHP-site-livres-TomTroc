@@ -32,18 +32,23 @@ try {
             break;
 
         case 'edit-book':
-            $messagingController = new BookController();
-            $messagingController->editBook();
+            $bookController = new BookController();
+            $bookController->editBook();
+            break;
+
+        case 'book-form':
+            $bookController = new BookController();
+            $bookController->bookForm();
             break;
 
         case 'add-book':
-            $messagingController = new LibraryController();
-            $messagingController->addBook();
+            $libraryController = new LibraryController();
+            $libraryController->addBook();
             break;
 
         case 'delete-book':
-            $messagingController = new LibraryController();
-            $messagingController->deleteBook();
+            $libraryController = new LibraryController();
+            $libraryController->deleteBook();
             break;
 
         case 'connexion':
