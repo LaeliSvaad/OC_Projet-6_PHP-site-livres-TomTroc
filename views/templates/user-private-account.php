@@ -20,11 +20,11 @@
             <h3>Vos informations personnelles</h3>
             <form method='post' action='index.php?action=modify-user'>
                 <label for="input-email" >Adresse email</label>
-                <input type="email" id="input-email" name='email' placeholder="<?= $user->getEmail() ?>" value="" />
+                <input type="email" id="input-email" name='email' value="<?= $user->getEmail() ?>"/>
                 <label for="input-pwd" >Mot de passe</label>
-                <input type="password" id="input-pwd" name="password" placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;"/>
+                <input type="password" id="input-pwd" name="password" value="" placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;"/>
                 <label for="input-nickname" >Pseudo</label>
-                <input type="text" id="input-nickname" name='nickname' placeholder="<?= $user->getNickname() ?>" value="" />
+                <input type="text" id="input-nickname" name='nickname' value="<?= $user->getNickname() ?>" />
                 <input type="hidden" name="userId" value="<?= $user->getUserId() ?>"/>
                 <input type="submit" value="Enregistrer" />
             </form>

@@ -24,4 +24,9 @@ class BookController
         $view = new View('book-form');
         $view->render("book-form", ['book' => $book]);
     }
+
+    public function editBook() : void
+    {
+
+    }
 }

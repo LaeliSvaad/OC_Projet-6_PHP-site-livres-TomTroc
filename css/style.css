@@ -1,9 +1,120 @@
-body{
-    margin: auto;
-    width: 80%;
+.playfair-display-title-font{
+    font-family: "Playfair Display", serif;
+    font-optical-sizing: auto;
+    font-weight: normal;
+    font-style: normal;
 }
 
-.footer, .navbar, .button{
+.inter-main-font{
+    font-family: "Inter", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: <weight>;
+    font-style: normal;
+}
+
+body{
+    max-width: 1440px;
+    margin: auto;
+}
+
+/*Navbar*/
+
+.navbar{
+    background-color: #F5F3EF;
+    border-color: #F5F3EF;
+}
+
+.active{
+    font-weight: bold;
+}
+
+.navbar-default .navbar-nav > li > a{
+    color: #292929;
+}
+
+.logo{
+    height: 40px;
+}
+.title{
+    margin-left: 15px;
+    color: #00AC66;
+    font-weight: bolder;
+    font-size: 1.2em;
+}
+
+.my-navbar-brand{
+    margin-top: -15px;
+    height: 50px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+/*buttons*/
+.green-button{
+    background-color: #00AC66;
+    width: auto;
+    font-size: 1.2em;
+    font-weight: bold;
+    padding: 15px;
+    border: 1px solid #00AC66;
+    border-radius: 10px;
+}
+
+.button-link, .button-link:hover, .button-link:active, .button-link:visited{
+    color: white;
+    text-decoration: none;
+}
+
+/*Intro Container*/
+.intro-container{
+    background-color: #F5F3EF;
+    margin-top: -20px;
+}
+.call{
+    font-size: xx-large;
+    font-weight: lighter;
+}
+.row-flex {
+    display: flex;
+    align-items: center;     /* centre verticalement */
+    justify-content: center; /* centre horizontalement (si besoin) */
+}
+.row-flex > [class*="col-"] {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.intro-img{
+    height: 540px;
+}
+
+.intro-content{
+    max-width: 400px;
+}
+/*Footer*/
+
+.footer{
+    height: 50px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+}
+.footer-content{
+    margin-right: 20px;
+}
+/*.button-link{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}*/
+
+/*.footer, .navbar, .button{
     height: 50px;
     padding-top: 10px;
     padding-bottom: 10px;
@@ -16,30 +127,17 @@ body{
     margin-right: 20px;
 }
 
-.logo img{
+.logo-img{
     height: 50px;
 }
-
+/*
 .button{
-    padding-left: 10px;
-    padding-right: 10px;
-    border: 1px solid #00AC66;
-    border-radius: 10px;
+
 }
 
-.button a{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    text-decoration: none;
-    color: white;
-    width: 100%;
-    height: 100%;
-}
 
-.green-button{
-    background-color: #00AC66;
-}
+
+
 
 .transparent-button{
     background-color: transparent;
@@ -48,9 +146,9 @@ body{
 .transparent-button a{
     color: #00AC66;
 }
-
+*/
 /*Navbar*/
-
+/*
 .logo, .nav-links{
     display: flex;
     flex-direction: row;
@@ -65,18 +163,16 @@ body{
     justify-content: space-around;
     width: 100%;
     height: 80px;
-    background-color: #F5F3EF;
+
 }
 
-.logo{
-    color: #00AC66;
-}
 
+*/
 /*Home*/
-
+/*
 .home-section{
     width: 100%;
-    background-color: #F5F3EF;
+
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -113,12 +209,10 @@ body{
 
 }
 
-.intro-img{
-    height: 540px;
-}
 
+*/
 /*Nos livres*/
-
+/*
 .book-searchbar{
     background-color: white;
     border: 1px solid #F0F0F0;
@@ -166,9 +260,5 @@ body{
 .unread-message{
     font-weight: bold;
 }
+*/
 
-/*Footer*/
-
-.footer{
-    justify-content: flex-end;
-}
