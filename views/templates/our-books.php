@@ -8,7 +8,7 @@ echo "</div>";
 echo "<div class='row'>";
 foreach ($library as $book) {
     echo "<div class='col-sm-3 book-card'>";
-    echo "<a href='?action=book-details&id=' " . $book->getId() . "'&userId='" . $book->getUser()->getUserId() . "'>";
+    echo "<a href='?action=book-details&id=" . $book->getId() . "&userId=" . $book->getUser()->getUserId() . "'>";
     echo "<div class='book-img'>";
     echo "<img src='" . $book->getBookPicture() . "' alt='" . $book->getTitle() . "'>";
     echo "</div>";

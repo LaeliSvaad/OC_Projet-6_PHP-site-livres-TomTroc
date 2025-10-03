@@ -20,16 +20,27 @@
 </section>
 
 <section>
-    <?php
-$library = $user->getLibrary()->getLibrary();
 
-foreach ($library as $book) {
-    echo "<div class='book'>";
-    echo "<h2><a href='?action=book-details&id=" . $book->getId() . "' >" . $book->getTitle() . "</a></h2>";
-    echo "<img class='book-img' src='" . $book->getBookPicture() . "' alt='" . $book->getTitle() . "'>";
-    echo "<div>Auteur : " . $book->getAuthor()->getFirstname() . " " . $book->getAuthor()->getLastname() . " " .  $book->getAuthor()->getPseudo() . "</div>";
-    echo "</div>";
-} ?>
+
+  <div class="row">
+            <?php
+            $library = $user->getLibrary()->getLibrary();
+            foreach ($library as $book) {
+                echo "<div class='col-sm-2 book-card'>";
+                echo "<a href='?action=book-details&id=". $book->getId() . "&userId=" .$book->getUser()->getUserId(). "'>";
+                echo "<div class='book-img'>";
+                echo "<img src='" . $book->getBookPicture() . "' alt='" . $book->getTitle() . "'>";
+                echo "</div>";
+                echo "<div class='book-info'>";
+                echo "<h3>" . $book->getTitle() . "</h3>";
+                echo "<span>" . $book->getAuthor()->getFirstname() . " " . $book->getAuthor()->getLastname() . "</span>";
+                echo "<span class='italic'>Vendu par: " . $book->getUser()->getNickname() . "</span>";
+                echo "</div>";
+                echo "</a>";
+                echo "</div>";
+            }
+            ?>
+    </div>
 </section>
 
 
