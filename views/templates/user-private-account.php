@@ -11,6 +11,7 @@
                 </form>
             </div>
             <h2><?= $user->getNickname() ?></h2>
+<!--            <p>Inscrit le --><?php //= $user->getRegistrationDate(); ?><!--</p>-->
             <span>Membre depuis <?= Utils::dateInterval($user->getRegistrationDate()) ?></span>
             <span>Bibliothèque</span>
             <span><?= $user->getLibrary()->countBooks() ?></span>
@@ -39,12 +40,12 @@
     echo "<tr><th>Photo</th><th>Titre</th><th>Auteur</th><th>Description</th><th>Disponibilité</th><th>Action</th></tr>";
     foreach ($library as $book) {
         echo "<tr>";
-        echo "<td><img class='book-img' src='" . $book->getBookPicture() . "' alt='" . $book->getTitle() . "'></td>";
+        echo "<td><img class='table-book-img' src='" . $book->getBookPicture() . "' alt='" . $book->getTitle() . "'></td>";
         echo "<td>" . $book->getTitle() . "</td>";
         echo "<td>" . $book->getAuthor()->getFirstname() . " " . $book->getAuthor()->getLastname() . "</td>";
         echo "<td>" . $book->getDescription() . "</td>";
-        echo "<td>" . $book->getStatus() . "</td>";
-        echo "<td><a href='index.php?action=book-form&id=". $book->getId() ."' >Modifier</a> <a href='index.php?action=delete-book&id=" . $book->getId() . "' >Supprimer</a></td>";
+        echo "<td>" . $book->getStatus()->getLabel() . "</td>";
+        echo "<td><a href='index.php?action=book-form&id=". $book->getId() ."' >Editer</a> <a href='index.php?action=delete-book&id=" . $book->getId() . "' >Supprimer</a></td>";
         echo "</tr>";
     }
     echo "</table>";

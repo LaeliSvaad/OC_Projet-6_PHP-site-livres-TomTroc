@@ -47,6 +47,7 @@ class UserPageController
             $userId = $_SESSION['user'];
             $userManager = new UserManager();
             $user = $userManager->getPrivateUserById($userId);
+
             if(!is_null($user))
             {
                 $libraryManager = new LibraryManager();

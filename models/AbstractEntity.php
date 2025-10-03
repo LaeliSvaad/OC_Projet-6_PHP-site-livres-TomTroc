@@ -30,6 +30,16 @@ abstract class AbstractEntity
         foreach ($data as $key => $value) {
             $method = 'set' . str_replace('_', '', ucwords($key, '_'));
             if (method_exists($this, $method)) {
+                $reflection = new ReflectionMethod($this, $method);
+                $parameters = $reflection->getParameters();
+                if ($parameters) {
+                    $type = $parameters[0]->getType();
+                    if ($type instanceof ReflectionNamedType && enum_exists($type->getName())) {
+                        $enumClass = $type->getName();
+                        $value = $enumClass::from($value); // conversion string → Enum
+                    }
+                }
+
                 $this->$method($value);
             }
         }

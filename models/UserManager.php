@@ -145,6 +145,7 @@ class UserManager extends AbstractEntityManager
         $user = $result->fetch();
         $user["registration_date"] = new DateTime($user["registration_date"]);
         if ($user) {
+
             return new User($user);
         }
         return null;

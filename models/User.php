@@ -9,7 +9,7 @@ class User extends AbstractEntity
     private ?string $email;
     private ?string $password;
     private ?string $picture;
-    private ?Datetime $registrationDate;
+    private ?\DateTime $registrationDate = null;
     private ?Library $library;
     private ?Chat $chat;
     private int $userId;
@@ -84,12 +84,12 @@ class User extends AbstractEntity
         return $this->password;
     }
 
-    public function getRegistrationDate() : ?Datetime
+    public function getRegistrationDate() : ?\DateTime
     {
         return $this->registrationDate;
     }
 
-    public function setRegistrationDate(?Datetime $registrationDate) : void
+    public function setRegistrationDate(?\DateTime $registrationDate) : void
     {
         $this->registrationDate = $registrationDate;
     }

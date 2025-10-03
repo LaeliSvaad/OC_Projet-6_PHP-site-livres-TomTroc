@@ -141,6 +141,18 @@ body{
 .our-books-title{
     justify-content: space-between;
 }
+
+.table-book-img{
+    width: 70px;
+}
+tr:nth-child(odd)
+{
+    background: #EDF2F6;
+}
+th, tr:nth-child(even)
+{
+    background: #FFFFFF;
+}
 /*Footer*/
 
 .footer{
