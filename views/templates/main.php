@@ -6,7 +6,7 @@
  *      $title string : le titre de la page.
  *      $content string : le contenu de la page.
  */
-
+$current_page = isset($_GET['action']) ? $_GET['action'] : 'home';
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -45,16 +45,29 @@
                         </a>
                     </div>
                     <ul class="nav navbar-nav">
-                        <li><a class="nav-link active" href="index.php">Accueil</a></li>
-                        <li><a class="nav-link" href="index.php?action=our-books">Nos livres</a></li>
+                        <li>
+                            <a class="nav-link <?php echo ($current_page === 'home') ? 'active' : ''; ?>" href="index.php">Accueil</a>
+                        </li>
+                        <li>
+                            <a class="nav-link <?php echo ($current_page === 'our-books') ? 'active' : ''; ?>" href="index.php?action=our-books">Nos livres</a>
+                        </li>
                     </ul>
+
                     <ul class="nav navbar-nav navbar-right">
                         <?php if (isset($_SESSION['user'])): ?>
-                            <li><a class="nav-link" href="index.php?action=chat">Messagerie</a></li>
-                            <li><a class="nav-link" href="index.php?action=user-private-account">Mon compte</a></li>
-                            <li><a class="nav-link" href="index.php?action=logout">Déconnexion</a></li>
+                            <li>
+                                <a class="nav-link <?php echo ($current_page === 'chat') ? 'active' : ''; ?>" href="index.php?action=chat">Messagerie</a>
+                            </li>
+                            <li>
+                                <a class="nav-link <?php echo ($current_page === 'user-private-account') ? 'active' : ''; ?>" href="index.php?action=user-private-account">Mon compte</a>
+                            </li>
+                            <li>
+                                <a class="nav-link <?php echo ($current_page === 'logout') ? 'active' : ''; ?>" href="index.php?action=logout">Déconnexion</a>
+                            </li>
                         <?php else: ?>
-                            <li><a class="nav-link" href="index.php?action=connexion">Connexion</a></li>
+                            <li>
+                                <a class="nav-link <?php echo ($current_page === 'connexion') ? 'active' : ''; ?>" href="index.php?action=connexion">Connexion</a>
+                            </li>
                         <?php endif; ?>
                     </ul>
                 </div>
