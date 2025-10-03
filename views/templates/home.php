@@ -15,34 +15,35 @@
         </div>
     </div>
 </section>
-
-
-
-    <div class="intro-content">
-
-    </div>
-</div>
 <section>
-    <div class="home-section library">
-        <span class="call playfair-display-title-font">Les derniers livres ajoutés</span>
-        <div class="books">
+    <div class="container-fluid home-section library">
+        <div class="row">
+            <span class="call col-sm-12 centered col-sm-12 playfair-display-title-font">Les derniers livres ajoutés</span>
+        </div>
+        <div class="row books">
             <?php
             foreach ($library as $book) {
-                echo"<div class='book'>";
-                echo "<h3><a a href='?action=book-details&id=" . $book->getId() . "&userId=".$book->getUser()->getUserId()."'  >" . $book->getTitle() . "</a></h3>";
-                echo "<img class='book-img' src='" . $book->getBookPicture() . "' alt='" . $book->getTitle() . "'>";
-                echo "<span>Auteur : " . $book->getAuthor()->getFirstname() . " " . $book->getAuthor()->getLastname() . "</span>";
-                echo "<span>Vendu par : <a href='index.php?action=user-public-account&id=" . $book->getUser()->getUserId() . "'>" . $book->getUser()->getNickname() . "</a></span>";
-                echo"</div>";
+                echo "<div class='col-sm-2 book-card'>";
+                echo "<a href='?action=book-details&id=' ". $book->getId() . "'&userId='".$book->getUser()->getUserId()."'>";
+                echo "<div class='book-img'>";
+                echo "<img src='" . $book->getBookPicture() . "' alt='" . $book->getTitle() . "'>";
+                echo "</div>";
+                echo "<div class='book-info'>";
+                echo "<h3>" . $book->getTitle() . "</h3>";
+                echo "<span>" . $book->getAuthor()->getFirstname() . " " . $book->getAuthor()->getLastname() . "</span>";
+                echo "<span class='italic'>Vendu par: " . $book->getUser()->getNickname() . "</span>";
+                echo "</div>";
+                echo "</a>";
+                echo "</div>";
             }
             ?>
         </div>
-        <button class="btn green-button inter-secondfont"><a href="index.php?action=our-books" >Voir tous les livres</a></button>
+        <div class="row row-flex"><a class="button-link" href="index.php?action=our-books" ><button class="btn green-button">Voir tous les livres</button></a></div>
     </div>
 </section>
 <section>
-    <div class="home-section">
-        <span class="call playfair-display-title-font">Comment ça marche ?</span>
+    <div class="container-fluid home-section">
+        <div class="row"><span class="call  col-sm-12 centered playfair-display-title-font">Comment ça marche ?</span></div>
         <span>Échanger des livres avec TomTroc c’est simple et amusant ! Suivez ces étapes pour commencer :</span>
         <div class="instructions">
             <div class="instruction">Inscrivez-vous gratuitement sur notre plateforme.</div>
@@ -50,17 +51,24 @@
             <div class="instruction">Parcourez les livres disponibles chez d'autres membres.</div>
             <div class="instruction">Proposez un échange et discutez avec d'autres passionnés de lecture.</div>
         </div>
-        <button class="button transparent-button"><a href="index.php?action=our-books" >Voir tous les livres</a></button>
+        <button class="btn transparent-button"><a href="index.php?action=our-books" >Voir tous les livres</a></button>
     </div>
 </section>
-<div class="home-section banner"><img src="pictures/banner.png" alt="banner"></div>
 <section>
-    <div class="home-section">
-        <span class="call playfair-display-title-font">Nos valeurs</span>
-        <p>Chez Tom Troc, nous mettons l'accent sur le partage, la découverte et la communauté. Nos valeurs sont ancrées dans notre passion pour les livres et notre désir de créer des liens entre les lecteurs. Nous croyons en la puissance des histoires pour rassembler les gens et inspirer des conversations enrichissantes.</p>
-        <p>Notre association a été fondée avec une conviction profonde : chaque livre mérite d'être lu et partagé.</p>
-        <p>Nous sommes passionnés par la création d'une plateforme conviviale qui permet aux lecteurs de se connecter, de partager leurs découvertes littéraires et d'échanger des livres qui attendent patiemment sur les étagères.</p>
-        <div class="signature"><span>L’équipe Tom Troc</span><img src="pictures/heart_signature.svg" alt="heart signature"></div>
+    <div class="container-fluid home-section">
+        <div class="row home-section banner"><img src="pictures/banner.png" alt="banner"></div>
+        <div class="row"><span class="call  col-sm-12 centered playfair-display-title-font">Nos valeurs</span></div>
+        <div class="row">
+            <p>Chez Tom Troc, nous mettons l'accent sur le partage, la découverte et la communauté. Nos valeurs sont ancrées dans notre passion pour les livres et notre désir de créer des liens entre les lecteurs. Nous croyons en la puissance des histoires pour rassembler les gens et inspirer des conversations enrichissantes.</p>
+            <p>Notre association a été fondée avec une conviction profonde : chaque livre mérite d'être lu et partagé.</p>
+            <p>Nous sommes passionnés par la création d'une plateforme conviviale qui permet aux lecteurs de se connecter, de partager leurs découvertes littéraires et d'échanger des livres qui attendent patiemment sur les étagères.</p>
+            <div class="signature"><span>L’équipe Tom Troc</span><img src="pictures/heart_signature.svg" alt="heart signature"></div>
+        </div>
     </div>
 </section>
+
+
+</div>
+
+
 

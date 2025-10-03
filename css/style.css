@@ -17,6 +17,12 @@ body{
     margin: auto;
 }
 
+.centered{
+    text-align: center;
+}
+.italic{
+    font-style: italic;
+}
 /*Navbar*/
 
 .navbar{
@@ -93,6 +99,47 @@ body{
 
 .intro-content{
     max-width: 400px;
+}
+
+.library{
+    background-color: #FAF9F7;
+}
+/*Books card*/
+.books{
+    display: flex;
+    justify-content: center;
+}
+.book-img img{
+    max-width: 100%;
+    height: auto;
+}
+
+.book-card a{
+    text-decoration: none;
+}
+
+.book-info{
+    height: 140px;
+    padding-left: 10px;
+    background-color: #FFFFFF;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.book-info h3{
+    margin-top: 10px;
+    font-size: 16px;
+    color: #000000;
+    margin-bottom: 12px;
+}
+
+.book-info span{
+    font-size: 14px;
+    color: #A6A6A6;
+}
+.our-books-title{
+    justify-content: space-between;
 }
 /*Footer*/
 
