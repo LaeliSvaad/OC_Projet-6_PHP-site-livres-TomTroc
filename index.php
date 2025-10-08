@@ -56,7 +56,7 @@ try {
             $signInController->showForm();
             break;
 
-        case 'deconnexion':
+        case 'logout':
             $signInController = new SignInController();
             $signInController->disconnectUser();
             break;
