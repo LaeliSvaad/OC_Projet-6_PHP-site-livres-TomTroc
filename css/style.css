@@ -153,6 +153,17 @@ th, tr:nth-child(even)
 {
     background: #FFFFFF;
 }
+
+/*Forms*/
+
+textarea {
+    overflow: hidden;
+    resize: none;
+    min-height: 2em;
+    line-height: 1.5;
+    box-sizing: border-box;
+}
+
 /*Footer*/
 
 .footer{

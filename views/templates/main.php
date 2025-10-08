@@ -28,7 +28,6 @@ $current_page = isset($_GET['action']) ? $_GET['action'] : 'home';
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
-
     <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
@@ -59,7 +58,7 @@ $current_page = isset($_GET['action']) ? $_GET['action'] : 'home';
                                 <a class="nav-link <?php echo ($current_page === 'chat') ? 'active' : ''; ?>" href="index.php?action=chat">Messagerie</a>
                             </li>
                             <li>
-                                <a class="nav-link <?php echo ($current_page === 'user-private-account') ? 'active' : ''; ?>" href="index.php?action=user-private-account">Mon compte</a>
+                                <a class="nav-link <?php echo ($current_page === 'user-private-account' || $current_page === 'book-form') ? 'active' : ''; ?>" href="index.php?action=user-private-account">Mon compte</a>
                             </li>
                             <li>
                                 <a class="nav-link <?php echo ($current_page === 'logout') ? 'active' : ''; ?>" href="index.php?action=logout">Déconnexion</a>
@@ -86,5 +85,6 @@ $current_page = isset($_GET['action']) ? $_GET['action'] : 'home';
             </div>
         </footer>
     </div>
+    <script src="scripts/script.js"></script>
 </body>
 </html>
