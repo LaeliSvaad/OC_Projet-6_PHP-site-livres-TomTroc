@@ -16,7 +16,7 @@
     </div>
 </section>
 <section>
-    <div class="container-fluid home-section library">
+    <div class="container-fluid intro-container library">
         <div class="row">
             <span class="call col-sm-12 centered col-sm-12 playfair-display-title-font">Les derniers livres ajoutés</span>
         </div>
@@ -42,8 +42,10 @@
     </div>
 </section>
 <section>
-    <div class="container-fluid home-section">
-        <div class="row"><span class="call  col-sm-12 centered playfair-display-title-font">Comment ça marche ?</span></div>
+    <div class="container-fluid intro-container">
+        <div class="row">
+            <span class="call  col-sm-12 centered playfair-display-title-font">Comment ça marche ?</span>
+        </div>
         <span>Échanger des livres avec TomTroc c’est simple et amusant ! Suivez ces étapes pour commencer :</span>
         <div class="instructions">
             <div class="instruction">Inscrivez-vous gratuitement sur notre plateforme.</div>
@@ -55,9 +57,11 @@
     </div>
 </section>
 <section>
-    <div class="container-fluid home-section">
-        <div class="row home-section banner"><img src="pictures/banner.png" alt="banner"></div>
-        <div class="row"><span class="call  col-sm-12 centered playfair-display-title-font">Nos valeurs</span></div>
+    <div class="container-fluid intro-container">
+        <div class="row row-banner"><img src="pictures/banner.png" alt="banner"></div>
+        <div class="row">
+            <span class="call  col-sm-12 centered playfair-display-title-font">Nos valeurs</span>
+        </div>
         <div class="row">
             <p>Chez Tom Troc, nous mettons l'accent sur le partage, la découverte et la communauté. Nos valeurs sont ancrées dans notre passion pour les livres et notre désir de créer des liens entre les lecteurs. Nous croyons en la puissance des histoires pour rassembler les gens et inspirer des conversations enrichissantes.</p>
             <p>Notre association a été fondée avec une conviction profonde : chaque livre mérite d'être lu et partagé.</p>
