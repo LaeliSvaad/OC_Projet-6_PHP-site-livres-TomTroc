@@ -2,9 +2,11 @@
     <div class="container-fluid intro-container">
         <div class="row">
             <div class="col-xs-12 col-sm-6">
-                <strong class="intro-content call playfair-display-title-font">Rejoignez nos lecteurs passionnés</strong>
-                <p class="intro-content">Donnez une nouvelle vie à vos livres en les échangeant avec d'autres amoureux de la lecture. Nous croyons en la magie du partage de connaissances et d'histoires à travers les livres.</p>
-                <a class="button-link" href="index.php?action=our-books" ><button class="btn green-button">Découvrir</button></a>
+                <div class="inner-col">
+                    <strong class="intro-content call playfair-display-title-font">Rejoignez nos lecteurs passionnés</strong>
+                    <p class="intro-content">Donnez une nouvelle vie à vos livres en les échangeant avec d'autres amoureux de la lecture. Nous croyons en la magie du partage de connaissances et d'histoires à travers les livres.</p>
+                    <a class="button-link" href="index.php?action=our-books" ><button class="btn green-button">Découvrir</button></a>
+                </div>
             </div>
             <div class="col-xs-12 col-sm-6">
                 <figure>
@@ -58,14 +60,16 @@
         </div>
         <div class="row">
             <div class="col-xs-12">
-                <span>Échanger des livres avec TomTroc c’est simple et amusant ! Suivez ces étapes pour commencer :</span>
-                <div class="instructions">
-                    <div class="instruction">Inscrivez-vous gratuitement sur notre plateforme.</div>
-                    <div class="instruction">Ajoutez les livres que vous souhaitez échanger à votre profil.</div>
-                    <div class="instruction">Parcourez les livres disponibles chez d'autres membres.</div>
-                    <div class="instruction">Proposez un échange et discutez avec d'autres passionnés de lecture.</div>
+                <div class="inner-col">
+                    <span>Échanger des livres avec TomTroc c’est simple et amusant ! Suivez ces étapes pour commencer :</span>
+                    <div>
+                        <div>Inscrivez-vous gratuitement sur notre plateforme.</div>
+                        <div >Ajoutez les livres que vous souhaitez échanger à votre profil.</div>
+                        <div>Parcourez les livres disponibles chez d'autres membres.</div>
+                        <div>Proposez un échange et discutez avec d'autres passionnés de lecture.</div>
+                    </div>
+                    <button class="btn transparent-button"><a href="index.php?action=our-books" >Voir tous les livres</a></button>
                 </div>
-                <button class="btn transparent-button"><a href="index.php?action=our-books" >Voir tous les livres</a></button>
             </div>
         </div>
     </div>

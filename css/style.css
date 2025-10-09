@@ -19,16 +19,18 @@ body{
     padding: 30px;
     background-color: #FAF9F7;
 }
+.white-block{
+    background-color: white;
+    border-radius: 15px;
+}
 .row > [class*="col-"] > .inner-col{
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: white;
 }
 .row > .col-xs-12 > .inner-col{
     margin: 10px;
 }
-
 .log-container{
     background-color: #FAF9F7;
 }
@@ -50,11 +52,6 @@ body{
     display: flex;
     flex-direction: column;
 }
-
-/*.row-banner-img{
-    width: 100%;
-    box-sizing: border-box;
-}*/
 .background-img-col{
     padding: 0;
 }
@@ -167,15 +164,37 @@ body{
 .our-books-title{
     justify-content: space-between;
 }
+
+.books-table tr:first-child{
+    border-bottom: 1px solid #FAF9F7;
+}
+.books-table th{
+    text-transform: uppercase;
+    font-weight: normal;
+    font-size: smaller;
+}
+.books-table td, .books-table th{
+    padding: 15px;
+}
+.books-table th:first-child{
+    border-top-left-radius: 15px;
+}
+.books-table th:last-child{
+    border-top-right-radius: 15px;
+}
+.books-table tr:last-child > td:first-child{
+    border-bottom-left-radius: 15px;
+}
+.books-table tr:last-child td:last-child{
+    border-bottom-right-radius: 15px;
+}
 .table-book-img{
     width: 70px;
 }
-tr:nth-child(odd)
-{
+tr:nth-child(odd) td {
     background: #EDF2F6;
 }
-th, tr:nth-child(even)
-{
+th, tr:nth-child(even) td {
     background: #FFFFFF;
 }
 /*Forms*/
@@ -225,11 +244,6 @@ textarea {
 .profile-picture{
     border-radius: 50px;
 }
-.private-user-page-col{
-    margin: 30px;
-    padding: 30px;
-    border-radius: 15px;
-}
 /*Footer*/
 .footer{
     height: 50px;
@@ -243,157 +257,3 @@ textarea {
 .footer-content{
     margin-right: 20px;
 }
-/*.button-link{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-}*/
-
-/*.footer, .navbar, .button{
-    height: 50px;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-}
-
-.footer-content, .nav-link, .logo img{
-    margin-right: 20px;
-}
-
-.logo-img{
-    height: 50px;
-}
-/*
-.button{
-
-}
-
-
-
-
-
-.transparent-button{
-    background-color: transparent;
-}
-
-.transparent-button a{
-    color: #00AC66;
-}
-*/
-/*Navbar*/
-/*
-.logo, .nav-links{
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-}
-
-.logo{
-    align-items: center;
-}
-
-.navbar{
-    justify-content: space-around;
-    width: 100%;
-    height: 80px;
-
-}
-
-
-*/
-/*Home*/
-/*
-.home-section{
-    width: 100%;
-
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.intro{
-    flex-direction: row-reverse;
-    justify-content: center;
-}
-
-.intro-content{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: 400px;
-}
-
-.library{
-    background-color: #FAF9F7;
-}
-
-.books, .instructions{
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: stretch;
-}
-
-.book{
-    display: flex;
-    flex-direction: column;
-
-}
-
-
-*/
-/*Nos livres*/
-/*
-.book-searchbar{
-    background-color: white;
-    border: 1px solid #F0F0F0;
-    border-radius: 10px;
-    height: 50px;
-    width: 325px;
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-    align-items: stretch;
-    padding: 5px;
-}
-
-.book-searchbar img{
-    margin-right: 15px;
-}
-
-.book-searchbar input{
-    width: 80%;
-    border: 0px;
-}
-
-.book-img{
-    width: 20%;
-}
-
-.messaging-page{
-    display: flex;
-    flex-direction: row;
-}
-
-.chat{
-    width: 20%;
-}
-
-.conversation{
-    width: 80%;
-    background-color: pink;
-}
-
-.message{
-    border: 1px solid #00AC66;
-}
-
-.unread-message{
-    font-weight: bold;
-}
-*/
-

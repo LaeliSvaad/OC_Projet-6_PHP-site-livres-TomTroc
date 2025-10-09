@@ -1,8 +1,9 @@
+<?php $library = $user->getLibrary()->getLibrary(); ?>
 <div class="main-content container-fluid">
     <h2 class="playfair-display-title-font">Mon compte</h2>
     <div class="row">
         <div class="col-xs-12 col-sm-6">
-            <div class="inner-col private-user-page-col">
+            <div class="inner-col white-block">
                 <form action="index.php?action=modify-user" method="post" enctype="multipart/form-data" id="uploadForm">
                     <label for="imageUpload">
                         <div class="block-content user-picture-input-div">
@@ -21,7 +22,7 @@
             </div>
         </div>
         <div class="col-xs-12 col-sm-6">
-            <div class="inner-col private-user-page-col">
+            <div class="inner-col white-block">
                 <h3>Vos informations personnelles</h3>
                 <form class="form-horizontal" method='post' action='index.php?action=modify-user'>
                     <input type="hidden" name="userId" value="<?= $user->getUserId() ?>"/>
@@ -44,22 +45,23 @@
             </div>
         </div>
     </div>
-    <div class="row user-white-block">
-        <?php $library = $user->getLibrary()->getLibrary(); ?>
-        <table>
+    <div class="row">
+        <table class="books-table">
+            <tbody>
             <tr><th>Photo</th><th>Titre</th><th>Auteur</th><th>Description</th><th>Disponibilité</th><th>Action</th></tr>
             <?php foreach ($library as $book):
                 $author = $book->getAuthor();
                 $status = $book->getStatus(); ?>
-            <tr>
-                <td><img class='table-book-img' src='<?= $book->getBookPicture() ?>' alt='<?= $book->getTitle()?>'></td>
-                <td><?= $book->getTitle() ?></td>
-                <td><?= $author->getFirstname() . " " . $author->getLastname() ?></td>
-                <td><?= $book->getDescription()?></td>
-                <td><?= $status->getLabel() ?></td>
-                <td><a href='index.php?action=book-form&id=<?= $book->getId() ?>' >Editer</a><a href='index.php?action=delete-book&id=<?= $book->getId() ?>' >Supprimer</a></td>
-            </tr>
+                <tr>
+                    <td><img class='table-book-img' src='<?= $book->getBookPicture() ?>' alt='<?= $book->getTitle()?>'></td>
+                    <td><?= $book->getTitle() ?></td>
+                    <td><?= $author->getFirstname() . " " . $author->getLastname() ?></td>
+                    <td><?= $book->getDescription()?></td>
+                    <td><?= $status->getLabel() ?></td>
+                    <td><a href='index.php?action=book-form&id=<?= $book->getId() ?>' >Editer</a><a href='index.php?action=delete-book&id=<?= $book->getId() ?>' >Supprimer</a></td>
+                </tr>
             <?php endforeach;  ?>
+            </tbody>
         </table>
     </div>
 </div>
