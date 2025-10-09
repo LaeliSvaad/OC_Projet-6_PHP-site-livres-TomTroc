@@ -65,7 +65,7 @@ $current_page = isset($_GET['action']) ? $_GET['action'] : 'home';
                             </li>
                         <?php else: ?>
                             <li>
-                                <a class="nav-link <?php echo ($current_page === 'connexion') ? 'active' : ''; ?>" href="index.php?action=connexion">Connexion</a>
+                                <a class="nav-link <?php echo ($current_page === 'connexion' || $current_page === 'registration-form') ? 'active' : ''; ?>" href="index.php?action=connexion">Connexion</a>
                             </li>
                         <?php endif; ?>
                     </ul>

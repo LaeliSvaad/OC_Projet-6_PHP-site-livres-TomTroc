@@ -27,9 +27,7 @@ body{
     display: flex;
     flex-direction: column;
     align-items: center;
-}
-.row > .col-xs-12 > .inner-col{
-    margin: 10px;
+    padding: 30px;
 }
 .log-container{
     background-color: #FAF9F7;
@@ -47,6 +45,11 @@ body{
 }
 .italic{
     font-style: italic;
+}
+.uppercase-text{
+    text-transform: uppercase;
+    font-size: x-small;
+    font-weight: bolder;
 }
 .block-content{
     display: flex;
@@ -127,9 +130,18 @@ body{
     background-color: #F5F3EF;
     padding: 30px;
 }
-.call{
+.span-title{
     font-size: xx-large;
     font-weight: lighter;
+}
+.span-small-title{
+    font-size: large;
+    font-weight: normal;
+}
+.search-form input{
+    box-shadow: none;
+    border-left: none;
+    height: auto;
 }
 .intro-img{
     height: 540px;
@@ -168,9 +180,6 @@ body{
     border-bottom: 1px solid #FAF9F7;
 }
 .books-table th{
-    text-transform: uppercase;
-    font-weight: bolder;
-    font-size: x-small;
     text-align:center;
 }
 .books-table td, .books-table th{
@@ -202,9 +211,6 @@ body{
 }
 .table-book-img{
     height: 70px;
-}
-th{
-    margin-left: 5px;
 }
 tr:nth-child(odd) td {
     background: #EDF2F6;
@@ -242,8 +248,8 @@ th, tr:nth-child(even) td {
 .book-action-links a:first-child{
     color: #292929;
 }
-.book-action-links a:last-child{
-    color: #CB2D2D;
+.grey-text{
+    color: #A6A6A6;
 }
 /*Forms*/
 .admin-form{
@@ -265,9 +271,9 @@ input[type=file] {
     display: none;
 }
 .input-file-span{
-    color: black;
     text-decoration: underline;
     text-align: right;
+    text-transform: lowercase;
 }
 label{
     font-weight: normal;

@@ -3,7 +3,7 @@
         <div class="row">
             <div class="col-xs-12 col-sm-6">
                 <div class="inner-col">
-                    <strong class="intro-content call playfair-display-title-font">Rejoignez nos lecteurs passionnés</strong>
+                    <strong class="span-title playfair-display-title-font">Rejoignez nos lecteurs passionnés</strong>
                     <p class="intro-content">Donnez une nouvelle vie à vos livres en les échangeant avec d'autres amoureux de la lecture. Nous croyons en la magie du partage de connaissances et d'histoires à travers les livres.</p>
                     <a class="button-link" href="index.php?action=our-books" ><button class="btn green-button">Découvrir</button></a>
                 </div>
@@ -21,7 +21,7 @@
     <div class="container-fluid intro-container library">
         <div class="row">
             <div class="col-xs-12">
-                <span class="call playfair-display-title-font">Les derniers livres ajoutés</span>
+                <span class="span-title playfair-display-title-font">Les derniers livres ajoutés</span>
             </div>
         </div>
         <div class="row">
@@ -55,7 +55,7 @@
     <div class="container-fluid intro-container">
         <div class="row">
             <div class="col-xs-12">
-                <span class="call playfair-display-title-font">Comment ça marche ?</span>
+                <span class="span-title playfair-display-title-font">Comment ça marche ?</span>
             </div>
         </div>
         <div class="row">
@@ -79,7 +79,7 @@
         <div class="row background-img-container"><img class="background-img" src="pictures/banner.png" alt="banner"></div>
         <div class="row">
             <div class="col-xs-12">
-                <span class="call playfair-display-title-font">Nos valeurs</span>
+                <span class="span-title playfair-display-title-font">Nos valeurs</span>
             </div>
         </div>
         <div class="row">

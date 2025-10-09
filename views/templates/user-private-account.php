@@ -8,22 +8,22 @@
                     <label for="imageUpload">
                         <div class="block-content user-picture-input-div">
                             <img class="profile-picture" src="<?= $user->getPicture() ?>" alt="<?= $user->getNickname() ?> profile picture" />
-                            <span class="input-file-span">Modifier</span>
+                            <span class="grey-text input-file-span">Modifier</span>
                         </div>
                     </label>
                     <input type="file" name="picture" id="imageUpload" onchange="document.getElementById('uploadForm').submit();">
                 </form>
                 <div>
                     <h3 class="playfair-display-title-font"><?= $user->getNickname() ?></h3>
-                    <span>Membre depuis <?= Utils::dateInterval($user->getRegistrationDate()) ?></span>
-                    <span>Bibliothèque</span>
-                    <span><?= $user->getLibrary()->countBooks() ?> livres</span>
+                    <div><span class="grey-text">Membre depuis <?= Utils::dateInterval($user->getRegistrationDate()) ?></span></div>
+                    <div><span class="uppercase-text">Bibliothèque</span></div>
+                    <div><img src="pictures/library-icon.png" alt="library icon">&nbsp;<span><?= $user->getLibrary()->countBooks() ?> livres</span></div>
                 </div>
             </div>
         </div>
         <div class="col-xs-12 col-sm-6">
             <div class="inner-col white-block">
-                <h3>Vos informations personnelles</h3>
+                <span class="span-small-title">Vos informations personnelles</span>
                 <form class="form-horizontal" method='post' action='index.php?action=modify-user'>
                     <input type="hidden" name="userId" value="<?= $user->getUserId() ?>"/>
                     <div class='form-group'>
@@ -48,7 +48,7 @@
     <div class="row">
         <table class="books-table">
             <tbody>
-            <tr><th>Photo</th><th>Titre</th><th>Auteur</th><th>Description</th><th>Disponibilité</th><th>Action</th></tr>
+            <tr class="uppercase-text"><th>Photo</th><th>Titre</th><th>Auteur</th><th>Description</th><th>Disponibilité</th><th>Action</th></tr>
             <?php foreach ($library as $book):
                 $author = $book->getAuthor();
                 $status = $book->getStatus(); ?>

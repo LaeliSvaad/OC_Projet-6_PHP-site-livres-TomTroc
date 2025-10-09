@@ -5,12 +5,18 @@
                 <h2 class='playfair-display-title-font'>Nos livres à l'échange</h2>
             </div>
             <div class='col-xs-12 col-sm-3'>
-                <form method='post' action='index.php?action=search-book'>
-                    <label for='booksearch'>
-                        <img src='pictures/magnifying.png'>
-                    </label>
-                    <input type='search' placeholder='Rechercher un livre' name='booksearch'>
-                </form>
+                <div class="inner-col">
+                    <form method='post' action='index.php?action=search-book'>
+                        <div class="input-group search-form">
+                            <div class="input-group-btn">
+                                <button class="btn btn-default grey-text" type="submit">
+                                    <i class="glyphicon glyphicon-search"></i>
+                                </button>
+                            </div>
+                            <input type="text" class="form-control" placeholder="Rechercher un livre">
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
         <div class='row'>
