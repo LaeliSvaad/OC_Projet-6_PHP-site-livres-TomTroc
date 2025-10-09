@@ -1,12 +1,12 @@
 <section>
     <div class="container-fluid intro-container">
-        <div class="row row-flex">
-            <div class="col-sm-6">
+        <div class="row">
+            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
                 <strong class="intro-content call playfair-display-title-font">Rejoignez nos lecteurs passionnés</strong>
                 <p class="intro-content">Donnez une nouvelle vie à vos livres en les échangeant avec d'autres amoureux de la lecture. Nous croyons en la magie du partage de connaissances et d'histoires à travers les livres.</p>
                 <a class="button-link" href="index.php?action=our-books" ><button class="btn green-button">Découvrir</button></a>
             </div>
-            <div class="col-sm-6">
+            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
                 <figure>
                     <img class="intro-img" src="pictures/hamza-nouasria.png" alt="photo d'Hamza Nouasria">
                     <figcaption>Hamza</figcaption>
@@ -18,61 +18,77 @@
 <section>
     <div class="container-fluid intro-container library">
         <div class="row">
-            <span class="call col-sm-12 centered col-sm-12 playfair-display-title-font">Les derniers livres ajoutés</span>
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <span class="call playfair-display-title-font">Les derniers livres ajoutés</span>
+            </div>
         </div>
-        <div class="row books">
-            <?php
-            foreach ($library as $book) {
-                echo "<div class='col-sm-2 book-card'>";
-                echo "<a href='?action=book-details&id=' ". $book->getId() . "'&userId='".$book->getUser()->getUserId()."'>";
-                echo "<div class='book-img'>";
-                echo "<img src='" . $book->getBookPicture() . "' alt='" . $book->getTitle() . "'>";
-                echo "</div>";
-                echo "<div class='book-info'>";
-                echo "<h3>" . $book->getTitle() . "</h3>";
-                echo "<span>" . $book->getAuthor()->getFirstname() . " " . $book->getAuthor()->getLastname() . "</span>";
-                echo "<span class='italic'>Vendu par: " . $book->getUser()->getNickname() . "</span>";
-                echo "</div>";
-                echo "</a>";
-                echo "</div>";
-            }
-            ?>
+        <div class="row">
+            <?php foreach ($library as $book): ?>
+            <div class='col-xs-6 col-sm-3 col-md-3 col-lg-3'>
+                <div class='inner-col book-card'>
+                    <a href='?action=book-details&id=<?= $book->getId() . "'&userId='".$book->getUser()->getUserId() ?>'>
+                        <div class='book-img'>
+                            <img src='<?= $book->getBookPicture() . "' alt='" . $book->getTitle() ?>'>
+                        </div>
+                        <div class='book-info'>
+                            <h3><?= $book->getTitle() ?></h3>
+                            <span><?= $book->getAuthor()->getFirstname() . " " . $book->getAuthor()->getLastname()?></span>
+                            <span class='italic'>Vendu par:<?= $book->getUser()->getNickname() ?></span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <?php endforeach;  ?>
         </div>
-        <div class="row row-flex"><a class="button-link" href="index.php?action=our-books" ><button class="btn green-button">Voir tous les livres</button></a></div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <a class="button-link" href="index.php?action=our-books" >
+                    <button class="btn green-button">Voir tous les livres</button>
+                </a>
+            </div>
+        </div>
     </div>
 </section>
 <section>
     <div class="container-fluid intro-container">
         <div class="row">
-            <span class="call  col-sm-12 centered playfair-display-title-font">Comment ça marche ?</span>
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <span class="call playfair-display-title-font">Comment ça marche ?</span>
+            </div>
         </div>
-        <span>Échanger des livres avec TomTroc c’est simple et amusant ! Suivez ces étapes pour commencer :</span>
-        <div class="instructions">
-            <div class="instruction">Inscrivez-vous gratuitement sur notre plateforme.</div>
-            <div class="instruction">Ajoutez les livres que vous souhaitez échanger à votre profil.</div>
-            <div class="instruction">Parcourez les livres disponibles chez d'autres membres.</div>
-            <div class="instruction">Proposez un échange et discutez avec d'autres passionnés de lecture.</div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <span>Échanger des livres avec TomTroc c’est simple et amusant ! Suivez ces étapes pour commencer :</span>
+                <div class="instructions">
+                    <div class="instruction">Inscrivez-vous gratuitement sur notre plateforme.</div>
+                    <div class="instruction">Ajoutez les livres que vous souhaitez échanger à votre profil.</div>
+                    <div class="instruction">Parcourez les livres disponibles chez d'autres membres.</div>
+                    <div class="instruction">Proposez un échange et discutez avec d'autres passionnés de lecture.</div>
+                </div>
+                <button class="btn transparent-button"><a href="index.php?action=our-books" >Voir tous les livres</a></button>
+            </div>
         </div>
-        <button class="btn transparent-button"><a href="index.php?action=our-books" >Voir tous les livres</a></button>
     </div>
 </section>
 <section>
     <div class="container-fluid intro-container">
         <div class="row row-banner"><img src="pictures/banner.png" alt="banner"></div>
         <div class="row">
-            <span class="call  col-sm-12 centered playfair-display-title-font">Nos valeurs</span>
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <span class="call playfair-display-title-font">Nos valeurs</span>
+            </div>
         </div>
         <div class="row">
-            <p>Chez Tom Troc, nous mettons l'accent sur le partage, la découverte et la communauté. Nos valeurs sont ancrées dans notre passion pour les livres et notre désir de créer des liens entre les lecteurs. Nous croyons en la puissance des histoires pour rassembler les gens et inspirer des conversations enrichissantes.</p>
-            <p>Notre association a été fondée avec une conviction profonde : chaque livre mérite d'être lu et partagé.</p>
-            <p>Nous sommes passionnés par la création d'une plateforme conviviale qui permet aux lecteurs de se connecter, de partager leurs découvertes littéraires et d'échanger des livres qui attendent patiemment sur les étagères.</p>
-            <div class="signature"><span>L’équipe Tom Troc</span><img src="pictures/heart_signature.svg" alt="heart signature"></div>
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <p>Chez Tom Troc, nous mettons l'accent sur le partage, la découverte et la communauté. Nos valeurs sont ancrées dans notre passion pour les livres et notre désir de créer des liens entre les lecteurs. Nous croyons en la puissance des histoires pour rassembler les gens et inspirer des conversations enrichissantes.</p>
+                <p>Notre association a été fondée avec une conviction profonde : chaque livre mérite d'être lu et partagé.</p>
+                <p>Nous sommes passionnés par la création d'une plateforme conviviale qui permet aux lecteurs de se connecter, de partager leurs découvertes littéraires et d'échanger des livres qui attendent patiemment sur les étagères.</p>
+                <div class="signature"><span>L’équipe Tom Troc</span><img src="pictures/heart_signature.svg" alt="heart signature"></div>
+            </div>
         </div>
     </div>
 </section>
 
-
-</div>
 
 
 

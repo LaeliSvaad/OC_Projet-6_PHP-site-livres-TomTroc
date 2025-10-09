@@ -1,6 +1,6 @@
 <div class="container-fluid log-container">
-    <div class="row row-flex">
-        <div class="col-sm-6 col-flex">
+    <div class="row">
+        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 col-flex">
             <h2 class="playfair-display-title-font">Connexion</h2>
             <form class="form-horizontal" method="post" action="index.php?action=sign-in" >
                 <div class='form-group'>
@@ -21,7 +21,7 @@
             </form>
             <span class="link-span">Pas encore inscrit? <a href="index.php?action=registration-form" >Créer un compte</a></span>
         </div>
-        <div class="col-sm-6 background-img-container">
+        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 background-img-container">
             <img class="background-img" src="pictures/library.png" alt="bibliothèque" >
         </div>
     </div>
