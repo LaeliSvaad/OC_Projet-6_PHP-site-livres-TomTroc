@@ -53,12 +53,12 @@
                 $author = $book->getAuthor();
                 $status = $book->getStatus(); ?>
                 <tr>
-                    <td><img class='table-book-img' src='<?= $book->getBookPicture() ?>' alt='<?= $book->getTitle()?>'></td>
-                    <td><?= $book->getTitle() ?></td>
-                    <td><?= $author->getFirstname() . " " . $author->getLastname() ?></td>
-                    <td><?= $book->getDescription()?></td>
-                    <td><?= $status->getLabel() ?></td>
-                    <td><a href='index.php?action=book-form&id=<?= $book->getId() ?>' >Editer</a><a href='index.php?action=delete-book&id=<?= $book->getId() ?>' >Supprimer</a></td>
+                    <td><div class="cell-fixed"><img class='table-book-img' src='<?= $book->getBookPicture() ?>' alt='<?= $book->getTitle()?>'></div></td>
+                    <td><div class="cell-fixed"><?= $book->getTitle() ?></div></td>
+                    <td><div class="cell-fixed"><?= $author->getFirstname() . " " . $author->getLastname() ?></div></td>
+                    <td><div class="italic cell-fixed"><?= $book->getDescription()?></div></td>
+                    <td><div class="book-status cell-fixed"><span class="<?= $status->value ?>"></span></div></td>
+                    <td><div class="book-action-links cell-fixed"><a href='index.php?action=book-form&id=<?= $book->getId() ?>' >Editer</a><a href='index.php?action=delete-book&id=<?= $book->getId() ?>' >Supprimer</a></div></td>
                 </tr>
             <?php endforeach;  ?>
             </tbody>

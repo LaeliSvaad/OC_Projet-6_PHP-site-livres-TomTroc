@@ -2,7 +2,7 @@
 enum BookStatus : string
 {
     case available = 'available';
-    case not_available = 'not available';
+    case not_available = 'not-available';
     case reserved = 'reserved';
 
     public function getLabel(): string

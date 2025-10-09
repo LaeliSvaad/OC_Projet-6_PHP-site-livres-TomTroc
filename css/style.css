@@ -164,17 +164,29 @@ body{
 .our-books-title{
     justify-content: space-between;
 }
-
 .books-table tr:first-child{
     border-bottom: 1px solid #FAF9F7;
 }
 .books-table th{
     text-transform: uppercase;
-    font-weight: normal;
-    font-size: smaller;
+    font-weight: bolder;
+    font-size: x-small;
+    text-align:center;
 }
 .books-table td, .books-table th{
+    width: 16.6%;
     padding: 15px;
+}
+.cell-fixed{
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 1.2em;
+    box-sizing: border-box;
+    width: 100%;
+    text-align: center;
 }
 .books-table th:first-child{
     border-top-left-radius: 15px;
@@ -189,13 +201,49 @@ body{
     border-bottom-right-radius: 15px;
 }
 .table-book-img{
-    width: 70px;
+    height: 70px;
+}
+th{
+    margin-left: 5px;
 }
 tr:nth-child(odd) td {
     background: #EDF2F6;
 }
 th, tr:nth-child(even) td {
     background: #FFFFFF;
+}
+.book-status span:after{
+    display: inline-block;
+    border-radius: 30px;
+    width: 100px;
+    color: white;
+    padding: 3px;
+    text-align: center;
+}
+.available:after{
+    background-color: #6DC5A1;
+    content: 'disponible';
+}
+.reserved:after{
+    background-color: #f0a264;
+    content: 'réservé';
+}
+.not-available:after{
+    background-color: #C56D6D;
+    content: 'non dispo.';
+}
+.book-action-links{
+
+}
+.book-action-links a{
+    margin: 10px;
+    text-decoration: underline;
+}
+.book-action-links a:first-child{
+    color: #292929;
+}
+.book-action-links a:last-child{
+    color: #CB2D2D;
 }
 /*Forms*/
 .admin-form{
