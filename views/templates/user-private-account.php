@@ -1,7 +1,7 @@
 <div class="main-content container-fluid">
     <h2 class="playfair-display-title-font">Mon compte</h2>
     <div class="row">
-        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+        <div class="col-xs-12 col-sm-6">
             <div class="inner-col private-user-page-col">
                 <form action="index.php?action=modify-user" method="post" enctype="multipart/form-data" id="uploadForm">
                     <label for="imageUpload">
@@ -20,18 +20,26 @@
                 </div>
             </div>
         </div>
-        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+        <div class="col-xs-12 col-sm-6">
             <div class="inner-col private-user-page-col">
                 <h3>Vos informations personnelles</h3>
-                <form method='post' action='index.php?action=modify-user'>
-                    <label for="input-email" >Adresse email</label>
-                    <input type="email" id="input-email" name='email' value="<?= $user->getEmail() ?>"/>
-                    <label for="input-pwd" >Mot de passe</label>
-                    <input type="password" id="input-pwd" name="password" value="" placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;"/>
-                    <label for="input-nickname" >Pseudo</label>
-                    <input type="text" id="input-nickname" name='nickname' value="<?= $user->getNickname() ?>" />
+                <form class="form-horizontal" method='post' action='index.php?action=modify-user'>
                     <input type="hidden" name="userId" value="<?= $user->getUserId() ?>"/>
-                    <input type="submit" value="Enregistrer" />
+                    <div class='form-group'>
+                        <label class='control-label' for="input-email" >Adresse email</label>
+                        <input class="form-control input-lg blue-input" type="email" id="input-email" name='email' value="<?= $user->getEmail() ?>"/>
+                    </div>
+                    <div class='form-group'>
+                        <label class='control-label' for="input-pwd" >Mot de passe</label>
+                        <input class="form-control input-lg blue-input" type="password" id="input-pwd" name="password" value="" placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;"/>
+                    </div>
+                    <div class='form-group'>
+                        <label class='control-label' for="input-nickname" >Pseudo</label>
+                        <input class="form-control input-lg blue-input" type="text" id="input-nickname" name='nickname' value="<?= $user->getNickname() ?>" />
+                    </div>
+                    <div class='form-group'>
+                        <input class="btn green-button" type="submit" value="Enregistrer" />
+                    </div>
                 </form>
             </div>
         </div>

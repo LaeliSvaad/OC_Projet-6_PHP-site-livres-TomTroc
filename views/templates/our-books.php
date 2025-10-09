@@ -1,10 +1,10 @@
 <section>
     <div class='container-fluid'>
         <div class='row'>
-            <div class='col-sm-9'>
+            <div class='col-xs-12 col-sm-9'>
                 <h2 class='playfair-display-title-font'>Nos livres à l'échange</h2>
             </div>
-            <div class='col-sm-3'>
+            <div class='col-xs-12 col-sm-3'>
                 <form method='post' action='index.php?action=search-book'>
                     <label for='booksearch'>
                         <img src='pictures/magnifying.png'>
@@ -20,7 +20,7 @@
                 $userId   = $user->getUserId();
                 $author   = $book->getAuthor();
                 $isOwner  = isset($_SESSION['user']) && $_SESSION['user'] == $userId; ?>
-            <div class="col-sm-3 book-card">
+            <div class="col-xs-6 col-sm-3 book-card">
                 <a href="?action=book-details&id=<?= $bookId ?>&userId=<?= $userId ?>">
                     <div class="book-img">
                         <img src="<?=$book->getBookPicture() ?>" alt="<?= $book->getTitle() ?>">

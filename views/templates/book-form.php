@@ -18,25 +18,25 @@
             <form class="form-horizontal admin-form" method='post' action='index.php?action=edit-book'>
                 <div class='form-group'>
                    <label class='control-label' for='input-title' >Titre </label>
-                    <input class='form-control input-lg book-input' type='text' id='input-title' name='title' value='<?= $book->getTitle() ?>'/>
+                    <input class='form-control input-lg blue-input' type='text' id='input-title' name='title' value='<?= $book->getTitle() ?>'/>
                     <input type='hidden' name='bookId' value='<?= $book->getId() ?>'/>
                 </div>
                 <div class='form-group'>
                     <label class='control-label' for='input-author' >Auteur </label>
-                    <input class='form-control input-lg book-input' type='text' id='input-author' name='author' value='<?= $book->getAuthor()->getFirstname() . " " . $book->getAuthor()->getLastname() ?>'/>
+                    <input class='form-control input-lg blue-input' type='text' id='input-author' name='author' value='<?= $book->getAuthor()->getFirstname() . " " . $book->getAuthor()->getLastname() ?>'/>
                 </div>
                 <div class='form-group'>
                     <label class='control-label' for='input-authorPseudo' >Pseudo de l'auteur: </label>
-                    <input class='form-control input-lg book-input' type='text' id='input-authorPseudo' name='authorPseudo' value='<?= $book->getAuthor()->getPseudo() ?>'/>
+                    <input class='form-control input-lg blue-input' type='text' id='input-authorPseudo' name='authorPseudo' value='<?= $book->getAuthor()->getPseudo() ?>'/>
                     <input type='hidden' name='authorId' value='<?= $book->getAuthor()->getAuthorId() ?>'/>
                 </div>
                 <div class='form-group'>
                     <label class='control-label' for='input-description' >Commentaire </label>
-                    <textarea id='input-description' class='form-control input-lg book-input' name='description'><?= $book->getDescription() ?></textarea>
+                    <textarea id='input-description' class='form-control input-lg blue-input' name='description'><?= $book->getDescription() ?></textarea>
                 </div>
                 <div class='form-group'>
                     <label class='control-label' for='input-disponibilite' >Disponibilité </label>
-                    <select class='form-control input-lg book-input' name='disponibilite' id='input-disponibilite'>
+                    <select class='form-control input-lg blue-input' name='disponibilite' id='input-disponibilite'>
                         <?php foreach (BookStatus::cases() as $status) : ?>
                         <option value="<?= $status->value ?>"><?= $status->getLabel() ?></option>
                         <?php endforeach; ?>
