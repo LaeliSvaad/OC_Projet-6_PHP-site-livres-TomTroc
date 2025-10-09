@@ -49,7 +49,7 @@
                 <td><?= $author->getFirstname() . " " . $author->getLastname() ?></td>
                 <td><?= $book->getDescription()?></td>
                 <td><?= $status->getLabel() ?></td>
-                <td><a href='index.php?action=book-form&id=". $book->getId() ."' >Editer</a><a href='index.php?action=delete-book&id=" . $book->getId() . "' >Supprimer</a></td>
+                <td><a href='index.php?action=book-form&id=<?= $book->getId() ?>' >Editer</a><a href='index.php?action=delete-book&id=<?= $book->getId() ?>' >Supprimer</a></td>
             </tr>
             <?php endforeach;  ?>
         </table>
