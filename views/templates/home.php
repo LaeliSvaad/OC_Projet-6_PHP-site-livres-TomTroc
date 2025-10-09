@@ -68,7 +68,7 @@
                         <div>Parcourez les livres disponibles chez d'autres membres.</div>
                         <div>Proposez un échange et discutez avec d'autres passionnés de lecture.</div>
                     </div>
-                    <button class="btn transparent-button"><a href="index.php?action=our-books" >Voir tous les livres</a></button>
+                    <a class="button-link" href="index.php?action=our-books" ><button class="btn transparent-button">Voir tous les livres</button></a>
                 </div>
             </div>
         </div>

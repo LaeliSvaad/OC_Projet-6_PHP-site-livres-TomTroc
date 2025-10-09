@@ -4,15 +4,20 @@
     <div class="row">
         <div class="col-xs-12 col-sm-6">
             <div class="inner-col white-block">
-                <form action="index.php?action=modify-user" method="post" enctype="multipart/form-data" id="uploadForm">
-                    <label for="imageUpload">
-                        <div class="block-content user-picture-input-div">
-                            <img class="profile-picture" src="<?= $user->getPicture() ?>" alt="<?= $user->getNickname() ?> profile picture" />
-                            <span class="grey-text input-file-span">Modifier</span>
-                        </div>
-                    </label>
-                    <input type="file" name="picture" id="imageUpload" onchange="document.getElementById('uploadForm').submit();">
-                </form>
+                <div>
+                    <form action="index.php?action=modify-user" method="post" enctype="multipart/form-data" id="uploadForm">
+                        <label for="imageUpload">
+                            <div class="block-content user-picture-input-div">
+                                <img class="profile-picture" src="<?= $user->getPicture() ?>" alt="<?= $user->getNickname() ?> profile picture" />
+                                <span class="grey-text input-file-span">Modifier</span>
+                            </div>
+                        </label>
+                        <input type="file" name="picture" id="imageUpload" onchange="document.getElementById('uploadForm').submit();">
+                    </form>
+                </div>
+                <div>
+                    <img src="pictures/separator.png" alt="separator">
+                </div>
                 <div>
                     <h3 class="playfair-display-title-font"><?= $user->getNickname() ?></h3>
                     <div><span class="grey-text">Membre depuis <?= Utils::dateInterval($user->getRegistrationDate()) ?></span></div>
@@ -39,7 +44,7 @@
                         <input class="form-control input-lg blue-input" type="text" id="input-nickname" name='nickname' value="<?= $user->getNickname() ?>" />
                     </div>
                     <div class='form-group'>
-                        <input class="btn green-button" type="submit" value="Enregistrer" />
+                        <input class="btn transparent-button" type="submit" value="Enregistrer" />
                     </div>
                 </form>
             </div>

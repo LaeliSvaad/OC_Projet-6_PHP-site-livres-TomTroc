@@ -107,6 +107,16 @@ body{
     align-items: center;
 }
 /*buttons*/
+.transparent-button{
+    background-color: #F5F3EF;
+    width: 322px;
+    font-size: 1.2em;
+    font-weight: bold;
+    padding: 15px;
+    border: 1px solid #00AC66;
+    border-radius: 10px;
+    color: #00AC66;
+}
 .green-button{
     background-color: #00AC66;
     width: 322px;
@@ -119,6 +129,10 @@ body{
 }
 .button-link, .button-link:hover, .button-link:active, .button-link:visited{
     color: white;
+    text-decoration: none;
+}
+.transparent-button, .transparent-button:hover, .transparent-button:active, .transparent-button:visited{
+    color: #00AC66;
     text-decoration: none;
 }
 .green-button, .green-button:hover, .green-button:active, .green-button:visited{
@@ -252,6 +266,16 @@ th, tr:nth-child(even) td {
     color: #A6A6A6;
 }
 /*Forms*/
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+select:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0px 1000px #EDF2F6 inset !important; /* ou une autre couleur de fond */
+    box-shadow: 0 0 0px 1000px #EDF2F6 inset !important;
+    -webkit-text-fill-color: #000 !important;
+    transition: background-color 5000s ease-in-out 0s; /* empêche la transition automatique */
+}
 .admin-form{
     padding:30px;
 }
