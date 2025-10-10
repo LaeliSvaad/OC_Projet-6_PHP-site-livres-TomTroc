@@ -13,16 +13,27 @@
                             <img class="profile-picture" src="<?= $conv->getInterlocutor()->getPicture() ?>" alt="<?= $conv->getInterlocutor()->getNickname() ?>">
                         </div>
                         <div class="col-xs-8">
-                            <span><?= $conv->getInterlocutor()->getNickname() ?></span>
-                            <?= $conv->getConversation()[0]->getText() . "  ". Utils::convertDateToFrenchFormat($conv->getConversation()[0]->getDatetime())?>
+                            <div><?= $conv->getInterlocutor()->getNickname() ."  ". Utils::convertDateToFrenchFormat($conv->getConversation()[0]->getDatetime())?></div>
+                            <div><?= $conv->getConversation()[0]->getText()?></div>
                         </div>
                     </div>
                </a>
             <?php endforeach; endif; ?>
         </div>
         <div class="col-xs-12 col-sm-9">
-            <img class="profile-picture" src="<?= $interlocutor->getPicture() ?>" alt="<?= $interlocutor->getNickname() ?> profile picture">
-            <span><?= $interlocutor->getNickname() ?></span>
+            <div>
+                <img class="profile-picture" src="<?= $interlocutor->getPicture() ?>" alt="<?= $interlocutor->getNickname() ?> profile picture">
+                <span><?= $interlocutor->getNickname() ?></span>
+                <?php foreach ($conversation->getConversation() as $message) :
+                        ?>
+                        <div>
+                            <?= $message->getSender()->getPicture() ?>
+                        </div>
+                        <div>
+                            <?= $message->getText() ?>
+                        </div>
+                    <?php endforeach;  ?>
+            </div>
         </div>
     </div>
 </div>

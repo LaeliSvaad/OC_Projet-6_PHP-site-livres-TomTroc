@@ -29,13 +29,12 @@ class ConversationManager extends AbstractEntityManager
         if ($db_array) {
             $conversation = new Conversation();
             $conversation->setConversationId($db_array[0]['conversationId']);
-            /*$conversation->setConnectedUserId($connectedUserId);
-            $conversation->setInterlocutorId($interlocutorId);*/
-
             foreach ($db_array as $element) {
                 $element["datetime"] = new \DateTime($element["datetime"]);
                 $element["sender"] = new User($element);
                 $element["message"] = new Message($element);
+                /*if($element["conversation"]->getInterlocutor() === NULL && $element["sender"]->getUserId() != $userId)
+                    $element["conversation"]->setInterlocutor($element["sender"]);*/
                 $conversation->addMessage($element["message"]);
             }
             return $conversation;
@@ -67,14 +66,13 @@ class ConversationManager extends AbstractEntityManager
 
         if ($db_array) {
             $conversation = new Conversation();
-            /*$conversation->setConversationId($conversationId);
-            $conversation->setConnectedUserId($userId);*/
+            $conversation->setConversationId($conversationId);
+
             foreach ($db_array as $element) {
                 $element["datetime"] = new DateTime($element["datetime"]);
                 $element["sender"] = new User($element);
-                /*if($conversation->getInterlocutorId() === NULL && $element["sender"]->getUserId() != $userId){
-                    $conversation->setInterlocutorId($element["sender"]->getUserId());
-                }*/
+                /*if($element["conversation"]->getInterlocutor() === NULL && $element["sender"]->getUserId() != $userId)
+                    $element["conversation"]->setInterlocutor($element["sender"]);*/
                 $element["message"] = new Message($element);
                 $conversation->addMessage($element["message"]);
             }
