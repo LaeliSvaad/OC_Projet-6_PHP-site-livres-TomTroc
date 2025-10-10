@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : db
--- Généré le : mer. 06 août 2025 à 13:49
+-- Généré le : ven. 10 oct. 2025 à 09:48
 -- Version du serveur : 5.7.44
 -- Version de PHP : 8.2.27
 
@@ -75,7 +75,7 @@ CREATE TABLE `book_data` (
                              `book_id` int(10) UNSIGNED NOT NULL,
                              `picture` varchar(180) NOT NULL,
                              `description` text NOT NULL,
-                             `status` enum('not available','reserved','available','') NOT NULL,
+                             `status` enum('not-available','reserved','available','') NOT NULL,
                              `id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -86,7 +86,9 @@ CREATE TABLE `book_data` (
 INSERT INTO `book_data` (`book_id`, `picture`, `description`, `status`, `id`) VALUES
                                                                                   (5, 'pictures/books/default-book-picture.png', 'Justine, ou les Malheurs de la vertu est un roman français du marquis de Sade publié de façon anonyme en 1791 à Paris, un an après que son auteur a été rendu à la liberté par la Révolution et l’abolition des lettres de cachet. ', 'available', 1),
                                                                                   (2, 'pictures/books/default-book-picture.png', 'Ainsi parlait Zarathoustra ou Ainsi parla Zarathoustra, sous-titré « Un livre pour tous et pour personne » (en allemand : Also sprach Zarathustra. Ein Buch für Alle und Keinen), est un poème philosophique de Friedrich Nietzsche, publié en plusieurs volumes entre 1883 et 1885. ', 'available', 2),
-                                                                                  (2, 'pictures/books/default-book-picture.png', 'Un super Livre!!!!', 'available', 3);
+                                                                                  (2, 'pictures/books/default-book-picture.png', 'Un super Livre!!!!', 'available', 3),
+                                                                                  (4, 'pictures/books/default-book-picture.png', 'un livre cool', 'available', 4),
+                                                                                  (3, 'pictures/books/default-book-picture.png', 'Encore un livre cool', 'available', 5);
 
 -- --------------------------------------------------------
 
@@ -129,7 +131,9 @@ CREATE TABLE `library` (
 INSERT INTO `library` (`book_data_id`, `user_id`, `id`) VALUES
                                                             (1, 3, 1),
                                                             (2, 3, 2),
-                                                            (3, 4, 3);
+                                                            (3, 4, 3),
+                                                            (4, 3, 4),
+                                                            (5, 3, 5);
 
 -- --------------------------------------------------------
 
@@ -186,11 +190,11 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`nickname`, `email`, `password`, `picture`, `registration_date`, `id`) VALUES
-                                                                                               ('Lisa', 'lisa.valade@hotmail.fr', '$2y$10$jGimq7mlWscQH2/oEf1fTO9dlGmDJEzFK7DKQW2KIm62TND97Nhoq', 'pictures/profile/default-profile-picture.png', '2025-07-10 07:15:06', 3),
-                                                                                               ('Lissaaaaaa', 'lisa.valade@orange.fr', '$2y$10$jx6YJ6nEwA0yKkUnNt3gVebV9Ip2y7bWwZj/e7E6A2aE8CVKaqlVC', 'pictures/profile/default-profile-picture.png', '2025-06-04 00:00:00', 4),
-                                                                                               ('LV', 'sdf@sdf.fr', '$2y$10$.6FgH6MsSPS..6.W8tqHGeJnWTE7OYLw2o8JyxkpFKY1lNsH4Mabq', 'pictures/profile/Mask group-3.png', '2025-06-20 00:00:00', 21),
-                                                                                               ('testtest', 'test@sdf.fr', '$2y$10$jx6YJ6nEwA0yKkUnNt3gVebV9Ip2y7bWwZj/e7E6A2aE8CVKaqlVC', 'pictures/profile/default-profile-picture.png', '2025-07-08 00:00:00', 22),
-                                                                                               ('autre utilisateur', 'miaou@miaou.fr', '$2y$10$J.T3Zg4JDtaibIP9/D1JWu9Kw055lDVt0fqMyW3dR.hIuBF7YzjoO', 'pictures/profile/default-profile-picture.png', '2025-07-11 08:23:41', 23);
+                                                                                               ('Lisa', 'lisa.valade@hotmail.fr', '$2y$10$yPsMR0JaVuyZyhiP/aYTxeAEm2HwluGcZUGww2SHQUucwH6Ezn74u', 'pictures/profile/12189165_102066100420jhgjgfghfjhgjrutiuhj   68123_7059307546526205589  _n.jpg', '2025-07-09 07:15:06', 3),
+                                                                                               ('Lisa2', 'lisa.valade@orange.fr', '$2y$10$Qo/QVwFyrnBtuY.LQYScsuv5IGHZTEZ7UHpzbLl.m0GhT3Ez.orFe', 'pictures/profile/img.jpg', '2025-06-04 00:00:00', 4),
+                                                                                               ('LV', 'sdf@sdf.fr', '$2y$10$Qz1kZSQL95KyOsd3hfmOquYwwWwDzZKJQg7aMh2EjIzbaheLVJWFa', 'pictures/profile/Mask group-3.png', '2025-06-20 00:00:00', 21),
+                                                                                               ('testtest', 'test@sdf.fr', '$2y$10$Qz1kZSQL95KyOsd3hfmOquYwwWwDzZKJQg7aMh2EjIzbaheLVJWFa', 'pictures/profile/default-profile-picture.png', '2025-07-08 00:00:00', 22),
+                                                                                               ('autre utilisateur', 'miaou@miaou.fr', '$2y$10$Qz1kZSQL95KyOsd3hfmOquYwwWwDzZKJQg7aMh2EjIzbaheLVJWFa', 'pictures/profile/default-profile-picture.png', '2025-07-11 08:23:41', 23);
 
 --
 -- Index pour les tables déchargées
@@ -258,7 +262,7 @@ ALTER TABLE `book`
 -- AUTO_INCREMENT pour la table `book_data`
 --
 ALTER TABLE `book_data`
-    MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+    MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT pour la table `conversation`
@@ -270,7 +274,7 @@ ALTER TABLE `conversation`
 -- AUTO_INCREMENT pour la table `library`
 --
 ALTER TABLE `library`
-    MODIFY `id` smallint(5) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+    MODIFY `id` smallint(5) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT pour la table `message`

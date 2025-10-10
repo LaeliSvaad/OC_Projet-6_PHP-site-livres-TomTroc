@@ -72,13 +72,13 @@ class UserPageController
         $userRequest["password"] = Utils::request("password");
         $userRequest["userId"]= Utils::request("userId");
 
-
         if(!isset($userRequest["userId"]) || $userRequest["userId"] == 0)
             throw new Exception("Une erreur est survenue lors de la mise à jour de vos informations. 0");
-        else
+        else{
             $userRequest["userId"] = (int)Utils::controlUserInput(Utils::request("userId"));
-
-        $userManager = new UserManager();
+            $userManager = new UserManager();
+            $user = $userManager->getPrivateUserById($userRequest["userId"]);
+        }
 
         foreach ($userRequest as $key => $value) {
 
@@ -87,19 +87,23 @@ class UserPageController
                     if($userRequest["nickname"] != null)
                     {
                         $userRequest["nickname"] = Utils::controlUserInput($userRequest["nickname"]);
-                        $modif = $userManager->modifyUserNickname($userRequest["nickname"], $userRequest["userId"]);
-                        if($modif == 0)
-                            throw new Exception("Une erreur est survenue lors de la mise à jour de vos informations. 1");
+                        if($userRequest["nickname"] != $user->getNickname()){
+                            $modif = $userManager->modifyUserNickname($userRequest["nickname"], $userRequest["userId"]);
+                            if($modif == 0)
+                                throw new Exception("Une erreur est survenue lors de la mise à jour de vos informations. 1");
+                        }
                     }
                     continue 2;
 
                 case 'email':
-                    if($userRequest["email"] != null)
+                    if($userRequest["email"] != null && $userRequest["email"] != $user->getEmail())
                     {
                         $userRequest["email"] = Utils::controlUserInput($userRequest["email"]);
-                        $modif = $userManager->modifyUserEmail($userRequest["email"], $userRequest["userId"]);
-                        if($modif == 0)
-                            throw new Exception("Une erreur est survenue lors de la mise à jour de vos informations. 2");
+                        if($userRequest["email"] != $user->getEmail()){
+                            $modif = $userManager->modifyUserEmail($userRequest["email"], $userRequest["userId"]);
+                            if($modif == 0)
+                                throw new Exception("Une erreur est survenue lors de la mise à jour de vos informations. 2");
+                        }
                     }
                     continue 2;
 
@@ -107,9 +111,11 @@ class UserPageController
                     if($userRequest["password"] != null)
                     {
                         $userRequest["password"] = Utils::controlPassword($userRequest["password"]);
-                        $modif = $userManager->modifyUserPassword($userRequest["password"], $userRequest["userId"]);
-                        if($modif == 0)
-                            throw new Exception("Une erreur est survenue lors de la mise à jour de vos informations. 3");
+                        if($userRequest["password"] != $user->getPassword()){
+                            $modif = $userManager->modifyUserPassword($userRequest["password"], $userRequest["userId"]);
+                            if($modif == 0)
+                                throw new Exception("Une erreur est survenue lors de la mise à jour de vos informations. 3");
+                        }
                     }
                     continue 2;
 
@@ -130,6 +136,6 @@ class UserPageController
                     break;
             }
         }
-        Utils::redirect("user-private-account", ["userId" => $userRequest["userId"]]);
+        Utils::redirect('user-private-account');
     }
 }

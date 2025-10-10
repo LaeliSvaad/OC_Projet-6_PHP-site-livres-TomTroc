@@ -140,7 +140,7 @@ class UserManager extends AbstractEntityManager
      */
     public function getPrivateUserById(int $userId) : ?User
     {
-        $sql = "SELECT `user`.`nickname`, `user`.`picture`, `user`.`registration_date`, `user`.`email`, `user`.`id` AS user_id FROM `user` WHERE `id` = :userId";
+        $sql = "SELECT `user`.`nickname`, `user`.`picture`, `user`.`password`, `user`.`registration_date`, `user`.`email`, `user`.`id` AS user_id FROM `user` WHERE `id` = :userId";
         $result = $this->db->query($sql, ['userId' => $userId]);
         $user = $result->fetch();
         $user["registration_date"] = new DateTime($user["registration_date"]);

@@ -3,11 +3,11 @@ class SignInController
 {
     public function connectUser() : void
     {
+
         // On récupère les données du formulaire.
         $nickname = Utils::request("nickname");
         $email = Utils::request("email");
         $password = Utils::request("password");
-
         //On sécurise les entrées utilisateur
         $nickname = Utils::controlUserInput($nickname);
         $email = Utils::controlUserInput($email);
