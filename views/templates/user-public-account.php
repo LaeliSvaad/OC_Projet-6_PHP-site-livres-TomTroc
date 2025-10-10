@@ -1,45 +1,50 @@
+<?php
+    $library = $user->getLibrary()->getLibrary();
+?>
 <section>
-    <div class="main-content-row">
-        <div class="content-block">
-            <div class="profile-picture">
-                <img src="<?= $user->getPicture() ?>" alt="<?= $user->getNickname() ?> profile picture" />
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-12 col-sm-3">
+                <div class="profile-picture">
+                    <img class="profile-picture" src="<?= $user->getPicture() ?>" alt="<?= $user->getNickname() ?> profile picture" />
+                </div>
+                <div>
+                    <img src="pictures/separator.png" alt="separator">
+                </div>
+                <div class="content-block">
+                    <h3 class="playfair-display-title-font"><?= $user->getNickname() ?></h3>
+                    <div><span class="grey-text">Membre depuis <?= Utils::dateInterval($user->getRegistrationDate()) ?></span></div>
+                    <div><span class="uppercase-text">Bibliothèque</span></div>
+                    <div><img src="pictures/library-icon.png" alt="library icon">&nbsp;<span><?= $user->getLibrary()->countBooks() ?> livres</span></div>
+                    <?php if (isset($_SESSION["user"])): ?>
+                        <a href="index.php?action=conversation&user1Id=<?= $user->getUserId() ?>&user2Id=<?= $_SESSION['user'] ?>" class="button-link">
+                            <button class="btn transparent-button">Écrire un message</button>
+                        </a>
+                    <?php else: ?>
+                        Connectez-vous pour lui écrire
+                    <?php endif; ?>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-9">
+                <?php if($user->getLibrary()->countBooks() != 0){ ?>
+                <div class="row">
+                    <table class="books-table">
+                        <tbody>
+                        <tr class="uppercase-text"><th>Photo</th><th>Titre</th><th>Auteur</th><th>Description</th></tr>
+                        <?php foreach ($library as $book):
+                            $author = $book->getAuthor(); ?>
+                            <tr>
+                                <td><div class="cell-fixed"><img class='table-book-img' src='<?= $book->getBookPicture() ?>' alt='<?= $book->getTitle()?>'></div></td>
+                                <td><div class="cell-fixed"><?= $book->getTitle() ?></div></td>
+                                <td><div class="cell-fixed"><?= $author->getFirstname() . " " . $author->getLastname() ?></div></td>
+                                <td><div class="italic cell-fixed"><?= $book->getDescription()?></div></td>
+                            </tr>
+                        <?php endforeach;  ?>
+                        </tbody>
+                    </table>
+                    <?php }?>
             </div>
         </div>
-        <div class="content-block">
-            <h2><?= $user->getNickname() ?></h2>
-            <span>Membre depuis <?= Utils::dateInterval($user->getRegistrationDate()) ?></span>
-            <span>Bibliothèque</span>
-            <span><?= $user->getLibrary()->countBooks() ?></span>
-            <span>livres</span>
-            <?php if (isset($_SESSION["user"]))
-                echo"<button><a href='index.php?action=conversation&user1Id= " . $user->getUserId() . "&user2Id=" . $_SESSION["user"] . "'>Ecrire un message</a></button>";
-            else
-                echo"Connectez-vous pour lui écrire"; ?>
-        </div>
-    </div>
-</section>
-
-<section>
-
-
-  <div class="row">
-            <?php
-            $library = $user->getLibrary()->getLibrary();
-            foreach ($library as $book) {
-                echo "<div class='col-sm-2 book-card'>";
-                echo "<a href='?action=book-details&id=". $book->getId() . "&userId=" .$book->getUser()->getUserId(). "'>";
-                echo "<div class='book-img'>";
-                echo "<img src='" . $book->getBookPicture() . "' alt='" . $book->getTitle() . "'>";
-                echo "</div>";
-                echo "<div class='book-info'>";
-                echo "<h3>" . $book->getTitle() . "</h3>";
-                echo "<span>" . $book->getAuthor()->getFirstname() . " " . $book->getAuthor()->getLastname() . "</span>";
-                echo "<span class='italic'>Vendu par: " . $book->getUser()->getNickname() . "</span>";
-                echo "</div>";
-                echo "</a>";
-                echo "</div>";
-            }
-            ?>
     </div>
 </section>
 

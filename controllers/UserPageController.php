@@ -14,7 +14,6 @@ class UserPageController
             $userId= Utils::request("id");
             $userManager = new UserManager();
             $user = $userManager->getPublicUserById($userId);
-
             if(!is_null($user))
             {
                 $libraryManager = new LibraryManager();
@@ -32,7 +31,6 @@ class UserPageController
             $view = new View('user-public-account');
             $view->render("user-public-account", ['user' => $user]);
         }
-
     }
 
     public function showPrivateUserPage(): void

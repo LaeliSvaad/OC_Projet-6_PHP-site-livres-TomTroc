@@ -51,6 +51,7 @@
             </div>
         </div>
     </div>
+    <?php if($user->getLibrary()  ->countBooks() != 0){ ?>
     <div class="row">
         <table class="books-table">
             <tbody>
@@ -69,6 +70,7 @@
             <?php endforeach;  ?>
             </tbody>
         </table>
+        <?php }?>
     </div>
 </div>
 

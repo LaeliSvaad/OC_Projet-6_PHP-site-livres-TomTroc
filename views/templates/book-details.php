@@ -26,7 +26,7 @@ $userId = $user->getUserId();
                     <div>
                         <div>
                             <a href='<?= $isOwner ? "index.php?action=user-private-account" : "index.php?action=user-public-account&id=$userId" ?>'>
-                                <img src='<?= $userPicture ?>' alt='<?= $userNickname ?>'>
+                                <img class="profile-picture" src='<?= $userPicture ?>' alt='<?= $userNickname ?>'>
                                 <span><?= $isOwner ? "Vous" : $userNickname ?></span>
                             </a>
                         </div>

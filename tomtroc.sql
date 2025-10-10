@@ -192,7 +192,7 @@ CREATE TABLE `user` (
 INSERT INTO `user` (`nickname`, `email`, `password`, `picture`, `registration_date`, `id`) VALUES
                                                                                                ('Lisa', 'lisa.valade@hotmail.fr', '$2y$10$yPsMR0JaVuyZyhiP/aYTxeAEm2HwluGcZUGww2SHQUucwH6Ezn74u', 'pictures/profile/12189165_102066100420jhgjgfghfjhgjrutiuhj   68123_7059307546526205589  _n.jpg', '2025-07-09 07:15:06', 3),
                                                                                                ('Lisa2', 'lisa.valade@orange.fr', '$2y$10$Qo/QVwFyrnBtuY.LQYScsuv5IGHZTEZ7UHpzbLl.m0GhT3Ez.orFe', 'pictures/profile/img.jpg', '2025-06-04 00:00:00', 4),
-                                                                                               ('LV', 'sdf@sdf.fr', '$2y$10$Qz1kZSQL95KyOsd3hfmOquYwwWwDzZKJQg7aMh2EjIzbaheLVJWFa', 'pictures/profile/Mask group-3.png', '2025-06-20 00:00:00', 21),
+                                                                                               ('LV', 'sdf@sdf.fr', '$2y$10$Qz1kZSQL95KyOsd3hfmOquYwwWwDzZKJQg7aMh2EjIzbaheLVJWFa', 'pictures/profile/default-profile-picture-2.png', '2025-06-20 00:00:00', 21),
                                                                                                ('testtest', 'test@sdf.fr', '$2y$10$Qz1kZSQL95KyOsd3hfmOquYwwWwDzZKJQg7aMh2EjIzbaheLVJWFa', 'pictures/profile/default-profile-picture.png', '2025-07-08 00:00:00', 22),
                                                                                                ('autre utilisateur', 'miaou@miaou.fr', '$2y$10$Qz1kZSQL95KyOsd3hfmOquYwwWwDzZKJQg7aMh2EjIzbaheLVJWFa', 'pictures/profile/default-profile-picture.png', '2025-07-11 08:23:41', 23);
 
