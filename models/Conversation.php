@@ -4,29 +4,29 @@
  */
 class Conversation extends AbstractEntity
 {
-   private ?int $user1Id;
-   private ?int $user2Id;
+   private ?User $connectedUser = null;
+   private ?User $interlocutor = null;
    private ?array $conversation = null;
    private ?int $conversationId;
 
-    public function getUser1Id(): ?int
+    public function getInterlocutor(): ?User
     {
-        return $this->user1Id;
+        return $this->interlocutor;
     }
 
-    public function setUser1Id(?int $id): void
+    public function setInterlocutor(?User $interlocutor): void
     {
-        $this->user1Id = $id;
+        $this->interlocutor = $interlocutor;
     }
 
-    public function getUser2Id(): ?int
+    public function getConnectedUser(): ?User
     {
-        return $this->user2Id;
+        return $this->connectedUser;
     }
 
-    public function setUser2Id(?int $id): void
+    public function setConnectedUser(?User $connectedUser): void
     {
-        $this->user2Id = $id;
+        $this->connectedUser = $connectedUser;
     }
 
     public function getConversation(): ?array

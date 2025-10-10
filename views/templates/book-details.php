@@ -34,7 +34,7 @@ $userId = $user->getUserId();
                             <?= !$connectedUserId
                                 ? "<span>Créez un compte ou connectez-vous pour lui envoyer un message.</span>"
                                 : (!$isOwner
-                                    ? "<a class='button-link' href='index.php?action=conversation&user1Id=$userId&user2Id=$connectedUserId'><button class='btn green-button'>Envoyer un message</button></a>"
+                                    ? "<a class='button-link' href='index.php?action=conversation&user1Id=$connectedUserId&user2Id=$userId'><button class='btn green-button'>Envoyer un message</button></a>"
                                     : "") ?>
                         </div>
                     </div>

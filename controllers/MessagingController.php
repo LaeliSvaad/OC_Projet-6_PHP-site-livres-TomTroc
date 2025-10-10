@@ -4,23 +4,29 @@ class MessagingController
 {
     public function showConversation() : void
     {
-        $userId = $_SESSION["user"];
-        $chatManager = new ChatManager();
-        $chat = $chatManager->getChat($userId);
-        $user1Id = Utils::request("user1Id", -1);
-        $user2Id = Utils::request("user2Id", -1);
+        $connectedUserId = Utils::request("user1Id", -1);
+        $interlocutorId = Utils::request("user2Id", -1);
         $conversationId = Utils::request("conversationId", -1);
+
+        $chatManager = new ChatManager();
         $conversationManager = new ConversationManager();
-        if($user1Id != -1 && $user2Id != -1)
-            $conversation = $conversationManager->getConversationByUsersId($user1Id, $user2Id);
+        $userManager = new UserManager();
+
+        $chat = $chatManager->getChat($connectedUserId);
+        $interlocutor = $userManager->getPublicUserById($interlocutorId);
+
+        if($connectedUserId != -1 && $interlocutorId != -1)
+            $conversation = $conversationManager->getConversationByUsersId($connectedUserId, $interlocutorId);
         else
-            $conversation = $conversationManager->getConversationById($conversationId);
+            $conversation = $conversationManager->getConversationById($conversationId, $connectedUserId);
+
         if(is_null($conversation))
         {
-            $conversation = new Conversation(["conversationId" => $conversationId, "user1Id" => $user1Id, "user2Id" => $user2Id]);
+            $conversation = new Conversation(["conversationId" => $conversationId, "user1Id" => $connectedUserId, "user2Id" => $interlocutorId]);
         }
+
         $view = new View('chat');
-        $view->render("chat", ['chat' => $chat, 'conversation' => $conversation]);
+        $view->render("chat", ['chat' => $chat, 'conversation' => $conversation, 'interlocutor' => $interlocutor]);
 
     }
 
@@ -34,17 +40,13 @@ class MessagingController
         if(isset($chat->getChat()[0]))
         {
             $conversationId = $chat->getChat()[0]->getConversationId();
-            $conversation = $conversationManager->getConversationById($conversationId);
+            $conversation = $conversationManager->getConversationById($conversationId, $userId);
             $view->render("chat", ['chat' => $chat, 'conversation' => $conversation]);
         }
         else
         {
             $view->render("chat", ['chat' => NULL, 'conversation' => NULL]);
         }
-
-
-
-
     }
 
     public function sendMessage() : void

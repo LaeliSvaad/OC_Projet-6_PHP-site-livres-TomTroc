@@ -8,6 +8,7 @@ class ChatManager extends AbstractEntityManager
                     `conversation`.`id` AS conversationId,
                     `message`.`id`,  
                     `user`.`nickname`,
+                    `user`.`picture`,
                     `user`.`id` AS userId,
                     `message`.`text`,
                     `message`.`date` AS `datetime`
@@ -16,8 +17,8 @@ class ChatManager extends AbstractEntityManager
                     SELECT `message`.`conversation_id`, MAX(`date`) AS latest_sent
                     FROM `message`
                     GROUP BY `message`.`conversation_id`
-                ) lm ON `conversation`.`id` = lm.`conversation_id`
-                JOIN `message` ON `message`.`conversation_id` = `lm`.`conversation_id` AND `message`.`date` = lm.latest_sent
+                ) lastmessages ON `conversation`.`id` = lastmessages.`conversation_id`
+                JOIN `message` ON `message`.`conversation_id` = `lastmessages`.`conversation_id` AND `message`.`date` = lastmessages.latest_sent
                 JOIN `user`  ON `message`.`sender_id` = `user`.`id`
                 WHERE `conversation`.`user_1_id` = :userId OR `conversation`.`user_2_id` = :userId
                 ORDER BY `message`.`date` DESC";
@@ -34,6 +35,13 @@ class ChatManager extends AbstractEntityManager
                 $element["datetime"] = new Datetime($element["datetime"]);
                 $element["message"] = new Message($element);
                 $element["conversation"] = new Conversation($element);
+                $element["conversation"]->setConnectedUser(new User($element));
+                if($element["conversation"]->getInterlocutor() === NULL && $element["sender"]->getUserId() != $userId)
+                    $element["conversation"]->setInterlocutor($element["sender"]);
+                /*$element["conversation"]->setConnectedUserId($userId);
+                if($element["conversation"]->getInterlocutorId() === NULL && $element["sender"]->getUserId() != $userId){
+                    $element["conversation"]->setInterlocutorId($element["sender"]->getUserId());
+                }*/
                 $element["conversation"]->addMessage($element["message"]);
                 $chat->addConversation($element["conversation"]);
             }

@@ -17,7 +17,7 @@
                     <div><span class="uppercase-text">Bibliothèque</span></div>
                     <div><img src="pictures/library-icon.png" alt="library icon">&nbsp;<span><?= $user->getLibrary()->countBooks() ?> livres</span></div>
                     <?php if (isset($_SESSION["user"])): ?>
-                        <a href="index.php?action=conversation&user1Id=<?= $user->getUserId() ?>&user2Id=<?= $_SESSION['user'] ?>" class="button-link">
+                        <a href="index.php?action=conversation&user1Id<?= $_SESSION['user'] ?>=&user2Id=<?= $user->getUserId() ?>" class="button-link">
                             <button class="btn transparent-button">Écrire un message</button>
                         </a>
                     <?php else: ?>
