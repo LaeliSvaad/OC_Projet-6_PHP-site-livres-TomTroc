@@ -65,14 +65,16 @@ class UserPageController
 
     public function modifyUser(): void
     {
+        if(isset($_FILES["picture"]))
+            $userRequest["picture"] = $_FILES["picture"];
         $userRequest["nickname"] = Utils::request("nickname");
         $userRequest["email"] = Utils::request("email");
         $userRequest["password"] = Utils::request("password");
-        $userRequest["picture"] = Utils::request("picture");
         $userRequest["userId"]= Utils::request("userId");
 
+
         if(!isset($userRequest["userId"]) || $userRequest["userId"] == 0)
-            throw new Exception("Une erreur est survenue lors de la mise à jour de vos informations.");
+            throw new Exception("Une erreur est survenue lors de la mise à jour de vos informations. 0");
         else
             $userRequest["userId"] = (int)Utils::controlUserInput(Utils::request("userId"));
 
@@ -87,7 +89,7 @@ class UserPageController
                         $userRequest["nickname"] = Utils::controlUserInput($userRequest["nickname"]);
                         $modif = $userManager->modifyUserNickname($userRequest["nickname"], $userRequest["userId"]);
                         if($modif == 0)
-                            throw new Exception("Une erreur est survenue lors de la mise à jour de vos informations.");
+                            throw new Exception("Une erreur est survenue lors de la mise à jour de vos informations. 1");
                     }
                     continue 2;
 
@@ -97,7 +99,7 @@ class UserPageController
                         $userRequest["email"] = Utils::controlUserInput($userRequest["email"]);
                         $modif = $userManager->modifyUserEmail($userRequest["email"], $userRequest["userId"]);
                         if($modif == 0)
-                            throw new Exception("Une erreur est survenue lors de la mise à jour de vos informations.");
+                            throw new Exception("Une erreur est survenue lors de la mise à jour de vos informations. 2");
                     }
                     continue 2;
 
@@ -107,17 +109,23 @@ class UserPageController
                         $userRequest["password"] = Utils::controlPassword($userRequest["password"]);
                         $modif = $userManager->modifyUserPassword($userRequest["password"], $userRequest["userId"]);
                         if($modif == 0)
-                            throw new Exception("Une erreur est survenue lors de la mise à jour de vos informations.");
+                            throw new Exception("Une erreur est survenue lors de la mise à jour de vos informations. 3");
                     }
                     continue 2;
 
                 case 'picture':
                     if($userRequest["picture"] != null)
                     {
-                        $userRequest["picture"] = Utils::controlProfilePicture($userRequest["picture"]);
-                        $modif = $userManager->modifyUserPicture($userRequest["picture"], $userRequest["userId"]);
-                        if($modif == 0)
-                            throw new Exception("Une erreur est survenue lors de la mise à jour de vos informations.");
+                        $userRequest["picture"]["name"] = Utils::controlProfilePicture($userRequest["picture"]["name"]);
+
+                        if(move_uploaded_file($userRequest["picture"]["tmp_name"], $userRequest["picture"]["name"]) === false){
+                            throw new Exception("Une erreur est survenue lors de la mise à jour de vos informations. 4");
+                        }
+                        else{
+                            $modif = $userManager->modifyUserPicture($userRequest["picture"]["name"], $userRequest["userId"]);
+                                if($modif == 0)
+                                    throw new Exception("Une erreur est survenue lors de la mise à jour de vos informations. 5");
+                            }
                     }
                     break;
             }

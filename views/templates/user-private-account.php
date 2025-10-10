@@ -12,6 +12,7 @@
                                 <span class="grey-text input-file-span">Modifier</span>
                             </div>
                         </label>
+                        <input type="hidden" name="userId" value="<?= $user->getUserId() ?>" >
                         <input type="file" name="picture" id="imageUpload" onchange="document.getElementById('uploadForm').submit();">
                     </form>
                 </div>
