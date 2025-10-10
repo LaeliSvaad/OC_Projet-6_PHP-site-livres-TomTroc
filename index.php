@@ -96,10 +96,10 @@ try {
             $messagingController->showConversation();
             break;
 
-        case 'chat':
+        /*case 'chat':
             $messagingController = new MessagingController();
-            $messagingController->showChat();
-            break;
+            $messagingController->showConversation();
+            break;*/
 
         case 'send-message':
             $messagingController = new MessagingController();
