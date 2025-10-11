@@ -3,17 +3,12 @@
         <div class="col-xs-12 col-sm-3">
             <h2 class="playfair-display-title-font">Messagerie</h2>
             <?php
-            if (is_null($chat)){?>
+            if (is_null($chat)):?>
                 <div><span>Aucune conversation à afficher</span></div>
-           <?php }
-            else{
+           <?php else:
                 $conversations = $chat->getChat();
-                foreach($conversations as $conv) {
-                    var_dump($conv->getInterlocutor());
-                    echo $conv->getInterlocutor()->getUserId(); ?>
-
-                    <a href="index.php?action=conversation&user1Id=<?= $conv->getConnectedUser()->getUserId() ?>&user2Id=<?= $conv->getInterlocutor()->getUserId()?>">la</a>
-                    <a href="index.php?action=conversation&user1Id=<?= $conv->getConnectedUser()->getUserId() ?>">
+                foreach($conversations as $conv) : ?>
+                    <a href="index.php?action=conversation&conversationId=<?= $conv->getConversationId()?>">
                         <div class="row">
                             <div class="col-xs-4">
                                 <img class="profile-picture" src="<?= $conv->getInterlocutor()->getPicture() ?>" alt="<?= $conv->getInterlocutor()->getNickname() ?>">
@@ -24,8 +19,7 @@
                             </div>
                         </div>
                     </a>
-            <?php }
-            }?>
+            <?php endforeach; endif;?>
         </div>
         <div class="col-xs-12 col-sm-9">
             <div>

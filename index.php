@@ -96,11 +96,6 @@ try {
             $messagingController->showConversation();
             break;
 
-        /*case 'chat':
-            $messagingController = new MessagingController();
-            $messagingController->showConversation();
-            break;*/
-
         case 'send-message':
             $messagingController = new MessagingController();
             $messagingController->sendMessage();

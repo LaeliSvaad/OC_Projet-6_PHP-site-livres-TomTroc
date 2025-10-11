@@ -35,19 +35,12 @@ class ChatManager extends AbstractEntityManager
                 $element["datetime"] = new Datetime($element["datetime"]);
                 $element["message"] = new Message($element);
                 $element["conversation"] = new Conversation($element);
-                if($element["conversation"]->getInterlocutor() === NULL && $element["sender"]->getUserId() != $userId){
-                    echo"<br><br>gggg<br><br>";
+                if($element["conversation"] ->getInterlocutor() === NULL && $element["sender"]->getUserId() != $userId){
                     $element["conversation"]->setInterlocutor($element["sender"]);
-                    var_dump($element["conversation"]->getInterlocutor());
-                    echo"<br><br>";
                 }
                 else if($element["conversation"]->getConnectedUser() === NULL && $element["sender"]->getUserId() === $userId){
-                    echo"<br><br>hhhh<br><br>";
                     $element["conversation"]->setConnectedUser($element["sender"]);
-                    var_dump($element["conversation"]->getConnectedUser());
-                    echo"<br><br>";
                 }
-
                 $element["conversation"]->addMessage($element["message"]);
                 $chat->addConversation($element["conversation"]);
             }

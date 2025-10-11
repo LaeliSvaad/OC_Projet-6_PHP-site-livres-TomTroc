@@ -4,10 +4,8 @@ class MessagingController
 {
     public function showConversation() : void
     {
-        $connectedUserId = Utils::request("user1Id", -1);
-        if($connectedUserId === -1)
-            $connectedUserId = $_SESSION["user"];
-        $interlocutorId = Utils::request("user2Id", -1);
+        $connectedUserId = $_SESSION["user"];
+        $interlocutorId = Utils::request("interlocutorId", -1);
 
         $chatManager = new ChatManager();
         $conversationManager = new ConversationManager();
@@ -15,17 +13,16 @@ class MessagingController
         $chat = $chatManager->getChat($connectedUserId);
         $conversation = new Conversation();
 
-        if($connectedUserId != -1 && $interlocutorId != -1)
+        if($connectedUserId != NULL && $interlocutorId != -1)
         {
             $conversation = $conversationManager->getConversationByUsersId($connectedUserId, $interlocutorId);
         }
-        else if($connectedUserId === -1 && $interlocutorId === -1 && isset($chat->getChat()[0]))
+        else if($interlocutorId === -1 && isset($chat->getChat()[0]))
         {
             $conversationId = $chat->getChat()[0]->getConversationId();
             $conversation = $conversationManager->getConversationById($conversationId, $connectedUserId);
         }
         $interlocutor = $conversation->getInterlocutor();
-
         $view = new View('chat');
         $view->render("chat", ['chat' => $chat, 'conversation' => $conversation, 'interlocutor' => $interlocutor]);
     }

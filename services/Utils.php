@@ -97,7 +97,7 @@ class Utils {
     public static function controlProfilePicture(string $filename) : ?string
     {
         if($filename != "")
-            return "pictures/profile/" . htmlspecialchars(strtolower($filename));
+            return "pictures/profile/" . htmlspecialchars(strtolower(trim($filename)));
         else
             return "pictures/profile/default-profile-picture.png";
     }

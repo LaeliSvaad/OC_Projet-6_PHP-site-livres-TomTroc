@@ -33,17 +33,11 @@ class ConversationManager extends AbstractEntityManager
                 $element["datetime"] = new \DateTime($element["datetime"]);
                 $element["sender"] = new User($element);
                 $element["message"] = new Message($element);
-                if($conversation ->getInterlocutor() === NULL && $element["sender"]->getUserId() != $connectedUserId){
-                    echo"<br><br>";
-                    echo"ici";
-                    $conversation ->setInterlocutor($element["sender"]);
-                    echo"<br><br>";
+                if($conversation->getInterlocutor() === NULL && $element["sender"]->getUserId() != $connectedUserId){
+                    $conversation->setInterlocutor($element["sender"]);
                 }
-                else if($conversation ->getConnectedUser() === NULL && $element["sender"]->getUserId() === $connectedUserId){
-                    echo"<br><br>";
-                    echo"la";
-                    $conversation ->setConnectedUser($element["sender"]);
-                    echo"<br><br>";
+                else if($conversation->getConnectedUser() === NULL && $element["sender"]->getUserId() === $connectedUserId){
+                    $conversation->setConnectedUser($element["sender"]);
                 }
                 $conversation->addMessage($element["message"]);
             }
@@ -84,8 +78,9 @@ class ConversationManager extends AbstractEntityManager
                 if($conversation->getInterlocutor() === NULL && $element["sender"]->getUserId() != $userId){
                     $conversation->setInterlocutor($element["sender"]);
                 }
-                else if($conversation ->getConnectedUser() === NULL && $element["sender"]->getUserId() === $userId)
-                    $conversation ->setConnectedUser($element["sender"]);
+                else if($conversation->getConnectedUser() === NULL && $element["sender"]->getUserId() === $userId){
+                    $conversation->setConnectedUser($element["sender"]);
+                }
                 $element["message"] = new Message($element);
                 $conversation->addMessage($element["message"]);
             }
