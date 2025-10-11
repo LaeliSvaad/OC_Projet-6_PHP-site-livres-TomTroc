@@ -4,6 +4,7 @@
  */
 class ConversationManager extends AbstractEntityManager
 {
+
     public function getConversationByUsersId(int $connectedUserId, int $interlocutorId) : ?Conversation
     {
         $sql = "SELECT

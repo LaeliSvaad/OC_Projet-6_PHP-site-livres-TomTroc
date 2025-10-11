@@ -4,7 +4,6 @@
  */
 class Conversation extends AbstractEntity
 {
-   private ?User $connectedUser = null;
    private ?User $interlocutor = null;
    private ?array $conversation = null;
    private ?int $conversationId;
@@ -17,16 +16,6 @@ class Conversation extends AbstractEntity
     public function setInterlocutor(?User $interlocutor): void
     {
         $this->interlocutor = $interlocutor;
-    }
-
-    public function getConnectedUser(): ?User
-    {
-        return $this->connectedUser;
-    }
-
-    public function setConnectedUser(?User $connectedUser): void
-    {
-        $this->connectedUser = $connectedUser;
     }
 
     public function getConversation(): ?array

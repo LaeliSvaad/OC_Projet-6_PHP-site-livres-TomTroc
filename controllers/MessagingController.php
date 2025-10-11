@@ -9,9 +9,15 @@ class MessagingController
 
         $chatManager = new ChatManager();
         $conversationManager = new ConversationManager();
+        $userManager = new UserManager();
 
         $chat = $chatManager->getChat($connectedUserId);
+        $connectedUser = $userManager->getPublicUserById($connectedUserId);
+        $chat->setConnectedUser($connectedUser);
+
         $conversation = new Conversation();
+        $interlocutor = $userManager->getPublicUserById($Id);
+        $conversation->setInterlocutor($interlocutor);
 
         if($connectedUserId != NULL && $interlocutorId != -1)
         {
@@ -21,8 +27,9 @@ class MessagingController
         {
             $conversationId = $chat->getChat()[0]->getConversationId();
             $conversation = $conversationManager->getConversationById($conversationId, $connectedUserId);
+            echo"ici";
         }
-        $interlocutor = $conversation->getInterlocutor();
+
         $view = new View('chat');
         $view->render("chat", ['chat' => $chat, 'conversation' => $conversation, 'interlocutor' => $interlocutor]);
     }

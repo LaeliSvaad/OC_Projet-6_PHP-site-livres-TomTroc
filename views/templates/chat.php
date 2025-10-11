@@ -19,7 +19,7 @@
                             </div>
                         </div>
                     </a>
-            <?php endforeach; endif;?>
+            <?php echo"<br>sorti de là<br>"; endforeach; endif; var_dump($interlocutor->getPicture()); ?>
         </div>
         <div class="col-xs-12 col-sm-9">
             <div>
