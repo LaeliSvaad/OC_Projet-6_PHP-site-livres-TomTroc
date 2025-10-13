@@ -11,6 +11,7 @@
                     <a href="index.php?action=conversation&conversationId=<?= $conv->getConversationId()?>">
                         <div class="row">
                             <div class="col-xs-4">
+                                <?php var_dump($conv->getInterlocutor()); ?>
                                 <img class="profile-picture" src="<?= $conv->getInterlocutor()->getPicture() ?>" alt="<?= $conv->getInterlocutor()->getNickname() ?>">
                             </div>
                             <div class="col-xs-8">

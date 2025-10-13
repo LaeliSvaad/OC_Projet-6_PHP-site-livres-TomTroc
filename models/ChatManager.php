@@ -76,7 +76,7 @@ class ChatManager extends AbstractEntityManager
                 JOIN `message` ON `message`.`conversation_id` = `lastmessages`.`conversation_id` AND `message`.`date` = lastmessages.latest_sent
                 JOIN `user`  ON `message`.`sender_id` = `user`.`id`
                 WHERE `conversation`.`user_1_id` = :userId OR `conversation`.`user_2_id` = :userId";
-
+//il faudrait parvenir à sélectionner dans la table l'user_id différent de connected user id où user_id_1 ou user_id_2 est égal à connected user id. Puis faire un join sur user pour trouver l'interlocuteur
         $result = $this->db->query($sql, ['userId' => $connectedUserId]);
 
         if(is_null($result))
@@ -86,10 +86,12 @@ class ChatManager extends AbstractEntityManager
             $chat = new Chat();
             foreach ($result as $element) {
                 $sender = new User($element);
+                /*$interlocutor = new User($element);*/
                 $message = new Message($element);
                 $message->setSender($sender);
                 $conversation = new Conversation();
                 $conversation->addMessage($message);
+                /*$conversation->setInterlocutor($interlocutor);*/
                 $conversation->setConversationId($element['conversationId']);
                 $chat->addConversation($conversation);
             }

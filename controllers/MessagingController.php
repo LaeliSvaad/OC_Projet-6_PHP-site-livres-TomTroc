@@ -16,7 +16,7 @@ class MessagingController
         $chat->setConnectedUser($connectedUser);
 
         $conversation = new Conversation();
-        $interlocutor = $userManager->getPublicUserById($Id);
+        $interlocutor = $userManager->getPublicUserById($interlocutorId);
         $conversation->setInterlocutor($interlocutor);
 
         if($connectedUserId != NULL && $interlocutorId != -1)
@@ -27,6 +27,8 @@ class MessagingController
         {
             $conversationId = $chat->getChat()[0]->getConversationId();
             $conversation = $conversationManager->getConversationById($conversationId, $connectedUserId);
+            $interlocutor = $conversation->getInterlocutor();
+            var_dump($interlocutor);
             echo"ici";
         }
 

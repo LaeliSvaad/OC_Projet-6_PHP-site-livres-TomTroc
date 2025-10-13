@@ -37,9 +37,9 @@ class ConversationManager extends AbstractEntityManager
                 if($conversation->getInterlocutor() === NULL && $element["sender"]->getUserId() != $connectedUserId){
                     $conversation->setInterlocutor($element["sender"]);
                 }
-                else if($conversation->getConnectedUser() === NULL && $element["sender"]->getUserId() === $connectedUserId){
+                /*else if($conversation->getConnectedUser() === NULL && $element["sender"]->getUserId() === $connectedUserId){
                     $conversation->setConnectedUser($element["sender"]);
-                }
+                }*/
                 $conversation->addMessage($element["message"]);
             }
             return $conversation;
@@ -77,11 +77,13 @@ class ConversationManager extends AbstractEntityManager
                 $element["datetime"] = new DateTime($element["datetime"]);
                 $element["sender"] = new User($element);
                 if($conversation->getInterlocutor() === NULL && $element["sender"]->getUserId() != $userId){
+                    echo"<br>là<br><br>";
                     $conversation->setInterlocutor($element["sender"]);
+                    var_dump($conversation->getInterlocutor());
                 }
-                else if($conversation->getConnectedUser() === NULL && $element["sender"]->getUserId() === $userId){
+                /*else if($conversation->getConnectedUser() === NULL && $element["sender"]->getUserId() === $userId){
                     $conversation->setConnectedUser($element["sender"]);
-                }
+                }*/
                 $element["message"] = new Message($element);
                 $conversation->addMessage($element["message"]);
             }
