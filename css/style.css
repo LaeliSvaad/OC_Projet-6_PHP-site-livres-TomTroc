@@ -330,6 +330,16 @@ textarea {
     object-position: center;
     border-radius: 50px;
 }
+/*Chat*/
+.chat{
+    width: 100%;
+}
+.align-right{
+    text-align: right;
+}
+.align-left{
+    text-align: left;
+}
 /*Footer*/
 .footer{
     height: 50px;

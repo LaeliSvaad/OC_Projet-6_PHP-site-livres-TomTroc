@@ -14,7 +14,7 @@
                                 <img class="profile-picture" src="<?= $conv->getInterlocutor()->getPicture() ?>" alt="<?= $conv->getInterlocutor()->getNickname() ?>">
                             </div>
                             <div class="col-xs-8">
-                                <div><?= $conv->getInterlocutor()->getNickname() ."  ". Utils::convertDateToFrenchFormat($conv->getConversation()[0]->getDatetime()) ?></div>
+                                <div><?= $conv->getInterlocutor()->getNickname() ."  ". Utils::convertDateToSmallFormat($conv->getConversation()[0]->getDatetime()) ?></div>
                                 <div><?= $conv->getConversation()[0]->getText()?></div>
                             </div>
                         </div>
@@ -23,16 +23,23 @@
         </div>
         <div class="col-xs-12 col-sm-9">
             <div>
-                <img class="profile-picture" src="<?= $conversation->getInterlocutor()->getPicture() ?>" alt="<?= $conversation->getInterlocutor()->getNickname() ?> profile picture">
-                <span><?= $conversation->getInterlocutor()->getNickname() ?></span>
-                <?php foreach ($conversation->getConversation() as $message) :
-                        ?>
-                        <div>
-                            <?= $message->getSender()->getNickname() ?>
-                            <img class="profile-picture" src="<?= $message->getSender()->getPicture() ?>" alt="<?= $message->getSender()->getNickname() ?> profile picture">
-                        </div>
-                        <div>
-                            <?= $message->getText() ?>
+                <div>
+                    <img class="profile-picture" src="<?= $conversation->getInterlocutor()->getPicture() ?>" alt="<?= $conversation->getInterlocutor()->getNickname() ?> profile picture">
+                    <span><?= $conversation->getInterlocutor()->getNickname() ?></span>
+                </div>
+                <?php foreach ($conversation->getConversation() as $message) : ?>
+                        <?php if($message->getSender()->getUserId() === $chat->getConnectedUser()->getUserId()):?>
+                        <div class="chat align-right">
+                        <?php else: ?>
+                        <div class="chat align-left">
+                        <?php endif;?>
+                            <div>
+                                <img class="profile-picture" src="<?= $message->getSender()->getPicture() ?>" alt="<?= $message->getSender()->getNickname() ?> profile picture">
+                                <?= Utils::convertDateToSmallFormat($message->getDatetime()) ?>
+                            </div>
+                            <div>
+                                <?= $message->getText() ?>
+                            </div>
                         </div>
                     <?php endforeach;  ?>
             </div>
