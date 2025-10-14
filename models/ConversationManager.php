@@ -81,9 +81,6 @@ class ConversationManager extends AbstractEntityManager
                     $conversation->setInterlocutor($element["sender"]);
                     var_dump($conversation->getInterlocutor());
                 }
-                /*else if($conversation->getConnectedUser() === NULL && $element["sender"]->getUserId() === $userId){
-                    $conversation->setConnectedUser($element["sender"]);
-                }*/
                 $element["message"] = new Message($element);
                 $conversation->addMessage($element["message"]);
             }

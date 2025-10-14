@@ -11,16 +11,15 @@
                     <a href="index.php?action=conversation&conversationId=<?= $conv->getConversationId()?>">
                         <div class="row">
                             <div class="col-xs-4">
-                                <?php var_dump($conv->getInterlocutor()); ?>
                                 <img class="profile-picture" src="<?= $conv->getInterlocutor()->getPicture() ?>" alt="<?= $conv->getInterlocutor()->getNickname() ?>">
                             </div>
                             <div class="col-xs-8">
-                                <div><?= $conv->getInterlocutor()->getNickname() ."  ". Utils::convertDateToFrenchFormat($conv->getConversation()[0]->getDatetime())?></div>
+                                <!-- <div>$conv->getInterlocutor()->getNickname() ."  ". Utils::convertDateToFrenchFormat($conv->getConversation()[0]->getDatetime())</div> -->
                                 <div><?= $conv->getConversation()[0]->getText()?></div>
                             </div>
                         </div>
                     </a>
-            <?php echo"<br>sorti de là<br>"; endforeach; endif; var_dump($interlocutor->getPicture()); ?>
+            <?php endforeach; endif; var_dump($interlocutor->getPicture()); ?>
         </div>
         <div class="col-xs-12 col-sm-9">
             <div>

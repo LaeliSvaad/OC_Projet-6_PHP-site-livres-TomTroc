@@ -9,17 +9,18 @@ class MessagingController
 
         $chatManager = new ChatManager();
         $conversationManager = new ConversationManager();
-        $userManager = new UserManager();
+
 
         $chat = $chatManager->getChat($connectedUserId);
-        $connectedUser = $userManager->getPublicUserById($connectedUserId);
-        $chat->setConnectedUser($connectedUser);
+        /*$connectedUser = $userManager->getPublicUserById($connectedUserId);
+        $chat->setConnectedUser($connectedUser);*/
 
-        $conversation = new Conversation();
-        $interlocutor = $userManager->getPublicUserById($interlocutorId);
-        $conversation->setInterlocutor($interlocutor);
 
-        if($connectedUserId != NULL && $interlocutorId != -1)
+        //$conversation = new Conversation();
+        //$interlocutor = $userManager->getPublicUserById($interlocutorId);
+        //$conversation->setInterlocutor($interlocutor);
+
+        /*if($connectedUserId != NULL && $interlocutorId != -1)
         {
             $conversation = $conversationManager->getConversationByUsersId($connectedUserId, $interlocutorId);
         }
@@ -30,10 +31,10 @@ class MessagingController
             $interlocutor = $conversation->getInterlocutor();
             var_dump($interlocutor);
             echo"ici";
-        }
+        }*/
 
         $view = new View('chat');
-        $view->render("chat", ['chat' => $chat, 'conversation' => $conversation, 'interlocutor' => $interlocutor]);
+        $view->render("chat", ['chat' => $chat]);
     }
 
     public function sendMessage() : void
