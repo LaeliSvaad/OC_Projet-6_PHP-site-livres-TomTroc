@@ -34,15 +34,10 @@ class ConversationManager extends AbstractEntityManager
                 $element["datetime"] = new \DateTime($element["datetime"]);
                 $element["sender"] = new User($element);
                 $element["message"] = new Message($element);
-                if($conversation->getInterlocutor() === NULL && $element["sender"]->getUserId() != $connectedUserId){
-                    $conversation->setInterlocutor($element["sender"]);
-                }
-                /*else if($conversation->getConnectedUser() === NULL && $element["sender"]->getUserId() === $connectedUserId){
-                    $conversation->setConnectedUser($element["sender"]);
-                }*/
                 $conversation->addMessage($element["message"]);
             }
             return $conversation;
+
         }
         return null;
     }
@@ -76,10 +71,8 @@ class ConversationManager extends AbstractEntityManager
             foreach ($db_array as $element) {
                 $element["datetime"] = new DateTime($element["datetime"]);
                 $element["sender"] = new User($element);
-                if($conversation->getInterlocutor() === NULL && $element["sender"]->getUserId() != $userId){
-                    echo"<br>là<br><br>";
+                if($element["sender_id"] != $userId) {
                     $conversation->setInterlocutor($element["sender"]);
-                    var_dump($conversation->getInterlocutor());
                 }
                 $element["message"] = new Message($element);
                 $conversation->addMessage($element["message"]);

@@ -6,35 +6,32 @@ class MessagingController
     {
         $connectedUserId = $_SESSION["user"];
         $interlocutorId = Utils::request("interlocutorId", -1);
+        $conversationId = Utils::request("conversationId", NULL);
 
+        /*On récupère d'abord les données des 2 utilisateurs: l'interlocuteur de la conversation affichée et l'utilisateur connecté */
+        $userManager = new UserManager();
+        $interlocutor = $userManager->getPublicUserById($interlocutorId);
+        $connectedUser = $userManager->getPublicUserById($connectedUserId);
+
+        /*On récupère le dernier message de chaque conversation de l'utilisateur connecté*/
         $chatManager = new ChatManager();
-        $conversationManager = new ConversationManager();
-
-
         $chat = $chatManager->getChat($connectedUserId);
-        /*$connectedUser = $userManager->getPublicUserById($connectedUserId);
-        $chat->setConnectedUser($connectedUser);*/
+        $chat->setConnectedUser($connectedUser);
 
-
-        //$conversation = new Conversation();
-        //$interlocutor = $userManager->getPublicUserById($interlocutorId);
-        //$conversation->setInterlocutor($interlocutor);
-
-        /*if($connectedUserId != NULL && $interlocutorId != -1)
-        {
+        /*On récupère, pour l'afficher entièrement, la conversation dont le dernier message est le plus récent */
+        $conversationManager = new ConversationManager();
+        if($interlocutor != NULL){
             $conversation = $conversationManager->getConversationByUsersId($connectedUserId, $interlocutorId);
+            $conversation->setInterlocutor($interlocutor);
         }
-        else if($interlocutorId === -1 && isset($chat->getChat()[0]))
-        {
-            $conversationId = $chat->getChat()[0]->getConversationId();
+        else{
+            if($conversationId === NULL){
+                $conversationId = $chat->getChat()[0]->getConversationId();
+            }
             $conversation = $conversationManager->getConversationById($conversationId, $connectedUserId);
-            $interlocutor = $conversation->getInterlocutor();
-            var_dump($interlocutor);
-            echo"ici";
-        }*/
-
+        }
         $view = new View('chat');
-        $view->render("chat", ['chat' => $chat]);
+        $view->render("chat", ['chat' => $chat, 'conversation' => $conversation]);
     }
 
     public function sendMessage() : void

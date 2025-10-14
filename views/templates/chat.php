@@ -14,21 +14,22 @@
                                 <img class="profile-picture" src="<?= $conv->getInterlocutor()->getPicture() ?>" alt="<?= $conv->getInterlocutor()->getNickname() ?>">
                             </div>
                             <div class="col-xs-8">
-                                <!-- <div>$conv->getInterlocutor()->getNickname() ."  ". Utils::convertDateToFrenchFormat($conv->getConversation()[0]->getDatetime())</div> -->
+                                <div><?= $conv->getInterlocutor()->getNickname() ."  ". Utils::convertDateToFrenchFormat($conv->getConversation()[0]->getDatetime()) ?></div>
                                 <div><?= $conv->getConversation()[0]->getText()?></div>
                             </div>
                         </div>
                     </a>
-            <?php endforeach; endif; var_dump($interlocutor->getPicture()); ?>
+            <?php endforeach; endif; ?>
         </div>
         <div class="col-xs-12 col-sm-9">
             <div>
-                <img class="profile-picture" src="<?= $interlocutor->getPicture() ?>" alt="<?= $interlocutor->getNickname() ?> profile picture">
-                <span><?= $interlocutor->getNickname() ?></span>
+                <img class="profile-picture" src="<?= $conversation->getInterlocutor()->getPicture() ?>" alt="<?= $conversation->getInterlocutor()->getNickname() ?> profile picture">
+                <span><?= $conversation->getInterlocutor()->getNickname() ?></span>
                 <?php foreach ($conversation->getConversation() as $message) :
                         ?>
                         <div>
-                            <?= $message->getSender()->getPicture() ?>
+                            <?= $message->getSender()->getNickname() ?>
+                            <img class="profile-picture" src="<?= $message->getSender()->getPicture() ?>" alt="<?= $message->getSender()->getNickname() ?> profile picture">
                         </div>
                         <div>
                             <?= $message->getText() ?>
