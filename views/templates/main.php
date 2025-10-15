@@ -55,7 +55,10 @@ $current_page = isset($_GET['action']) ? $_GET['action'] : 'home';
                     <ul class="nav navbar-nav navbar-right">
                         <?php if (isset($_SESSION['user'])): ?>
                             <li>
-                                <a class="nav-link <?php echo ($current_page === 'conversation') ? 'active' : ''; ?>" href="index.php?action=conversation">Messagerie</a>
+                                <a class="nav-link <?php echo ($current_page === 'conversation') ? 'active' : ''; ?>" id="chat-nav-link" href="index.php?action=conversation">
+                                    <img src="pictures/messaging-icon.png" alt="messaging icon" >
+                                    &nbsp;<span>Messagerie</span>
+                                </a>
                             </li>
                             <li>
                                 <a class="nav-link <?php echo ($current_page === 'user-private-account' || $current_page === 'book-form') ? 'active' : ''; ?>" href="index.php?action=user-private-account">Mon compte</a>

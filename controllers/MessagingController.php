@@ -17,6 +17,8 @@ class MessagingController
         $chatManager = new ChatManager();
         $chat = $chatManager->getChat($connectedUserId);
         $chat->setConnectedUser($connectedUser);
+        /*On récupère le nombre de messages non lus*/
+        $chat->setUnreadMessagesCount($chatManager->getUnreadMessageCount($connectedUserId));
 
         /*On récupère, pour l'afficher entièrement, la conversation dont le dernier message est le plus récent */
         $conversationManager = new ConversationManager();
@@ -36,31 +38,10 @@ class MessagingController
 
     public function sendMessage() : void
     {
-        $userId = Utils::request("senderId");
+        $userId = $_SESSION["user"];
         $text = Utils::request("message");
         $conversationId = Utils::request("conversationId");
-        $seenByRecipient = Utils::request("seenByRecipient");
-
-        if(!isset($conversationId)){
-            $user1Id = Utils::request("user1Id");
-            $user2Id = Utils::request("user2Id");
-            if(isset($user1Id) && isset($user2Id)){
-                $conversation = new Conversation(["user1Id" => (int)Utils::controlUserInput($user1Id),
-                    "user2Id" => (int)Utils::controlUserInput($user2Id)]);
-                $conversationManager = new ConversationManager();
-                if($conversationManager->addConversation($conversation))
-                {
-                    $conversationId = $conversationManager->getLastConversationId();
-                    if($conversationId == 0)
-                        throw new Exception("Une erreur est survenue lors de l'envoi du message.");
-                }
-            }
-            else
-            {
-                throw new Exception("Une erreur est survenue lors de l'envoi du message.");
-            }
-        }
-
+        $seenByRecipientMessageId = Utils::request("seenByRecipientMessageId");
         $sender = new User(["userId" => $userId]);
         $message = new Message([
             "text" => $text,
@@ -69,21 +50,15 @@ class MessagingController
             "conversationId" => $conversationId]);
         $messageManager = new MessageManager();
 
-        if(isset($seenByRecipient)){
-            $seenByRecipient = (int)Utils::controlUserInput($seenByRecipient);
-            $messageManager->updateMessageStatus($seenByRecipient);
+        if(isset($seenByRecipientMessageId)){
+            $seenByRecipientMessageId = (int)Utils::controlUserInput($seenByRecipientMessageId);
+            if($seenByRecipientMessageId != -1)
+                $messageManager->updateMessageStatus($seenByRecipientMessageId);
         }
 
         if($messageManager->sendMessage($message))
         {
-            $conversationManager = new ConversationManager();
-            $conversation = $conversationManager->getConversationById($conversationId);
-
-            $chatManager = new ChatManager();
-            $chat = $chatManager->getChat($userId);
-
-            $view = new View('chat');
-            $view->render("chat", ['chat' => $chat, 'conversation' => $conversation]);
+            Utils::redirect("conversation", ["conversationId" => $conversationId]);
         }
         else
         {

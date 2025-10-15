@@ -4,7 +4,7 @@ class ChatManager extends AbstractEntityManager
 {
     public function getChat(int $connectedUserId): ?Chat
     {
-        $sql="SELECT
+        $sql = "SELECT
                 conversation.id AS conversationId,
                 message.id,
                 message.text,
@@ -58,6 +58,8 @@ class ChatManager extends AbstractEntityManager
                 $message->setDatetime(new \DateTime($element["date"]));
                 $message->setSeenByRecipient($element["seen_by_recipient"]);
                 $message->setSender($sender);
+                if($sender->getUserId() === $connectedUserId)
+                    $message->setConnectedUserMessage(true);
                 $conversation = new Conversation();
                 $conversation->setInterlocutor($interlocutor);
                 $conversation->addMessage($message);
@@ -66,5 +68,17 @@ class ChatManager extends AbstractEntityManager
             }
             return $chat;
         }
+    }
+
+    public function getUnreadMessageCount(int $connectedUserId): int
+    {
+        $sql = "SELECT COUNT(*) AS unreadMessagesCount
+                FROM message
+                WHERE seen_by_recipient = FALSE AND sender_id <> :connectedUserId";
+
+        $req = $this->db->query($sql, ['connectedUserId' => $connectedUserId]);
+
+        $result = $req->fetch();
+        return $result["unreadMessagesCount"];
     }
 }

@@ -6,7 +6,7 @@
         <div class="row">
             <div class="col-xs-12 col-sm-3">
                 <div class="profile-picture">
-                    <img class="profile-picture" src="<?= $user->getPicture() ?>" alt="<?= $user->getNickname() ?> profile picture" />
+                    <img class="profile-picture large-profile-picture" src="<?= $user->getPicture() ?>" alt="<?= $user->getNickname() ?> profile picture" />
                 </div>
                 <div>
                     <img src="pictures/separator.png" alt="separator">

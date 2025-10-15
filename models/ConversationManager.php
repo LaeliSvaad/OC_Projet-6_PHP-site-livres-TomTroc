@@ -34,6 +34,9 @@ class ConversationManager extends AbstractEntityManager
                 $element["datetime"] = new \DateTime($element["datetime"]);
                 $element["sender"] = new User($element);
                 $element["message"] = new Message($element);
+                if($element["sender_id"] === $userId) {
+                    $element["message"]->setIsConnectedUserMessage(true);
+                }
                 $conversation->addMessage($element["message"]);
             }
             return $conversation;
@@ -71,10 +74,12 @@ class ConversationManager extends AbstractEntityManager
             foreach ($db_array as $element) {
                 $element["datetime"] = new DateTime($element["datetime"]);
                 $element["sender"] = new User($element);
+                $element["message"] = new Message($element);
                 if($element["sender_id"] != $userId) {
                     $conversation->setInterlocutor($element["sender"]);
                 }
-                $element["message"] = new Message($element);
+                else
+                    $element["message"]->setConnectedUserMessage(true);
                 $conversation->addMessage($element["message"]);
             }
             return $conversation;

@@ -8,6 +8,7 @@ class Message extends AbstractEntity
     private ?Datetime $datetime;
     private string $text;
     private bool $seenByRecipient;
+    private bool $connectedUserMessage = false;
     private User $sender;
     private int $conversationId;
 
@@ -31,6 +32,16 @@ class Message extends AbstractEntity
     public function getSender() : User
     {
         return $this->sender;
+    }
+
+    public function setConnectedUserMessage(bool $connectedUserMessage) : void
+    {
+        $this->connectedUserMessage = $connectedUserMessage;
+    }
+
+    public function isConnectedUserMessage() : bool
+    {
+        return $this->connectedUserMessage;
     }
 
     public function setConversationId(int $conversationId) : void

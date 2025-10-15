@@ -36,12 +36,24 @@ class Utils {
         return $dateFormatter->format($date);
     }
 
-    public static function convertDateToSmallFormat(DateTime $date) : string
+    public static function convertDateToMediumFormat(DateTime $date) : string
     {
         $dateFormatter = new IntlDateFormatter('fr_FR', IntlDateFormatter::FULL, IntlDateFormatter::FULL);
         $today = new DateTime('today');
         if ($date->format('Y-m-d') !== $today->format('Y-m-d')) {
             $dateFormatter->setPattern('dd.MM HH:mm');
+        } else {
+            $dateFormatter->setPattern('HH:mm');
+        }
+        return $dateFormatter->format($date);
+    }
+
+    public static function convertDateToSmallFormat(DateTime $date) : string
+    {
+        $dateFormatter = new IntlDateFormatter('fr_FR', IntlDateFormatter::FULL, IntlDateFormatter::FULL);
+        $today = new DateTime('today');
+        if ($date->format('Y-m-d') !== $today->format('Y-m-d')) {
+            $dateFormatter->setPattern('dd.MM');
         } else {
             $dateFormatter->setPattern('HH:mm');
         }
