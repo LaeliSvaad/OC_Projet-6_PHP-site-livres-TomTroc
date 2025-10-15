@@ -75,11 +75,9 @@ class ConversationManager extends AbstractEntityManager
                 $element["datetime"] = new DateTime($element["datetime"]);
                 $element["sender"] = new User($element);
                 $element["message"] = new Message($element);
-                if($element["sender_id"] != $userId) {
-                    $conversation->setInterlocutor($element["sender"]);
-                }
-                else
+                if($element["sender"]->getUserId() === $userId) {
                     $element["message"]->setConnectedUserMessage(true);
+                }
                 $conversation->addMessage($element["message"]);
             }
             return $conversation;
@@ -87,13 +85,31 @@ class ConversationManager extends AbstractEntityManager
         return null;
     }
 
-    public function addConversation(Conversation $conversation) : bool
+    public function getInterlocutor(int $connectedUserId, int $conversationId) : ?User
+    {
+        $sql = "SELECT 
+                    `user`.`nickname`, 
+                    `user`.`picture`,
+                    `user`.`id` AS userId
+                FROM `conversation`
+                JOIN user
+                ON user.id = CASE 
+                    WHEN conversation.user_1_id = :connectedUserId THEN conversation.user_2_id
+                    ELSE conversation.user_1_id
+                END
+                WHERE conversation.id = :conversationId";
+
+        $req = $this->db->query($sql, ['connectedUserId' => $connectedUserId, 'conversationId' => $conversationId]);
+        $result = $req->fetch();
+        return new User($result);
+    }
+    public function addConversation(int $connectedUserId, int $interlocutorId) : bool
     {
         $sql = "INSERT INTO `conversation` (`user_1_id`, `user_2_id`) VALUES (:user1Id, :user2Id)";
 
         $result = $this->db->query($sql, [
-            'user1Id' => $conversation->getUser1Id(),
-            'user2Id' => $conversation->getUser2Id(),
+            'user1Id' => $connectedUserId,
+            'user2Id' => $interlocutorId,
         ]);
 
         return $result->rowCount() > 0;

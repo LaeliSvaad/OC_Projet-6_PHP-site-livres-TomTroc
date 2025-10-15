@@ -5,7 +5,7 @@
 class Conversation extends AbstractEntity
 {
    private ?User $interlocutor = null;
-   private ?array $conversation = null;
+   private ?array $conversation = [];
    private ?int $conversationId;
 
     public function getInterlocutor(): ?User
