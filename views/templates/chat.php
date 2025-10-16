@@ -1,3 +1,6 @@
+
+
+
 <div class="container-fluid">
     <div class="row chat-row row-flex">
         <div class="col-xs-12 col-sm-3 chat-list">
@@ -41,7 +44,6 @@
                     &nbsp;<span><?= $conversation->getInterlocutor()->getNickname() ?></span>
                 </div>
                 <div class="conversation-body">
-                <?php $lastMessageId = -1; ?>
                 <?php if(!empty($conversation->getConversation())):
                     foreach ($conversation->getConversation() as $message) : ?>
                         <?php if($message->isConnectedUserMessage() === true):?>
@@ -49,7 +51,7 @@
                             <div>
                         <?php else: ?>
                         <div class="align-left">
-                            <div>
+                            <div class="message-header">
                                 <img class="profile-picture mini-profile-picture" src="<?= $message->getSender()->getPicture() ?>" alt="<?= $message->getSender()->getNickname() ?> profile picture">
                         <?php endif;?>
                                 <?= Utils::convertDateToMediumFormat($message->getDatetime()) ?>
@@ -68,12 +70,12 @@
                         </div>
                         <?php
                         if($message->isConnectedUserMessage() === false && $message->getSeenByRecipient() === false)
-                            $lastMessageId = $message->getId();
+                            $unseenMessageIds[] = $message->getId();
                         ?>
-                    <?php endforeach;  endif; ?>
+                    <?php endforeach;  endif;?>
                     <form action="index.php?action=send-message" method="post">
                         <input type="hidden" name="conversationId" value="<?= $conversation->getConversationId(); ?>" />
-                        <input type="hidden" name="seenByRecipientMessageId" value="<?= $lastMessageId; ?>" />
+                        <input type="hidden"  name="seenByRecipientMessagesIds" value="<?= json_encode($chat->getUnreadMessagesIds()); ?>" />
                         <div class="chat-message-form">
                             <input class="input-lg message-input" type="text" name="message" placeholder="Tapez votre message ici"/>
                             <input class="btn green-button" type="submit" value="Envoyer" />

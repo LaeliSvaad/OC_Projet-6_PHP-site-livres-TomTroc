@@ -4,7 +4,7 @@ class Chat extends AbstractEntity
 {
     private ?array $chat = [];
     private ?User $connectedUser = null;
-    private int $unreadMessagesCount = 0;
+    private array $unreadMessagesIds = [];
 
     public function setConnectedUser(?User $connectedUser): void
     {
@@ -14,13 +14,13 @@ class Chat extends AbstractEntity
     {
         return $this->connectedUser;
     }
-    public function setUnreadMessagesCount(int $unreadMessagesCount): void
+    public function addUnreadMessageId(int $unreadMessageId): void
     {
-        $this->unreadMessagesCount = $unreadMessagesCount;
+        $this->unreadMessagesIds[] = $unreadMessageId;
     }
-    public function getUnreadMessagesCount(): int
+    public function getUnreadMessagesIds(): array
     {
-        return $this->unreadMessagesCount;
+        return $this->unreadMessagesIds;
     }
     public function addConversation(?Conversation $conversation): void
     {

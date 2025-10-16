@@ -70,15 +70,14 @@ class ChatManager extends AbstractEntityManager
         }
     }
 
-    public function getUnreadMessageCount(int $connectedUserId): int
+    public function getUnreadMessagesIds(int $connectedUserId, Chat $chat): void
     {
-        $sql = "SELECT COUNT(*) AS unreadMessagesCount
+        $sql = "SELECT message.id
                 FROM message
                 WHERE seen_by_recipient = FALSE AND sender_id <> :connectedUserId";
-
-        $req = $this->db->query($sql, ['connectedUserId' => $connectedUserId]);
-
-        $result = $req->fetch();
-        return $result["unreadMessagesCount"];
+        $result = $this->db->query($sql, ['connectedUserId' => $connectedUserId]);
+        foreach ($result as $element) {
+            $chat->addUnreadMessageId($element["id"]);
+        }
     }
 }

@@ -21,7 +21,8 @@ class ConversationManager extends AbstractEntityManager
                 INNER JOIN `message` ON `message`.`conversation_id` = `conversation`.`id`
                 INNER JOIN `user` ON `user`.`id` = `message`.`sender_id`
                 WHERE `conversation`.`user_1_id` = :connectedUserId AND `conversation`.`user_2_id` = :interlocutorId
-                OR `conversation`.`user_2_id` = :connectedUserId AND `conversation`.`user_1_id` = :interlocutorId";
+                OR `conversation`.`user_2_id` = :connectedUserId AND `conversation`.`user_1_id` = :interlocutorId
+                ORDER BY `message`.`id` ASC";
 
         $result = $this->db->query($sql, ['connectedUserId' => $connectedUserId, 'interlocutorId' => $interlocutorId]);
 
@@ -34,8 +35,8 @@ class ConversationManager extends AbstractEntityManager
                 $element["datetime"] = new \DateTime($element["datetime"]);
                 $element["sender"] = new User($element);
                 $element["message"] = new Message($element);
-                if($element["sender_id"] === $userId) {
-                    $element["message"]->setIsConnectedUserMessage(true);
+                if($element["sender_id"] === $connectedUserId) {
+                    $element["message"]->setConnectedUserMessage(true);
                 }
                 $conversation->addMessage($element["message"]);
             }
@@ -61,7 +62,8 @@ class ConversationManager extends AbstractEntityManager
                 FROM `conversation`
                 INNER JOIN `message` ON `message`.`conversation_id` = `conversation`.`id`
                 INNER JOIN `user` ON `user`.`id` = `message`.`sender_id`
-                WHERE `conversation`.`id` = :conversationId";
+                WHERE `conversation`.`id` = :conversationId
+                ORDER BY `message`.`id` ASC";
 
         $result = $this->db->query($sql, ['conversationId' => $conversationId]);
 

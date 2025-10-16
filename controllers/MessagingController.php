@@ -18,15 +18,18 @@ class MessagingController
         $chat = $chatManager->getChat($connectedUserId);
         $chat->setConnectedUser($connectedUser);
 
-        /* Si la liste de conversations est vide, on ne va pas plus loin et on envoie la vue,
-        sauf si l'id interlocutor existe (il est récupéré via le lien "envoyer un message" qui figure soit sur le profil public d'un utilisateur, soit sur la page de détail d'un livre).
-        On peut alors créer une nouvelle conversation */
+        /* On récupère le tableau d'ids des messages non-lus par l'utilisateur connecté */
+        $chatManager->getUnreadMessagesIds($connectedUserId, $chat);
+
+
         if(empty($chat->getChat()) && $interlocutorId === -1){
+            /* Si la liste de conversations est vide et qu'il n'y a pas d'interlocuteur potentiel, on ne va pas plus loin et on envoie la vue */
             $view = new View('chat');
             $view->render("chat", ['chat' => $chat, 'conversation' => NULL]);
         }
         else if(empty($chat->getChat()) && $interlocutorId != -1){
-            /* On crée une conversation vierge qu'on envoie en DB et dont on récupère l'id*/
+            /* Liste de conversations vide, mais interlocuteur demandé:
+            on crée une conversation vierge qu'on envoie en DB et dont on récupère l'id */
             $conversationManager = new ConversationManager();
             $conversation = new Conversation();
             $conversation->setInterlocutor($interlocutor);
@@ -38,17 +41,31 @@ class MessagingController
             $view->render("chat", ['chat' => $chat, 'conversation' => $conversation]);
         }
         else{
-            /*On récupère le nombre de messages non lus*/
-            $chat->setUnreadMessagesCount($chatManager->getUnreadMessageCount($connectedUserId));
-
-            /*On récupère, pour l'afficher entièrement, la conversation dont le dernier message est le plus récent */
+            /* On récupère une conversation à afficher entièrement */
             $conversationManager = new ConversationManager();
             if($interlocutor != NULL){
+                /* Si l'interlocuteur existe, on charge la conversation entre l'utilisateur connecté et l'interlocuteur: */
                 $conversation = $conversationManager->getConversationByUsersId($connectedUserId, $interlocutorId);
-                $conversation->setInterlocutor($interlocutor);
+                if($conversation != NULL){
+                    /* Le conversation existe, on lui attribue l'interlocuteur */
+                    $conversation->setInterlocutor($interlocutor);
+                }
+                else{
+                    /* Le conversation n'existe pas, on lui attribue l'interlocuteur et on l'initialise */
+                    $conversationManager = new ConversationManager();
+                    $conversation = new Conversation();
+                    $conversation->setInterlocutor($interlocutor);
+                    if($conversationManager->addConversation($connectedUserId, $interlocutorId) === true)
+                        $conversation->setConversationId($conversationManager->getLastConversationId());
+                    else
+                        throw new Exception("Une erreur est survenue lors de l'initialisation de la conversation.");
+                }
+
             }
             else{
+                /* Si pas d'interlocuteur: */
                 if($conversationId === NULL){
+                    /* si pas d'id de conversation, on prend l'id de la conversation comportant le message le + récent */
                     $conversationId = $chat->getChat()[0]->getConversationId();
                 }
                 $conversation = $conversationManager->getConversationById($conversationId, $connectedUserId);
@@ -66,21 +83,27 @@ class MessagingController
         $userId = $_SESSION["user"];
         $text = Utils::request("message");
         $conversationId = Utils::request("conversationId");
-        $seenByRecipientMessageId = Utils::request("seenByRecipientMessageId");
+
+        $messageManager = new MessageManager();
+
+        $seenByRecipientMessageIds = json_decode(Utils::request("seenByRecipientMessagesIds"));
+        if(!empty($seenByRecipientMessageIds)){
+            $placeholders = [];
+            $params = [];
+            foreach ($seenByRecipientMessageIds as $index => $id) {
+                $placeholder = ":id{$index}";
+                $placeholders[] = $placeholder;
+                $params[$placeholder] = (int)$id;
+            }
+            $messageManager->updateMessageStatus($params, $placeholders);
+        }
+
         $sender = new User(["userId" => $userId]);
         $message = new Message([
             "text" => $text,
             "sender" => $sender,
             "seenByRecipient" => false,
             "conversationId" => $conversationId]);
-        $messageManager = new MessageManager();
-
-        if(isset($seenByRecipientMessageId)){
-            $seenByRecipientMessageId = (int)Utils::controlUserInput($seenByRecipientMessageId);
-            if($seenByRecipientMessageId != -1)
-                $messageManager->updateMessageStatus($seenByRecipientMessageId);
-        }
-
         if($messageManager->sendMessage($message))
         {
             Utils::redirect("conversation", ["conversationId" => $conversationId]);

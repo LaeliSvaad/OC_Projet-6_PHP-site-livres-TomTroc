@@ -390,6 +390,9 @@ textarea {
     border-radius: 5px;
     padding: 10px;
 }
+.message-header{
+    margin-top: 20px;
+}
 .connected-user-message span{
     background-color: #edf2f6;
 }

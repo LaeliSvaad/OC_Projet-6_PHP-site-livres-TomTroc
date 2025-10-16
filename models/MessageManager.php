@@ -18,12 +18,13 @@ class MessageManager extends AbstractEntityManager
         return $result->rowCount() > 0;
     }
 
-    public function updateMessageStatus(int $messageId) : bool
+    public function updateMessageStatus(array $params, array $placeholders) : bool
     {
-        $sql = "UPDATE `message` SET `message`.`seen_by_recipient` = true WHERE `message`.`id` = :messageId";
-        $result = $this->db->query($sql, [
-            'messageId' => $messageId
-        ]);
+        $sql = "UPDATE `message`
+            SET `seen_by_recipient` = TRUE
+            WHERE `id` IN (" . implode(',', $placeholders) . ")";
+
+        $result = $this->db->query($sql,$params);
         return $result->rowCount() > 0;
     }
 }
